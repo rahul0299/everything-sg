@@ -1,0 +1,15 @@
+.card {
+    border: 1px solid #ddd;
+    padding: 2rem;
+    width: 100%;
+    box-shadow: 0px 0px 20px #ececec;
+    border-radius: 10px;,
+}
+
+.login-input {
+    border-radius: 10px;
+    padding: 1rem;
+    width: 200px;
+    position: relative;
+    border: 1px solid #ccc;
+}
