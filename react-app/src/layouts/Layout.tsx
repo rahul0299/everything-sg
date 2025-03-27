@@ -1,6 +1,7 @@
 import {Outlet, useLocation} from "react-router";
 import {MenuBar} from "../components/MenuBar/MenuBar.tsx";
 import {useEffect} from "react";
+import "./layout.css";
 
 const Layout = () => {
     const location = useLocation();
@@ -15,7 +16,9 @@ const Layout = () => {
     return (
         <>
             {!hiddenMenuPaths.includes(location.pathname) && <MenuBar />}
-            <Outlet />
+            <div className="container">
+                <Outlet />
+            </div>
         </>
 
     )

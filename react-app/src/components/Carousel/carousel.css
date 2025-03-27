@@ -1,0 +1,49 @@
+.carousel-wrapper {
+    position: relative;
+    /*border-bottom: 1px solid lightgray;*/
+    /*border-top: 1px solid lightgray;*/
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 2rem;
+    scrollbar-width: none;
+    width: 100%;
+}
+
+.carousel-item {
+    height: 300px;
+    width: 600px;
+    flex: 0 0 auto;
+    border-radius: 20px;
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 0.5rem;
+    height: 15px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border-radius: 50%;
+    background: #ccc;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.dot.dot-active {
+    background: #535bf2;
+}
