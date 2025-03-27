@@ -6,14 +6,20 @@ import "./login.css";
 const Login = () => {
     const navigate = useNavigate();
 
+    const handleSubmit = (formData) => {
+        console.log(formData.get("email"));
+        console.log(formData.get("password"));
+        navigate("/");
+    }
+
     return (
         <div className="auth-container">
             <div className="card">
                 <h2>Login</h2>
-                <form onSubmit={() => navigate("/")}>
-                    <input type="email" placeholder="Email" className="login-input" /><br /><br />
-                    <input type="password" placeholder="Password" className="login-input"/><br /><br />
-                    <button type="submit">Login</button>
+                <form action={handleSubmit} method="POST" className="auth-form">
+                    <input name="email" type="email" placeholder="Email" className="login-input" />
+                    <input name="password" type="password" placeholder="Password" className="login-input"/>
+                    <button type="submit" className="auth-form-button">Login</button>
                 </form>
                 <p>
                     Don't have an account? <Link to="/signup">Sign up</Link>

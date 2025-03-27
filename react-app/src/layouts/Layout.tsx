@@ -5,7 +5,7 @@ import "./layout.css";
 
 const Layout = () => {
     const location = useLocation();
-    const hiddenMenuPaths =["/login", "/signup"];
+    const hiddenMenuPaths =["/login", "/signup", "/verification"];
 
     useEffect(() => {
         console.log("Current location:", location.pathname);

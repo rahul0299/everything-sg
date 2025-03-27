@@ -5,6 +5,8 @@ interface Props {
     items: Array<{item: number, bgcolor: string}>
 }
 
+// TODO: set up infinite scroll
+
 
 const Carousel = ({ items }: Props) => {
 
