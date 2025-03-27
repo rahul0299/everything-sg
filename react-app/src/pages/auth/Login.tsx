@@ -6,9 +6,9 @@ import "./login.css";
 const Login = () => {
     const navigate = useNavigate();
 
-    const handleSubmit = (formData) => {
-        console.log(formData.get("email"));
-        console.log(formData.get("password"));
+    const handleSubmit = (formData: FormData | null) => {
+        console.log(formData && formData.get("email"));
+        console.log(formData && formData.get("password"));
         navigate("/");
     }
 
@@ -16,7 +16,7 @@ const Login = () => {
         <div className="auth-container">
             <div className="card">
                 <h2>Login</h2>
-                <form action={handleSubmit} method="POST" className="auth-form">
+                <form action={handleSubmit} className="auth-form">
                     <input name="email" type="email" placeholder="Email" className="login-input" />
                     <input name="password" type="password" placeholder="Password" className="login-input"/>
                     <button type="submit" className="auth-form-button">Login</button>

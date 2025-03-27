@@ -27,16 +27,16 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
         }
     }
 
-    const handleBackspace = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+    const handleBackspace = (e: KeyboardEvent, index: number) => {
         if (e.key === 'Backspace' && !code[index] && index > 0) {
             codeRef.current[index - 1]?.focus();
         }
     };
 
 
-    const handlePaste = (e) => {
+    const handlePaste = (e: ClipboardEvent) => {
         e.preventDefault();
-        const paste = e.clipboardData.getData("text");
+        const paste = e.clipboardData && e.clipboardData.getData("text");
 
         if (!paste) return;
 
@@ -49,7 +49,7 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
     };
 
 
-    const handleSubmit = (formData) => {
+    const handleSubmit = () => {
         console.log(code.join(""));
         navigate("/");
     }
@@ -69,9 +69,11 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
                                         className="otp-input"
                                         value={d}
                                         onChange={(e) => handleChange(e.target.value, i)}
-                                        onKeyDown={(e) => handleBackspace(e, i)}
-                                        ref={reference => codeRef.current[i] = reference as HTMLInputElement}
-                                        onPaste={handlePaste}
+                                        onKeyDown={(e) => handleBackspace(e.nativeEvent, i)}
+                                        ref={reference => {
+                                            codeRef.current[i] = reference as HTMLInputElement
+                                        }}
+                                        onPaste={(e) => handlePaste(e.nativeEvent)}
                                     />
                                 ))
                             }

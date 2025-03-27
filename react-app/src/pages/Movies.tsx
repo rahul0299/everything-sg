@@ -1,8 +1,6 @@
 import "./movies.css";
 import Carousel from "../components/Carousel/Carousel.tsx";
-import data from "../data/sample.tsx";
 
-const movieData = data.movies;
 
 const getRandomColor = (): string => {
     return `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;

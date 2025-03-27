@@ -4,8 +4,8 @@ import "./login.css"
 const SignUp = () => {
     const navigate = useNavigate();
 
-    const handleSubmit = (formData) => {
-        console.log(formData);
+    const handleSubmit = (formData: FormData | null) => {
+        console.log(formData && formData.entries());
         navigate("/verification");
     }
 
