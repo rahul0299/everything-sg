@@ -7,6 +7,7 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
 
     const navigate = useNavigate();
     const [code, setCode] = useState(new Array<string>(num_digits).fill(""));
+    const [isVerifyingOtp, setIsVerifyingOtp] = useState<boolean>(false);
     const codeRef = useRef<Array<HTMLInputElement>>(Array(num_digits).fill(null));
 
     useEffect(() => {
@@ -51,7 +52,15 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
 
     const handleSubmit = () => {
         console.log(code.join(""));
-        navigate("/");
+        performLogin()
+        // navigate("/");
+    }
+
+    const performLogin = () => {
+        setIsVerifyingOtp(true);
+        setTimeout(() => {
+            navigate("/");
+        }, 3000);
     }
 
 
@@ -81,7 +90,23 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
                     <p style={{ marginBottom: "2rem" }}>
                         Didn't recieve an OTP? <a href="" onClick={(e) => e.preventDefault()}><u>Resend</u></a>
                     </p>
-                    <button type="submit" className="otp-submit">Submit</button>
+
+                    {
+                        isVerifyingOtp
+
+                            ?
+
+                            <div style={{ marginTop: "2rem", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                <button className="otp-submit disabled" disabled={true} onClick={handleSubmit}>
+                                    Verifying <div className="loader" ></div>
+                                </button>
+                            </div>
+
+                            :
+
+                            <button type="submit" className="otp-submit">Submit</button>
+                    }
+
                 </form>
             </div>
         </div>

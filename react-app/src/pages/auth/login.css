@@ -79,6 +79,18 @@ input[type=number] {
     color: white;
     border: none;
     padding: 10px;
+    /*display: */
+    height: 40px;
+}
+
+.otp-submit.disabled {
+    content: "";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    position: relative;
+    background-color: #747bff;
 }
 
 .otp-submit:active {
@@ -93,4 +105,24 @@ input[type=number] {
     margin: 0;
 }
 
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 1rem;
+    padding: 4px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: inline-block;
+    background: white;
+    --_m:
+            conic-gradient(#0000 5%,#000),
+            linear-gradient(#000 0 0) content-box;
+    -webkit-mask: var(--_m);
+    mask: var(--_m);
+    -webkit-mask-composite: source-out;
+    mask-composite: subtract;
+    animation: l3 1s infinite linear;
+}
+@keyframes l3 {to{transform: rotate(1turn)}}
 
