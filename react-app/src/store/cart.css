@@ -1,0 +1,32 @@
+.cart {
+    padding: 20px;
+    border-radius: 15px;
+    width: 500px;
+}
+
+.cart-header {
+    border-bottom: 1px solid lightgray;
+}
+
+.cart-items {
+    height: 400px;
+    justify-content: start;
+    text-align: left;
+}
+
+.cart-items ul {
+    list-style: none;
+}
+
+.cart-footer {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+    border-top: 1px solid lightgray;
+    padding: 1rem;
+}
+
+.cart-footer button {
+    background: #646cff;
+    color: white;
+}

@@ -1,0 +1,61 @@
+.dining-container {
+    display: flex;
+}
+
+.main-panel {
+    flex-grow: 1;
+}
+
+.main-panel-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-select {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.custom-select select {
+    height: 40px;
+    padding: 0 20px;
+    margin: 0;
+    font-size: 14px;
+    width: 150px;
+    display: inline-block;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.filter-container {
+    height: 500px;
+    width: 280px;
+    border: 1px solid black;
+    padding: 0.5rem;
+}
+
+.top-rated-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.restaurant-card {
+    height: 300px;
+    width: 300px;
+    background-color: lightblue;
+    border-radius: 15px;
+}
+
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    width: 100%;
+    gap: 20px;
+    margin-left: 10px;
+    overflow-y: scroll;
+
+}
