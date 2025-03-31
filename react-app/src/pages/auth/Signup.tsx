@@ -1,12 +1,34 @@
-import {Link, useNavigate} from "react-router";
+import {Link, useLocation, useNavigate} from "react-router";
 import "./login.css"
+import {createUser} from "../../dummy/server.ts";
 
 const SignUp = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from || "/";
 
-    const handleSubmit = (formData: FormData | null) => {
-        console.log(formData && formData.entries());
-        navigate("/verification");
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+
+        const fname = formData.get("firstname");
+        const lname = formData.get("lastname");
+        const email = formData.get("email");
+        const password = formData.get("password");
+
+
+        console.log("handleSubmit", fname, lname, email, password);
+
+        try {
+            await createUser({ fname, lname, email, password });
+            navigate("/verification", { state: { user: { fname, lname, email, password }, from } });
+        } catch (err: any) {
+            console.log(err);
+        }
+
+
+        // console.log(formData && formData.entries());
+        // navigate("/verification");
     }
 
     return (
@@ -14,7 +36,7 @@ const SignUp = () => {
             <div className="card">
                 <h2>Sign Up</h2>
                 <form
-                    action={handleSubmit}
+                    onSubmit={handleSubmit}
                     className="auth-form">
                     <div style={{ display: "flex", gap: "1rem"}}>
                         <input name="firstname" type="text" placeholder="First Name" className="login-input" />
@@ -25,7 +47,7 @@ const SignUp = () => {
                     <button type="submit" className="auth-form-button">Create Account</button>
                 </form>
                 <p>
-                    Already have an account? <Link to="/login">Login</Link>
+                    Already have an account? <Link to="/login" state={{ from }}>Login</Link>
                 </p>
             </div>
         </div>

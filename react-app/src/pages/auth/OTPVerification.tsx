@@ -1,11 +1,19 @@
 import {useEffect, useRef, useState} from "react";
 import "./login.css"
-import {useNavigate} from "react-router";
+import {useLocation, useNavigate} from "react-router";
+import {useAuth} from "../../store/AuthContext.tsx";
+import {verifyOTP} from "../../dummy/server.ts";
 
 
 const OTPVerification = ({num_digits}: {num_digits: number}) => {
 
     const navigate = useNavigate();
+    const { loginUser } = useAuth();
+    const location = useLocation();
+
+    const user = location.state?.user;
+    const from = location.state?.from || "/";
+
     const [code, setCode] = useState(new Array<string>(num_digits).fill(""));
     const [isVerifyingOtp, setIsVerifyingOtp] = useState<boolean>(false);
     const codeRef = useRef<Array<HTMLInputElement>>(Array(num_digits).fill(null));
@@ -50,17 +58,25 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
     };
 
 
-    const handleSubmit = () => {
-        console.log(code.join(""));
-        performLogin()
-        // navigate("/");
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsVerifyingOtp(true);
+
+        try {
+            const otp = code.join("");
+            await verifyOTP(otp);
+            loginUser(user);
+            navigate(from, { replace: true });
+        } catch (err) {
+            console.error("OTP failed", err);
+        } finally {
+            setIsVerifyingOtp(false);
+        }
     }
 
-    const performLogin = () => {
-        setIsVerifyingOtp(true);
-        setTimeout(() => {
-            navigate("/");
-        }, 3000);
+    const censorEmail = (email: string, showchars: number = 5): string => {
+        const i = email.lastIndexOf("@");
+        return email.substring(0, Math.min(showchars, i)) + "*".repeat(Math.max(0, i - showchars)) + email.substring(i, email.length);
     }
 
 
@@ -68,8 +84,8 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
         <div className="auth-container">
             <div className="card otp-form">
                 <h2>Verification</h2>
-                <p>We have sent an OTP to the email address ***********</p>
-                <form action={handleSubmit}>
+                <p>We have sent an OTP to the email address {censorEmail(user?.email)}</p>
+                <form onSubmit={handleSubmit}>
                         <div className="otp-input-container">
                             {
                                 code.map((d, i) => (
@@ -88,7 +104,7 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
                             }
                         </div>
                     <p style={{ marginBottom: "2rem" }}>
-                        Didn't recieve an OTP? <a href="" onClick={(e) => e.preventDefault()}><u>Resend</u></a>
+                        Didn't receive an OTP? <a href="" onClick={(e) => e.preventDefault()}><u>Resend</u></a>
                     </p>
 
                     {
@@ -97,7 +113,7 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
                             ?
 
                             <div style={{ marginTop: "2rem", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                <button className="otp-submit disabled" disabled={true} onClick={handleSubmit}>
+                                <button type="submit" className="otp-submit disabled" disabled={true} >
                                     Verifying <div className="loader" ></div>
                                 </button>
                             </div>
