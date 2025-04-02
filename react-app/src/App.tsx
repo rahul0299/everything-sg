@@ -10,9 +10,10 @@ import {AttractionsPage} from "./pages/Attractions.tsx";
 import {DiningPage} from "./pages/Dining.tsx";
 import Layout from "./layouts/Layout.tsx";
 import OTPVerification from "./pages/auth/OTPVerification.tsx";
-import {Cart, CartProvider} from "./store/CartContext.tsx";
+import {CartProvider} from "./store/CartContext.tsx";
 import {AuthProvider} from "./store/AuthContext.tsx";
 import MovieDetails from "./pages/movie/MovieDetails.tsx";
+import {Cart} from "./components/Cart/Cart.tsx";
 
 function App() {
   return (
