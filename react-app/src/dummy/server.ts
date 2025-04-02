@@ -45,3 +45,15 @@ export const verifyOTP = (otp: string): Promise<boolean> => {
         }, 3000);
     });
 };
+
+export const fetchData = () => {
+    return new Promise((resolve) => {
+        console.log(`Fetching data`)
+        resolve({
+            movies: [],
+            events: [],
+            attractions: [],
+            dining: [],
+        });
+    })
+}
