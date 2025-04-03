@@ -32,37 +32,71 @@ def generate_otp(length=6):
 
 @auth.route('/register', methods=['POST'])
 def register():
-    data=request.get_json()
-    username=data.get('username')
-    email=data.get('email')
-    plain_password=data.get('password')
-    role=data.get('role','user')
+    data = request.get_json() or {}
+    username = data.get('username')
+    email = data.get('email')
+    plain_password = data.get('password')
+    role = data.get('role', 'user')
 
     if not (username and email and plain_password):
-        return jsonify({"message":"Missing username or email or password"})
+        return jsonify({"message": "Missing username or email or password"}), 400
 
-    #check if user already exists
-    con=get_connection()
-    cursor=con.cursor(dictionary=True)
-    cursor.execute("SELECT email FROM users WHERE email =%s",(email,))
-    existing=cursor.fetchone()
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    # Check if user email already in DB
+    cursor.execute("SELECT email, is_verified FROM users WHERE email = %s", (email,))
+    existing = cursor.fetchone()
+
     if existing:
-        return jsonify({"message":"User already registered"}), 400
-    
-    #hash password
-    hashed_password=bcrypt.generate_password_hash(plain_password).decode('utf-8')
+        # User found in DB. Check if verified or not
+        if existing["is_verified"]:
+            # Already verified
+            cursor.close()
+            conn.close()
+            return jsonify({"message": "User already registered and verified"}), 400
+        else:
+            # User is in DB but not verified -> re-trigger OTP
+            new_otp = generate_otp(6)
+            # re-hash password 
+            hashed_password = bcrypt.generate_password_hash(plain_password).decode('utf-8')
 
-    #generate otp and insert into db as unverified
+            cursor.execute("""
+                UPDATE users
+                SET password_hash = %s,
+                    otp_code = %s
+                WHERE email = %s
+            """, (hashed_password, new_otp, email))
+            conn.commit()
 
-    otp=generate_otp(6)
-    cursor.execute("""
-        INSERT INTO users(username, email, password, role, is_verified, otp_code)
-        VALUES(%s,%s,%s,%s,%s,%s)
-    """,(username, email, hashed_password,False, role, otp))
-    con.commit()
-    cursor.close()
-    con.close()
-    return jsonify({"message":"Enter OTP for verification","otp_demp":otp}),200
+            cursor.close()
+            conn.close()
+
+            # In production, you'd re-send OTP via email/SMS
+            return jsonify({
+                "message": "User already registered but not verified. New OTP sent.",
+                "otp_demo": new_otp
+            }), 200
+    else:
+        # No existing record -> create new user
+        hashed_password = bcrypt.generate_password_hash(plain_password).decode('utf-8')
+        otp_code = generate_otp(6)
+
+        insert_query = """
+            INSERT INTO users (username, email, password_hash, role, is_verified, otp_code)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """
+        cursor.execute(insert_query, (username, email, hashed_password, role, False, otp_code))
+        conn.commit()
+
+        cursor.close()
+        conn.close()
+
+        # Return OTP for demo
+        return jsonify({
+            "message": "User registered. Please verify with OTP.",
+            "otp_demo": otp_code
+        }), 200
 
     
 
@@ -115,12 +149,12 @@ def login():
 def verify():
     data = request.get_json() or {}
     email = data.get("email")
-    otp_submitted = data.get("otp")
+    otp_submitted = data.get("otp_code")
 
     conn = get_connection()
     cursor = conn.cursor(dictionary=True)
     # Fetch user by email
-    cursor.execute("SELECT otp, is_verified FROM users WHERE email = %s", (email,))
+    cursor.execute("SELECT otp_code, is_verified FROM users WHERE email = %s", (email,))
     user = cursor.fetchone()
 
     if not user:
@@ -130,9 +164,9 @@ def verify():
         return jsonify({"message": "Already verified"}), 400
 
     # Check OTP
-    if user["otp"] == otp_submitted:
+    if user["otp_code"] == otp_submitted:
         # Mark verified in DB
-        cursor.execute("UPDATE users SET is_verified = 1, otp = NULL WHERE email = %s", (email,))
+        cursor.execute("UPDATE users SET is_verified = 1, otp_code = NULL WHERE email = %s", (email,))
         conn.commit()
         message = "Verified successfully"
         status = 200
