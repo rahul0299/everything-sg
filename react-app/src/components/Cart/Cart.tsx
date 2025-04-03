@@ -1,6 +1,7 @@
 import Modal from "../Modal/Modal.tsx";
 import {useCart} from "../../store/CartContext.tsx";
 import {IconButton} from "../IconButton/IconButton.tsx";
+import CloseIcon from '@mui/icons-material/Close';
 
 export const Cart = () => {
     const context = useCart();
@@ -21,7 +22,9 @@ export const Cart = () => {
         <div className="cart-header">
             <h3>Your Cart</h3>
             {/*<button onClick={handleButtonClick}></button>*/}
-            <IconButton onClick={handleButtonClick}>X</IconButton>
+            <IconButton onClick={handleButtonClick}>
+                <CloseIcon />
+            </IconButton>
 
         </div>
 

@@ -6,7 +6,8 @@
     height: 45px;
     width: 45px;
     border-radius: 50%;
-    background-color: lightgray;
+    background-color: #747bff;
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,9 +55,14 @@
 }
 
 .dropdown-row {
-    padding: 10px 20px;
+    padding: 10px 10px;
     background-color: transparent;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+    gap: 0.5rem;
 }
 
 .dropdown-row:hover {

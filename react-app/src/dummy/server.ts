@@ -100,3 +100,7 @@ export const fetchData = () => {
         resolve(data);
     })
 }
+
+export const addToCart = () => {
+    console.log(`Adding to cart`);
+}

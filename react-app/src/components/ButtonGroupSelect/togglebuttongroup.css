@@ -1,0 +1,21 @@
+.toggle-button-group {
+    width: 500px;
+    border: 1px solid black;
+    justify-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.toggle-button {
+    border: 1px solid #747bff;
+    background-color: white;
+    color: #747bff;
+}
+
+.toggle-button-selected {
+    background-color: #747bff;
+    color: white;
+}
