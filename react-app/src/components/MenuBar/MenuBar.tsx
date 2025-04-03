@@ -11,43 +11,52 @@ const MenuBar = () => {
 
     return (
         <div className="menu-bar">
-            <Link to="/movies" className="underline">Movies</Link>
-            <Link to="/events" className="underline">Events</Link>
-            <Link to="/attractions" className="underline">Attractions</Link>
-            <Link to="/dining" className="underline">Dining</Link>
+            <div className="menu-bar-home">
+                <Link to="/">Home</Link>
+            </div>
+            <div className="menu-bar-categories">
+                <Link to="/movies" className="underline">Movies</Link>
+                <Link to="/events" className="underline">Events</Link>
+                <Link to="/attractions" className="underline">Attractions</Link>
+                <Link to="/dining" className="underline">Dining</Link>
+            </div>
 
-            {
-                authContext.token
+            <div className="menu-bar-user">
 
-                ?
-                    <>
-                        <button onClick={() => cartContext.dispatch({
-                            type: "SHOW_CART",
-                            payload: "",
-                        })} style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            gap: "0.4rem",
-                            outline: "1px solid lightgray",
-                        }}>
-                            Cart
-                            <img src={icon_svg_url}  alt="cart"/>
-                        </button>
+                {
+                    authContext.token
 
-                        <button onClick={authContext.logoutUser}>
-                            Logout
-                        </button>
-                    </>
+                        ?
+                        <>
+                            <button onClick={() => cartContext.dispatch({
+                                type: "SHOW_CART",
+                                payload: "",
+                            })} style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "0.4rem",
+                            }}>
+                                Cart
+                                <img src={icon_svg_url}  alt="cart"/>
+                            </button>
 
-                    :
+                            <button onClick={authContext.logoutUser}>
+                                Logout
+                            </button>
+                        </>
 
-                    <>
-                        <button><Link to="/login" state={{ from: location.pathname }}>Login</Link></button>
-                        <button><Link to="signup" state={{ from: location.pathname }}>Sign Up</Link> </button>
-                    </>
-            }
+                        :
+
+                        <>
+                            <button><Link to="/login" state={{ from: location.pathname }}>Login</Link></button>
+                            <button><Link to="signup" state={{ from: location.pathname }}>Sign Up</Link> </button>
+                        </>
+                }
+
+            </div>
+
         </div>
     )
 }

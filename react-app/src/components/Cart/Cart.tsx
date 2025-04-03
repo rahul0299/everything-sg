@@ -1,5 +1,6 @@
 import Modal from "../Modal/Modal.tsx";
 import {useCart} from "../../store/CartContext.tsx";
+import {IconButton} from "../IconButton/IconButton.tsx";
 
 export const Cart = () => {
     const context = useCart();
@@ -19,20 +20,40 @@ export const Cart = () => {
     return <Modal open={context?.state.isOpen || false} className="cart">
         <div className="cart-header">
             <h3>Your Cart</h3>
-        </div>
-        <div className="cart-items">
-            <ul>
-                {
-                    Array(5).fill("Item").map((item, i) => (
-                        <li key={i}>{item} - {i}</li>
-                    ))
-                }
-            </ul>
+            {/*<button onClick={handleButtonClick}></button>*/}
+            <IconButton onClick={handleButtonClick}>X</IconButton>
 
         </div>
-        <div className="cart-footer">
-            <button onClick={handleButtonClick}>Close</button>
-            <button onClick={handleButtonClick}>Checkout</button>
+
+        <div className="cart-body">
+            <div className="cart-items">
+                <ul>
+                    {
+                        Array(5).fill("Item").map((item, i) => (
+                            <li key={i}>{item} - {i}</li>
+                        ))
+                    }
+                </ul>
+            </div>
+            <div className="cart-summary">
+                <h3>Summary</h3>
+                <div className="cart-summary-row">
+                    <p>Subtotal</p>
+                    <p>$123</p>
+                </div>
+                <div className="cart-summary-row">
+                    <p>GST</p>
+                    <p>10%</p>
+                </div>
+
+                <div className="cart-summary-row cart-total-row">
+                    <p>Total</p>
+                    <p>{`$${123 * 1.1}`}</p>
+                </div>
+
+                <button onClick={handleButtonClick} className="cart-checkout-button">Checkout</button>
+
+            </div>
         </div>
     </Modal>
 }
