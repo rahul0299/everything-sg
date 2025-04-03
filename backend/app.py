@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager, jwt_required, get_jwt
 
 from auth import auth
 
+
 app = Flask(__name__)
 
 app.config["JWT_SECRET_KEY"]="everything-sg"
