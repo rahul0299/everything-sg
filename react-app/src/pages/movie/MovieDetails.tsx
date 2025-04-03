@@ -37,6 +37,11 @@ const MovieDetails = () => {
                     See Showtimes
                 </button>
             </div>
+
+            <div className="showtimes">
+                <div className="day-select"></div>
+                <div className="movie-timings"></div>
+            </div>
         </div>
     </>
 }

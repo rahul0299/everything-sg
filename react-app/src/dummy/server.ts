@@ -1,3 +1,5 @@
+import data from "../data/sample.tsx";
+
 interface User {
     fname: string;
     lname: string;
@@ -7,8 +9,8 @@ interface User {
 
 const users: User[] = [
     {
-        fname: "",
-        lname: "",
+        fname: "F",
+        lname: "L",
         email: "test@123",
         password: "test",
     }
@@ -58,6 +60,8 @@ const users: User[] = [
 // TOTAL PRICE
 // DATA (include all details)
 
+// ON HOMEPAGE if logged in show upcoming bookings (next 24 hrs)
+
 export const createUser = ({ fname, lname, email, password }: User): Promise<void> => {
     return new Promise((resolve, reject) => {
         const exists = users.some(u => u.email === email);
@@ -92,12 +96,7 @@ export const verifyOTP = (otp: string): Promise<boolean> => {
 
 export const fetchData = () => {
     return new Promise((resolve) => {
-        console.log(`Fetching data`)
-        resolve({
-            movies: [],
-            events: [],
-            attractions: [],
-            dining: [],
-        });
+        console.log(`Fetching data`, data);
+        resolve(data);
     })
 }

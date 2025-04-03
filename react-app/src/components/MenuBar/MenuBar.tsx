@@ -2,6 +2,7 @@ import "./menu-bar.css";
 import {Link} from "react-router";
 import {useCart} from "../../store/CartContext.tsx";
 import {useAuth} from "../../store/AuthContext.tsx";
+import UserProfileButton from "../UserProfileButton/UserProfileButton.tsx";
 
 const icon_svg_url = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNob3BwaW5nLWNhcnQtaWNvbiBsdWNpZGUtc2hvcHBpbmctY2FydCI+PGNpcmNsZSBjeD0iOCIgY3k9IjIxIiByPSIxIi8+PGNpcmNsZSBjeD0iMTkiIGN5PSIyMSIgcj0iMSIvPjxwYXRoIGQ9Ik0yLjA1IDIuMDVoMmwyLjY2IDEyLjQyYTIgMiAwIDAgMCAyIDEuNThoOS43OGEyIDIgMCAwIDAgMS45NS0xLjU3bDEuNjUtNy40M0g1LjEyIi8+PC9zdmc+"
 
@@ -42,9 +43,7 @@ const MenuBar = () => {
                                 <img src={icon_svg_url}  alt="cart"/>
                             </button>
 
-                            <button onClick={authContext.logoutUser}>
-                                Logout
-                            </button>
+                            <UserProfileButton />
                         </>
 
                         :

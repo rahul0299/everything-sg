@@ -1,4 +1,4 @@
-import {createContext, ReactNode, useContext, useEffect, useState} from 'react';
+import {createContext, useContext, useEffect, useState} from 'react';
 
 const initialState = {
     token: null,
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
     const logoutUser = () => {
         setToken(null);
-        localStorage.removeItem('user');
+        localStorage.removeItem("token");
     };
 
     return <AuthContext.Provider value={{token, loginUser, logoutUser}} >
