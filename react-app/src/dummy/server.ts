@@ -14,7 +14,6 @@ const users: User[] = [
     }
 ];
 
-
 // EVENTS/ATTRACTIONS/RESTAURANTS
 
 // 1. IMAGES
@@ -27,6 +26,7 @@ const users: User[] = [
 // 8. PRICE
 // 9. PER SLOT SEATS AVAILABLE
 // 10. MAX per booking 4
+// 11. FEATURED_FLAG
 
 
 // FOR MOVIES
@@ -41,6 +41,7 @@ const users: User[] = [
 // 8. RUNTIME/DURATION
 // 9. PRICE
 // 10. NUMBER AVAILABLE SEATS
+// 11. FEATURED_FLAG
 
 // Don't use seat numbers. Only need number of seats being booked (simple counter)
 // Per booking max 10 seats
