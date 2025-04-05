@@ -16,8 +16,6 @@ export const Cart = () => {
         payload: ""
     })
 
-    console.log(context?.state.isOpen);
-
     return <Modal open={context?.state.isOpen || false} className="cart">
         <div className="cart-header">
             <h3>Your Cart</h3>

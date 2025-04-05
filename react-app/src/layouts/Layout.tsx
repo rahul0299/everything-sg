@@ -1,17 +1,10 @@
 import {Outlet, useLocation} from "react-router";
 import {MenuBar} from "../components/MenuBar/MenuBar.tsx";
-import {useEffect} from "react";
 import "./layout.css";
 
 const Layout = () => {
     const location = useLocation();
     const hiddenMenuPaths =["/login", "/signup", "/verification"];
-
-    useEffect(() => {
-        console.log("Current location:", location.pathname);
-    }, [location]);
-
-    console.log("location", location);
 
     return (
         <>

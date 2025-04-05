@@ -40,14 +40,36 @@
     align-items: start;
     justify-content: flex-start;
     height: 100%;
-    padding: 50px 0;
+    padding: 0 0 50px 0;
     box-sizing: border-box;
 }
 
 .movie-info p {
     margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 
 .movie-title {
     color: white;
+    margin-bottom: 0;
+}
+
+.movie-banner p {
+    margin: 5px;
+}
+
+.movie-about-section {
+    max-width: 700px;
+    text-align: left;
+    margin-top: 50px;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 50px;
+}
+
+#movie-showtimes {
+    padding-top: 25px;
+    text-align: left;
+    scroll-margin-top: 50px;
 }

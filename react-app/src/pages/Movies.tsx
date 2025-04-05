@@ -1,6 +1,7 @@
 import "./movies.css";
 import Carousel from "../components/Carousel/Carousel.tsx";
 import {useNavigate} from "react-router";
+import {useStore} from "../store/StoreContext.tsx";
 
 
 const getRandomColor = (): string => {
@@ -22,6 +23,9 @@ const createArray = (num: number): number[] => {
 
 const MoviesPage = () => {
     const navigate = useNavigate();
+    const { data: { movies } } = useStore();
+
+    console.log(movies);
 
     const carouselData = [];
     for (let i = 0; i < 7; i++) {
@@ -48,7 +52,7 @@ const MoviesPage = () => {
                                     borderRadius: "5px"
                                 }}
                                      key={i}
-                                onClick={() => navigate(`/movies/${i}`)}>
+                                onClick={() => navigate(`/movies/${i}` , { state: { movie: movies[i % (movies.length || 1)] } })}>
 
                                 </div>
                             )

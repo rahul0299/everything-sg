@@ -13,7 +13,7 @@ const MenuBar = () => {
     return (
         <div className="menu-bar">
             <div className="menu-bar-home">
-                <Link to="/">Home</Link>
+                <Link to="/">LOGO</Link>
             </div>
             <div className="menu-bar-categories">
                 <Link to="/movies" className="underline">Movies</Link>

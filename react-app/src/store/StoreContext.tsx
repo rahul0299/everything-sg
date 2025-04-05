@@ -2,32 +2,36 @@ import {createContext, useContext, useEffect, useState} from "react";
 import {fetchData} from "../dummy/server.ts";
 
 const StoreContext = createContext({
-    movies: [],
-    events: [],
-    attractions: [],
-    dining: [],
+    data: {
+        movies: [],
+        events: [],
+        attractions: [],
+        dining: [],
+    }
 });
 
 
 
 const StoreProvider = ({ children }) => {
     const [data, setData] = useState({
-        movies: null,
-        events: null,
-        attractions: null,
-        dining: null,
+        data: {
+            movies: [],
+            events: [],
+            attractions: [],
+            dining: [],
+        }
     });
 
     const [lastFetched, setLastFetched] = useState<number | null>(null);
 
     const refreshData = async () => {
-        const { movies, events, attractions, dining }= await fetchData();
-        setData({ movies, events, attractions, dining });
+        const { movies, events, attractions, dining } = await fetchData();
+        setData(prevState => ( {...prevState, data: { movies, events, attractions, dining } }));
         setLastFetched(Date.now());
     };
 
     useEffect(() => {
-        refreshData(); // Initial fetch
+         refreshData(); // Initial fetch
 
         const interval = setInterval(() => {
             refreshData();
@@ -36,7 +40,7 @@ const StoreProvider = ({ children }) => {
         return () => clearInterval(interval); // Cleanup
     }, []);
 
-    return <StoreContext.Provider value={data, refreshData, lastFetched}>
+    return <StoreContext.Provider value={{...data, refreshData, lastFetched}}>
         {children}
     </StoreContext.Provider>
 }
