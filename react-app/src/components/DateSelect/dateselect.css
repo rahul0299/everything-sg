@@ -1,0 +1,58 @@
+.date-select {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+}
+
+.date-select-control {
+    padding: 10px;
+    border-radius: 0;
+    color: #747bff;
+    border: 2px solid #747bff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.date-select-control:disabled {
+    pointer-events: none;
+}
+
+.date-select-control:disabled:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.date-select-control:active:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.date-select-date {
+    width: 200px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    box-sizing: border-box;
+    border-top: 2px solid #747bff;
+    border-bottom: 2px solid #747bff;
+    cursor: pointer;
+}
+
+.date-select-date.selected {
+    background-color: #747bff;
+    color: white;
+}

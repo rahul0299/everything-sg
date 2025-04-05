@@ -1,7 +1,11 @@
-import {useLocation, useNavigate, useParams} from "react-router";
+import {useLocation, useParams} from "react-router";
 import "./moviedetails.css";
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import StarIcon from '@mui/icons-material/Star';
+import {groupMovieShows} from "../../utlis.ts";
+import DateSelect from "../../components/DateSelect/DateSelect.tsx";
+import MovieVenueShowTimes from "../../components/MovieVenueShowTimes/MovieVenueShowTimes.tsx";
+import {useStore} from "../../store/StoreContext.tsx";
 
 const posterUrl = "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/t_16by9Centre/f_auto/q_auto/fom-website/2025/F1%20movie/f1_movie_poster16x9%20(1)"
 
@@ -15,10 +19,26 @@ const genres = ["Action", "Adventure", "Thriller"]
 
 
 const MovieDetails = () => {
-    const navigate = useNavigate();
     const movieId = useParams().id;
+    const { movies } = useStore().data;
     const showTimesRef = useRef<HTMLDivElement>(null);
     const location = useLocation();
+
+
+    // TODO: Use this version later once Movies page is hooked up
+    // const movieData = location.state.movie || useStore().data.movies.find(movie => movie.id === movieId);
+
+    const movieData = location.state?.movie || movies[movieId % movies.length];
+
+    const dates = groupMovieShows(movieData.show_timings);
+
+    const [selectedDate, setSelectedDate] = useState<number>(0);
+
+
+    const handleDateChange = (i: number) => {
+        console.log("Change date to ", dates[i])
+        setSelectedDate(i)
+    }
 
     const scrollToRef = () => {
         if (showTimesRef.current) {
@@ -29,11 +49,6 @@ const MovieDetails = () => {
         }
     }
 
-    console.log(location.state.movie)
-
-    const groupTimingsByVenue = (shows) => {
-        console.log(shows)
-    }
 
     console.log(movieId);
     return <>
@@ -48,28 +63,18 @@ const MovieDetails = () => {
 
             <div className="movie-info">
                 <h1 className="movie-title">Movie Title</h1>
-                <p style={{ fontSize: "0.9rem", marginBottom: "40px" }}>{genres.join("\t•\t")}</p>
+                <p className="movie-genres">{genres.join("\t•\t")}</p>
 
-                <div className="" style={{ padding: "20px", fontSize: "0.9rem", borderRadius: "10px", border: "3px solid #edf6f9", backgroundColor: "rgba(255, 255, 255, 0.25)" }}>
+                <div className="movie-details">
 
                     <p>
-                    <span style={{ width: "105px", textAlign: "left", marginRight: "20px", color: "white", fontWeight: "bold" }}>
-                        User Ratings:
-                    </span>
-                        5.0
-                        <StarIcon fontSize="small" sx={{ verticalAlign: "middle", lineHeight: "100%" }}/>
+                        <span> User Ratings: </span> 5.0 <StarIcon fontSize="small" sx={{ verticalAlign: "middle", lineHeight: "100%" }}/>
                     </p>
                     <p>
-                    <span style={{ width: "105px", textAlign: "left", marginRight: "20px", color: "white", fontWeight: "bold" }}>
-                        Runtime:
-                    </span>
-                        3h 2m
+                        <span >Runtime: </span> 3h 2m
                     </p>
                     <p>
-                    <span style={{ width: "105px", textAlign: "left", marginRight: "20px", color: "white", fontWeight: "bold" }}>
-                        Languages:
-                    </span>
-                        English
+                        <span> Languages: </span> English
                     </p>
 
                 </div>
@@ -97,8 +102,8 @@ const MovieDetails = () => {
 
         <div id="movie-showtimes" ref={showTimesRef}>
             <h2>Show Timings</h2>
-            <div className="date-select" style={{ width: "100%", height: "100vh" }}>
-            </div>
+            <DateSelect dates={dates.map(item => item.date)} handleDateChange={handleDateChange} selected={selectedDate} />
+            <MovieVenueShowTimes data={dates[selectedDate].venues} />
         </div>
     </>
 }

@@ -1,5 +1,5 @@
 import "./menu-bar.css";
-import {Link} from "react-router";
+import {Link, useNavigate} from "react-router";
 import {useCart} from "../../store/CartContext.tsx";
 import {useAuth} from "../../store/AuthContext.tsx";
 import UserProfileButton from "../UserProfileButton/UserProfileButton.tsx";
@@ -9,6 +9,7 @@ const icon_svg_url = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53
 const MenuBar = () => {
     const cartContext = useCart();
     const authContext = useAuth();
+    const navigate = useNavigate();
 
     return (
         <div className="menu-bar">
@@ -49,8 +50,18 @@ const MenuBar = () => {
                         :
 
                         <>
-                            <button><Link to="/login" state={{ from: location.pathname }}>Login</Link></button>
-                            <button><Link to="signup" state={{ from: location.pathname }}>Sign Up</Link> </button>
+                            <button
+                                onClick={() => navigate("/login", { state: { from: location.pathname }})}
+                                style={{ color: "#747bff" }}
+                            >
+                                Login
+                            </button>
+                            <button
+                                onClick={() => navigate("/signup", { state: { from: location.pathname }})}
+                                style={{ color: "#747bff" }}
+                            >
+                                Sign Up
+                            </button>
                         </>
                 }
 
