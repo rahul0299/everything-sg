@@ -1,4 +1,4 @@
-import {useLocation, useParams} from "react-router";
+import {useLocation, useNavigate, useParams} from "react-router";
 import "./moviedetails.css";
 import {useRef, useState} from "react";
 import StarIcon from '@mui/icons-material/Star';
@@ -23,6 +23,7 @@ const MovieDetails = () => {
     const { movies } = useStore().data;
     const showTimesRef = useRef<HTMLDivElement>(null);
     const location = useLocation();
+    const navigate = useNavigate();
 
 
     // TODO: Use this version later once Movies page is hooked up
@@ -47,6 +48,16 @@ const MovieDetails = () => {
                 block: "start"
             });
         }
+    }
+
+    const onClick = ({ venue, time }: { venue: string, time: string }) => {
+        navigate(`/movies/${movieId}/book`, { state: {
+            show: {
+                date: dates[selectedDate].date,
+                venue: venue,
+                time: time,
+            }
+        }});
     }
 
 
@@ -103,7 +114,7 @@ const MovieDetails = () => {
         <div id="movie-showtimes" ref={showTimesRef}>
             <h2>Show Timings</h2>
             <DateSelect dates={dates.map(item => item.date)} handleDateChange={handleDateChange} selected={selectedDate} />
-            <MovieVenueShowTimes data={dates[selectedDate].venues} />
+            <MovieVenueShowTimes data={dates[selectedDate].venues} onClick={onClick} />
         </div>
     </>
 }

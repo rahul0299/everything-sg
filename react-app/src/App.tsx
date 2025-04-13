@@ -14,6 +14,8 @@ import {CartProvider} from "./store/CartContext.tsx";
 import {AuthProvider} from "./store/AuthContext.tsx";
 import MovieDetails from "./pages/movie/MovieDetails.tsx";
 import {Cart} from "./components/Cart/Cart.tsx";
+import MovieBooking from "./pages/movie/MovieBooking.tsx";
+import ProtectedRoute from "./layouts/ProtectedRoute.tsx";
 
 function App() {
   return (
@@ -33,6 +35,14 @@ function App() {
                               <Route path="attractions" element={<AttractionsPage />} />
                               <Route path="dining" element={<DiningPage />} />
                               <Route path="verification" element={<OTPVerification num_digits={6} />} />
+                              {/*<Route path="movies/:id/book" element={<MovieBooking />} />*/}
+
+                              <Route element={<ProtectedRoute />}>
+                                  <Route path="movies/:id/book" element={<MovieBooking />} />
+                                  {/*<Route path="events/:id/book" element={<EventBooking />} />*/}
+                                  {/*<Route path="attractions/:id/book" element={<AttractionBooking />} />*/}
+                                  {/*<Route path="dining/:id/book" element={<DiningBooking />} />*/}
+                              </Route>
                           </Route>
                       </Routes>
                   </CartProvider>

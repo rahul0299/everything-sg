@@ -133,6 +133,7 @@ const data = {
     ],
     "movies": [
         {
+            "id": "1",
             "title": "Avengers: Endgame",
             "poster": "avengers_endgame.jpg",
             "description": "The Avengers take a final stand against Thanos in Marvel Studios’ epic conclusion to the Infinity Saga.",
@@ -151,6 +152,7 @@ const data = {
             "featured_flag": true
         },
         {
+            "id": "2",
             "title": "La La Land",
             "poster": "la_la_land.jpg",
             "description": "A vibrant musical that tells the story of love and ambition in Los Angeles.",

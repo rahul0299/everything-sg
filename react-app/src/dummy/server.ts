@@ -1,4 +1,5 @@
 import data from "../data/sample.tsx";
+import {CartBookingItem} from "../types/booking.tsx";
 
 interface User {
     fname: string;
@@ -15,6 +16,10 @@ const users: User[] = [
         password: "test",
     }
 ];
+
+const cart: CartBookingItem[] = [
+
+]
 
 // EVENTS/ATTRACTIONS/RESTAURANTS
 
@@ -101,6 +106,19 @@ export const fetchData = () => {
     })
 }
 
-export const addToCart = () => {
-    console.log(`Adding to cart`);
+export const addToCart = (cartItem: CartBookingItem) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log(`Adding to cart: ${cartItem}`);
+            resolve(true)
+        }, 1000);
+    });
+}
+
+export const fetchCart = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(cart)
+        }, 1000);
+    })
 }

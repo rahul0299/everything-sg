@@ -16,7 +16,7 @@ const ToggleButtonGroup = ({ items }: PropTypes) => {
         }
     }
 
-    console.log(items);
+    console.log(selected);
     return <div className="toggle-button-group">
         {items.map(item => (
             <button

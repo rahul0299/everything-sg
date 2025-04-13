@@ -4,10 +4,11 @@ interface PropTypes {
     data: {
         venue: string;
         times: string[];
-    }[]
+    }[],
+    onClick: ({ venue, time }: { venue: string, time: string }) => void
 }
 
-const MovieVenueShowTimes = ({ data }: PropTypes) => {
+const MovieVenueShowTimes = ({ data, onClick }: PropTypes) => {
 
     console.log(data);
 
@@ -25,7 +26,13 @@ const MovieVenueShowTimes = ({ data }: PropTypes) => {
                     </div>
                     <div className="data-row-timings">
                         {
-                            times.map(time => <div className="data-row-timing-item" key={`${venue}-${time}`}>{time}</div>)
+                            times.map(time => <div
+                                className="data-row-timing-item"
+                                key={`${venue}-${time}`}
+                                onClick={() => onClick({ venue, time })}
+                            >
+                                {time}
+                            </div>)
                         }
                     </div>
                 </div>
