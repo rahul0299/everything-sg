@@ -3,6 +3,7 @@ import {FormControl, IconButton, InputBase, InputLabel, MenuItem, Paper, Select}
 import SearchIcon from '@mui/icons-material/Search';
 import ButtonGroupSelect from "../components/ButtonGroupSelect/ButtonGroupSelect.tsx";
 import PageTitleBanner from "../components/PageTitleBanner/PageTitleBanner.tsx";
+import RestaurantCard from "../components/RestaurantCard/RestaurantCard.tsx";
 
 
 const DiningPage = () => {
@@ -55,7 +56,7 @@ const DiningPage = () => {
                     <div className="restaurant-grid">
                         {
                             Array(10).fill("").map((_, i) => (
-                                <div className="restaurant-card" key={i} ></div>
+                                <RestaurantCard key={`restaurant-${i}`}  />
                             ))
                         }
                     </div>

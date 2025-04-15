@@ -131,7 +131,7 @@ const MovieBooking = () => {
                         gap: "10px",
                         justifyContent: "start",
                     }}>
-                        <button className="outline-button">Cancel</button>
+                        <button className="outline-button" onClick={() => navigate(-1)}>Cancel</button>
                         <button className="primary-button" onClick={onSubmit}>Add to Cart</button>
 
                     </div>
