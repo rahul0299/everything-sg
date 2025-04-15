@@ -4,8 +4,15 @@ import "./moviebooking.css";
 import {MenuItem, Select} from "@mui/material";
 import {useState} from "react";
 import {addToCart} from "../../dummy/server.ts";
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import LocationPinIcon from '@mui/icons-material/LocationPin';
 
-const options = Array.from({length: 10}, (v, i) => i + 1);
+
+const options = Array.from({length: 10}, (_, i) => i + 1);
+
+const posterUrl = "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/t_16by9Centre/f_auto/q_auto/fom-website/2025/F1%20movie/f1_movie_poster16x9%20(1)"
+
 
 const MovieBooking = () => {
     const { id } = useParams(); // movieId from URL
@@ -20,6 +27,8 @@ const MovieBooking = () => {
     const onSubmit = async () => {
         addToCart({
             id: id as string,
+            name: movie?.title || "",
+            venue: venue || "",
             quantity: numSeats,
             category: "movie",
             session: {
@@ -28,7 +37,7 @@ const MovieBooking = () => {
         })
             .then(res => {
                 console.log("Success", res);
-                navigate("/");
+                navigate("/", { state: { toast: 'Added to cart successfully!' } });
             })
             .catch(err => {
                 console.log(err);
@@ -50,20 +59,62 @@ const MovieBooking = () => {
     // Booking form after showtime selection
     return (
         <div className="movie-booking-container">
-            <div className="card" style={{display: "flex", flexDirection: "row", padding: "0", minWidth: "800px" }} >
-                <div className="card-image" style={{ width: "400px", backgroundColor: "red"}} >
+            <div className="card" style={{display: "flex", flexDirection: "row", padding: "0", minWidth: "800px", overflow: "hidden" }} >
+                <div className="card-image" style={{ width: "500px" }} >
+                    <img src={posterUrl} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
 
                 </div>
-                <div className="card-content" style={{minWidth: "500px", minHeight:"500px", padding: "30px", flexDirection: "column", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <div
+                    className="card-content"
+                    style={{
+                        minWidth: "500px",
+                        minHeight:"500px",
+                        padding: "30px",
+                        flexDirection: "column",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center"
+                }}>
                     <h2>Booking for {movie.title}</h2>
-                    <p><strong>Date:</strong> {date}</p>
-                    <p><strong>Time:</strong> {time}</p>
-                    <p><strong>Venue:</strong> {venue}</p>
-                    <div>
-                        <strong>Seats:</strong>
+                    <div style={{
+                        margin: "10px auto"
+                    }}>
+                        <div style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: "10px",
+                            alignItems: "baseline"
+                        }}>
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "start", gap: "10px", minWidth: "300px", minHeight: "40px" }}>
+                            <CalendarTodayIcon sx={{ color: "gray" }} />
+                            <span style={{ fontWeight: "bold", color: "gray" }}>Date:</span>
+                            {date}
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "start", gap: "10px", minWidth: "300px", minHeight: "40px" }}>
+                            <ScheduleIcon sx={{ color: "gray" }} />
+                            <span style={{ fontWeight: "bold", color: "gray" }}>Time:</span>
+                            {time}
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "start", gap: "10px", minWidth: "300px", minHeight: "40px" }}>
+                            <LocationPinIcon sx={{ color: "gray" }} />
+                            <span style={{ fontWeight: "bold", color: "gray" }}>Venue:</span>
+                            {venue}
+                        </div>
+
+                    </div>
+                    <div style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "10px",
+                        alignItems: "baseline",
+                        minWidth: "300px",
+                        minHeight: "40px",
+                    }}>
+                        <strong>Select Seats:</strong>
                         <Select
                             size="small"
-                            sx={{ width: "100px" }}
+                            sx={{ width: "100px", textAlign: "left" }}
                             value={numSeats}
                             onChange={e => setNumSeats(Number(e.target.value))}>
                             {
@@ -73,8 +124,17 @@ const MovieBooking = () => {
                             }
                         </Select>
                     </div>
-                    <button>Cancel</button>
-                    <button className="auth-button" onClick={onSubmit}>Add to Cart</button>
+
+                    <div style={{
+                        margin: "40px auto 0",
+                        display: "flex",
+                        gap: "10px",
+                        justifyContent: "start",
+                    }}>
+                        <button className="outline-button">Cancel</button>
+                        <button className="primary-button" onClick={onSubmit}>Add to Cart</button>
+
+                    </div>
                 </div>
             </div>
         </div>

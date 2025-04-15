@@ -16,6 +16,7 @@ import MovieDetails from "./pages/movie/MovieDetails.tsx";
 import {Cart} from "./components/Cart/Cart.tsx";
 import MovieBooking from "./pages/movie/MovieBooking.tsx";
 import ProtectedRoute from "./layouts/ProtectedRoute.tsx";
+import {Slide, ToastContainer} from "react-toastify";
 
 function App() {
   return (
@@ -24,6 +25,19 @@ function App() {
               <BrowserRouter>
                   <CartProvider>
                       <Cart />
+                      <ToastContainer
+                          position="top-center"
+                          autoClose={5000}
+                          hideProgressBar={false}
+                          newestOnTop={false}
+                          closeOnClick={false}
+                          rtl={false}
+                          pauseOnFocusLoss
+                          draggable
+                          pauseOnHover
+                          theme="colored"
+                          transition={Slide}
+                      />
                       <Routes>
                           <Route path="/" element={<Layout />} >
                               <Route index element={<HomePage />} />

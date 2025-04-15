@@ -1,6 +1,7 @@
 .cart {
     padding: 20px;
     border-radius: 15px;
+    max-height: 550px;
 }
 
 .cart-header {
@@ -27,7 +28,7 @@
 }
 
 .cart-items {
-    max-height: 600px;
+    max-height: 450px;
     overflow-y: scroll;
     scrollbar-width: thin;
     justify-content: start;
@@ -43,6 +44,7 @@
 
 .cart-summary {
     max-height: 300px;
+    height: fit-content;
     width: 250px;
     border: 1px solid lightgray;
     border-radius: 5px;

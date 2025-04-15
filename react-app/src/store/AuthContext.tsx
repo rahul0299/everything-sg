@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useState} from 'react';
+import {createContext, ReactNode, useContext, useEffect, useState} from 'react';
 
 const initialState = {
     token: null,
@@ -9,7 +9,7 @@ const initialState = {
 
 const AuthContext = createContext(initialState);
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [token, setToken] = useState<string | null>(null);
 
     useEffect(() => {

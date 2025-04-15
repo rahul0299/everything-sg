@@ -17,9 +17,20 @@ const users: User[] = [
     }
 ];
 
-const cart: CartBookingItem[] = [
+const cartItem: CartBookingItem = {
+    id: '1',
+    name: 'La La Land',
+    quantity: 1,
+    category: 'movie',
+    venue: 'GV Tiong Bahru',
+    session: {date: '2025-04-05', time: '12:00 PM'}
+}
 
-]
+const cart: CartBookingItem[] = []
+
+for (let i = 0; i < 2; i++) {
+    cart.push(cartItem);
+}
 
 // EVENTS/ATTRACTIONS/RESTAURANTS
 
@@ -109,7 +120,8 @@ export const fetchData = () => {
 export const addToCart = (cartItem: CartBookingItem) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            console.log(`Adding to cart: ${cartItem}`);
+            console.log(`Adding to cart`);
+            console.log(cartItem);
             resolve(true)
         }, 1000);
     });

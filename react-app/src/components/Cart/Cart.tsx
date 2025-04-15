@@ -2,24 +2,24 @@ import Modal from "../Modal/Modal.tsx";
 import {useCart} from "../../store/CartContext.tsx";
 import {IconButton} from "../IconButton/IconButton.tsx";
 import CloseIcon from '@mui/icons-material/Close';
+import CartItem from "../CartItem/CartItem.tsx";
+import {Badge, Stack} from "@mui/material";
 
 export const Cart = () => {
-    const context = useCart();
+    const cart = useCart();
 
 
     // DESIGN INSPIRATIONS
     // https://dribbble.com/shots/21752241-Shopping-Cart
     // https://dribbble.com/shots/22369270-Shopping-cart-exercise
 
-    const handleButtonClick = () => context?.dispatch({
-        type: "HIDE_CART",
-        payload: ""
-    })
+    const handleButtonClick = () => {
+        cart.hideCart();
+    }
 
-    return <Modal open={context?.state.isOpen || false} className="cart">
+    return <Modal open={cart?.cart.isOpen || false} className="cart">
         <div className="cart-header">
             <h3>Your Cart</h3>
-            {/*<button onClick={handleButtonClick}></button>*/}
             <IconButton onClick={handleButtonClick}>
                 <CloseIcon />
             </IconButton>
@@ -28,13 +28,9 @@ export const Cart = () => {
 
         <div className="cart-body">
             <div className="cart-items">
-                <ul>
-                    {
-                        Array(5).fill("Item").map((item, i) => (
-                            <li key={i}>{item} - {i}</li>
-                        ))
-                    }
-                </ul>
+                {
+                    cart.cart.items.map((item) => (<CartItem key={item.id} item={item} />))
+                }
             </div>
             <div className="cart-summary">
                 <h3>Summary</h3>
@@ -57,4 +53,33 @@ export const Cart = () => {
             </div>
         </div>
     </Modal>
+}
+
+
+const icon_svg_url = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXNob3BwaW5nLWNhcnQtaWNvbiBsdWNpZGUtc2hvcHBpbmctY2FydCI+PGNpcmNsZSBjeD0iOCIgY3k9IjIxIiByPSIxIi8+PGNpcmNsZSBjeD0iMTkiIGN5PSIyMSIgcj0iMSIvPjxwYXRoIGQ9Ik0yLjA1IDIuMDVoMmwyLjY2IDEyLjQyYTIgMiAwIDAgMCAyIDEuNThoOS43OGEyIDIgMCAwIDAgMS45NS0xLjU3bDEuNjUtNy40M0g1LjEyIi8+PC9zdmc+"
+
+export const CartMenuBarButton = () => {
+    const cartContext = useCart();
+
+    return (
+        <Stack>
+
+            <Badge color="primary" showZero={false} badgeContent={cartContext.cart.items.length}>
+                <button onClick={cartContext.showCart}
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: "0.4rem",
+                            padding: "0.5rem 1rem",
+                        }}>
+                    Cart
+                    <img src={icon_svg_url}  alt="cart"/>
+                </button>
+            </Badge>
+
+        </Stack>
+
+    )
 }

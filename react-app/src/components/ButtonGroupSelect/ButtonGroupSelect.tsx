@@ -1,11 +1,11 @@
-import "./togglebuttongroup.css";
+import "./buttongroupselect.css";
 import {useState} from "react";
 
 interface PropTypes {
     items: string[];
 }
 
-const ToggleButtonGroup = ({ items }: PropTypes) => {
+const ButtonGroupSelect = ({ items }: PropTypes) => {
     const [selected, setSelected] = useState<string[]>([]);
 
     const toggleButton = (item: string) => {
@@ -31,4 +31,4 @@ const ToggleButtonGroup = ({ items }: PropTypes) => {
 }
 
 
-export default ToggleButtonGroup;
+export default ButtonGroupSelect;
