@@ -5,7 +5,7 @@ from flask_jwt_extended import (
     jwt_required,
     get_jwt
 )
-from database.db import get_connection
+from database.db import db_connection_pool
 from flask_bcrypt import Bcrypt
 import datetime
 import string
@@ -41,7 +41,7 @@ def register():
     if not (username and email and plain_password):
         return jsonify({"message": "Missing username or email or password"}), 400
 
-    conn = get_connection()
+    conn = db_connection_pool.get_connection()
     cursor = conn.cursor(dictionary=True)
 
     # Check if user email already in DB
@@ -110,7 +110,7 @@ def login():
     if not email or not plain_password:
         return jsonify({"message": "Missing email or password"}), 400
 
-    conn = get_connection()
+    conn = db_connection_pool.get_connection()
     cursor = conn.cursor(dictionary=True)
 
     # Fetch user record
@@ -167,7 +167,7 @@ def verify():
     email = data.get("email")
     otp_submitted = data.get("otp_code")
 
-    conn = get_connection()
+    conn = db_connection_pool.get_connection()
     cursor = conn.cursor(dictionary=True)
     # Fetch user by email
     cursor.execute("SELECT otp_code, is_verified FROM users WHERE email = %s", (email,))
