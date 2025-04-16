@@ -151,7 +151,7 @@ def login():
             "access_token_cookie",access_token,
             httponly=True,
             secure=True,
-            same_site="Lax",
+            samesite="Lax",
             max_age=15*60
         )
 
