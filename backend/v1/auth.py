@@ -161,7 +161,7 @@ def login():
         return jsonify({"message": "Invalid credentials"}), 401
 
 
-@auth.route("/verify", methods=["GET"])
+@auth.route("/verify", methods=["POST"])
 def verify():
     data = request.get_json() or {}
     email = data.get("email")
@@ -188,7 +188,7 @@ def verify():
         # status = 200
         access_token=create_access_token(
             identity=email,
-            additional_claims={"role":user["role"]},
+            # additional_claims={"role":user["role"]},
             expires_delta=datetime.timedelta(minutes=15)
         )
         response=make_response(jsonify({
