@@ -8,6 +8,11 @@ from auth import auth
 app = Flask(__name__)
 
 app.config["JWT_SECRET_KEY"]="everything-sg"
+app.config["JWT_TOKEN_LOCATION"]=["cookies"]
+app.config["JWT_ACCESS_COOKIE_NAME"]="access_token_cookie"
+app.config["JWT_COOKIE_HTTPONLY"]=True
+app.config["JWT_COOKIE_SECURE"]=True
+app.config["JWT_COOKIE_SAMESITE"]="Lax"
 jwt = JWTManager(app)
 
 

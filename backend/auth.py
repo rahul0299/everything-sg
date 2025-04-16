@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, make_response
 from flask_jwt_extended import (
     JWTManager,
     create_access_token,
@@ -135,12 +135,28 @@ def login():
             additional_claims={"role": user_record["role"]},
             expires_delta=datetime.timedelta(minutes=15)  # optional override
         )
-        return jsonify({
-            "message": "Login successful!",
-            "access_token": access_token,
-            "username": user_record["username"],
-            "role": user_record["role"]
-        }), 200
+        # return jsonify({
+        #     "message": "Login successful!",
+        #     "access_token": access_token,
+        #     "username": user_record["username"],
+        #     "role": user_record["role"]
+        # }), 200
+        response=make_response(jsonify({
+            "message":"Login Successful!!",
+            "username":user_record["username"],
+            "role":user_record["role"]
+
+        }))
+        response.set_cookie(
+            "access_token_cookie",access_token,
+            httponly=True,
+            secure=True,
+            same_site="Lax",
+            max_age=15*60
+        )
+
+        return response
+
     else:
         return jsonify({"message": "Invalid credentials"}), 401
 
