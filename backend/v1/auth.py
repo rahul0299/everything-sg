@@ -184,15 +184,35 @@ def verify():
         # Mark verified in DB
         cursor.execute("UPDATE users SET is_verified = 1, otp_code = NULL WHERE email = %s", (email,))
         conn.commit()
-        message = "Verified successfully"
-        status = 200
-    else:
-        message = "Invalid OTP"
-        status = 400
+        # message = "Verified successfully"
+        # status = 200
+        access_token=create_access_token(
+            identity=email,
+            additional_claims={"role":user["role"]},
+            expires_delta=datetime.timedelta(minutes=15)
+        )
+        response=make_response(jsonify({
+            "message":"Verified Successfully !!",
+            "username":user['username'],
+            "role":user["role"]
+        }))
 
-    cursor.close()
-    conn.close()
-    return jsonify({"message": message}), status
+        response.set_cookie(
+            "access_token_cookie", access_token,
+            httponly=True,
+            secure=True,
+            samesite="Lax",
+            max_age=15*60
+        )
+
+        cursor.close()
+        conn.close()
+        return response
+
+    else:
+        cursor.close()
+        conn.close()
+        return jsonify({"message":"Invalid Otp"}), 400
 
 
 
