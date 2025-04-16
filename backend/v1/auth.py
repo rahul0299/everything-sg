@@ -134,6 +134,7 @@ def login():
             additional_claims={"role": user_record["role"]},
             expires_delta=datetime.timedelta(minutes=15)  # optional override
         )
+        #already handled in registeration
         # return jsonify({
         #     "message": "Login successful!",
         #     "access_token": access_token,
