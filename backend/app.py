@@ -16,7 +16,7 @@ app.config["JWT_COOKIE_SAMESITE"]="Lax"
 jwt = JWTManager(app)
 
 
-app.register_blueprint(auth, url_prefix="/v1/api")
+app.register_blueprint(auth, url_prefix="/v1/auth")
 
 if __name__ == "__main__":
     app.run(debug=True)
