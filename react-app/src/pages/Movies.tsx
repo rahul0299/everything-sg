@@ -2,6 +2,7 @@ import "./movies.css";
 import Carousel from "../components/Carousel/Carousel.tsx";
 import {useNavigate} from "react-router";
 import {useStore} from "../store/StoreContext.tsx";
+import MovieCard from "../components/MovieCard/MovieCard.tsx";
 
 
 const getRandomColor = (): string => {
@@ -44,17 +45,19 @@ const MoviesPage = () => {
                     {
                         createArray(10).map(i => {
                             return (
-                                <div style={{
-                                    backgroundColor: getRandomColor(),
-                                    height: "400px",
-                                    width: "300px",
-                                    float: "left",
-                                    borderRadius: "5px"
-                                }}
-                                     key={i}
-                                onClick={() => navigate(`/movies/${i}` , { state: { movie: movies[i % (movies.length || 1)] } })}>
+                                // <div style={{
+                                //     backgroundColor: getRandomColor(),
+                                //     height: "400px",
+                                //     width: "300px",
+                                //     float: "left",
+                                //     borderRadius: "5px"
+                                // }}
+                                //      key={i}
+                                // onClick={() => navigate(`/movies/${i}` , { state: { movie: movies[i % (movies.length || 1)] } })}>
+                                //
+                                // </div>
 
-                                </div>
+                                <MovieCard key={`movie-${i}`} onClick={() => navigate(`/movies/${i}` , { state: { movie: movies[i % (movies.length || 1)] } })} />
                             )
                         })
                     }

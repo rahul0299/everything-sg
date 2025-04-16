@@ -16,7 +16,6 @@ export interface RestaurantCardProps {
     location: string;
 }
 
-const imgUrl = "https://plus.unsplash.com/premium_photo-1669687063538-7b5cf035c17c?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
 const getRandomIcon = () => {
     const icons = [
@@ -29,11 +28,22 @@ const getRandomIcon = () => {
     return icons[Math.floor(Math.random() * icons.length)];
 }
 
+const getRandomImage = () => {
+    const images = [
+        "https://images.unsplash.com/photo-1648366311677-dcb555d41f5f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fGZvb2QlMjBzaW5nYXBvcmV8ZW58MHx8MHx8fDA%3D",
+        "https://plus.unsplash.com/premium_photo-1669687063538-7b5cf035c17c?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1669348704435-65abfb3905f0?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://plus.unsplash.com/premium_photo-1661432484710-90bd17326a97?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzd8fGZvb2QlMjBzaW5nYXBvcmV8ZW58MHx8MHx8fDA%3D"
+    ]
+
+    return images[Math.floor(Math.random() * images.length)];
+}
+
 const RestaurantCard: React.FC<RestaurantCardProps> = (props) => {
     const Icon = getRandomIcon();
     return (
         <div className="restaurant-card">
-            <img src={props.image || imgUrl} alt="name" className="restaurant-card-image" />
+            <img src={props.image || getRandomImage()} alt="name" className="restaurant-card-image" />
             <div className="restaurant-card-content">
                 <h2 className="restaurant-card-title">{props.name || "Restaurant Name"}</h2>
                 <p className="restaurant-card-category">{props.category || "Category1, Category2"}</p>
