@@ -72,7 +72,6 @@ def register():
             cursor.close()
             conn.close()
 
-            # In production, you'd re-send OTP via email/SMS
             return jsonify({
                 "message": "User already registered but not verified. New OTP sent.",
                 "otp_demo": new_otp
@@ -176,8 +175,20 @@ def verify():
     if not user:
         return jsonify({"message": "User not found"}), 404
 
-    if user["is_verified"]:
-        return jsonify({"message": "Already verified"}), 400
+    # if user["is_verified"]:
+    #     return jsonify({"message": "Already verified"}), 400
+    
+    # if not otp_submitted:
+    #     new_otp=generate_otp(6)
+    #     cursor.execute("UPDATE users SET otp_code = %s WHERE email = %s", (new_otp,email))
+    #     conn.commit()
+    #     cursor.close()
+    #     conn.close()
+
+    #     return jsonify({
+    #         "message":"User found, but not verified. OTP sent",
+    #         "otp_demo":new_otp
+    #     }), 200
 
     # Check OTP
     if user["otp_code"] == otp_submitted:
@@ -193,8 +204,7 @@ def verify():
         )
         response=make_response(jsonify({
             "message":"Verified Successfully !!",
-            "username":user['username'],
-            "role":user["role"]
+            
         }))
 
         response.set_cookie(
