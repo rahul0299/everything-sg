@@ -9,6 +9,6 @@ db_connection_pool=pooling.MySQLConnectionPool(
     pool_reset_session=True,
     host='localhost',
     user='root',
-    database='users',
+    database='everything_sg',
     port=3306
 )

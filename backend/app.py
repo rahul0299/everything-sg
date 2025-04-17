@@ -1,8 +1,11 @@
-from flask import Flask
+from flask import Flask, Blueprint
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt
 
 
 from v1.auth import auth
+from v1.dining import dining
+
+
 
 
 app = Flask(__name__)
@@ -17,6 +20,15 @@ jwt = JWTManager(app)
 
 
 app.register_blueprint(auth, url_prefix="/v1/auth")
+app.register_blueprint(dining, url_prefix="/v1/restaurants")
+
+
+# image_bp=Blueprint("images",__name__)
+# BASE_IMAGE_PATH = r"C:/test_images/restaurants"
+
+
+# @image_bp.route("images/<restaurants>/<filename>")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
