@@ -4,7 +4,7 @@ from flask_jwt_extended import JWTManager, jwt_required, get_jwt
 
 from v1.auth import auth
 from v1.dining import dining
-
+from v1.movies import movies
 
 
 
@@ -21,6 +21,7 @@ jwt = JWTManager(app)
 
 app.register_blueprint(auth, url_prefix="/v1/auth")
 app.register_blueprint(dining, url_prefix="/v1/restaurants")
+app.register_blueprint(movies, url_prefix="/v1/movies")
 
 
 # image_bp=Blueprint("images",__name__)
