@@ -33,13 +33,14 @@ def generate_otp(length=6):
 @auth.route('/register', methods=['POST'])
 def register():
     data = request.get_json() or {}
-    username = data.get('username')
+    firstname = data.get('firstname')
+    lastname=data.get('lastname')
     email = data.get('email')
     plain_password = data.get('password')
     role = data.get('role', 'user')
 
-    if not (username and email and plain_password):
-        return jsonify({"message": "Missing username or email or password"}), 400
+    if not (firstname and email and plain_password):
+        return jsonify({"message": "Missing name or email or password"}), 400
 
     conn = db_connection_pool.get_connection()
     cursor = conn.cursor(dictionary=True)
@@ -85,7 +86,7 @@ def register():
             INSERT INTO users (username, email, password_hash, role, is_verified, otp_code)
             VALUES (%s, %s, %s, %s, %s, %s)
         """
-        cursor.execute(insert_query, (username, email, hashed_password, role, False, otp_code))
+        cursor.execute(insert_query, (firstname, lastname, email, hashed_password, role, False, otp_code))
         conn.commit()
 
         cursor.close()
@@ -130,8 +131,13 @@ def login():
     if bcrypt.check_password_hash(user_record["password_hash"], plain_password):
         # Create JWT
         access_token = create_access_token(
-            identity=email,
-            additional_claims={"role": user_record["role"]},
+            identity=user_record["id"],
+            additional_claims={
+                "firstname":user_record["firstname"],
+                "lastname":user_record["lastname"],
+                "role": user_record["role"]
+                               
+            },
             expires_delta=datetime.timedelta(minutes=15)  # optional override
         )
         #already handled in registeration
@@ -143,7 +149,8 @@ def login():
         # }), 200
         response=make_response(jsonify({
             "message":"Login Successful!!",
-            "username":user_record["username"],
+            "firstname":user_record["firstname"],
+            "lastname":user_record["lastname"],
             "role":user_record["role"]
 
         }))
@@ -199,8 +206,11 @@ def verify():
         # message = "Verified successfully"
         # status = 200
         access_token=create_access_token(
-            identity=email,
-            # additional_claims={"role":user["role"]},
+            identity=user["id"],
+            additional_claims={
+                "firstname":user["firstname"],
+                "lastname":user["lastname"],                
+                "role":user["role"]},
             expires_delta=datetime.timedelta(minutes=15)
         )
         response=make_response(jsonify({
