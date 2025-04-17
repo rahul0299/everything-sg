@@ -4,7 +4,12 @@ from flask_jwt_extended import JWTManager, jwt_required, get_jwt
 
 from v1.auth import auth
 from v1.dining import dining
+<<<<<<< Updated upstream
 from v1.movies import movies
+=======
+from v1.events import events
+
+>>>>>>> Stashed changes
 
 
 
@@ -21,7 +26,13 @@ jwt = JWTManager(app)
 
 app.register_blueprint(auth, url_prefix="/v1/auth")
 app.register_blueprint(dining, url_prefix="/v1/restaurants")
+<<<<<<< Updated upstream
 app.register_blueprint(movies, url_prefix="/v1/movies")
+=======
+app.register_blueprint(events, url_prefix="/v1/events")
+
+
+>>>>>>> Stashed changes
 
 
 # image_bp=Blueprint("images",__name__)
