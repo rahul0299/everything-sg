@@ -30,7 +30,7 @@ def cart_table_exists():
     conn.close()
 
 @cart.route("/add", methods=["POST"])
-@jwt_required
+@jwt_required()
 def add_to_cart():
     user_id=get_jwt_identity()
     data=request.get_json()
