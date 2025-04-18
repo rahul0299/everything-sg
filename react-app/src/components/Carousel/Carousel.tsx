@@ -1,9 +1,9 @@
 import "./carousel.css";
-import {useRef, useState} from "react";
+import {ReactNode, useRef, useState} from "react";
 
 
 interface Props {
-    items: Array<{item: number, bgcolor: string}>
+    items: Array<ReactNode>
 }
 
 
@@ -52,10 +52,10 @@ const Carousel = ({ items }: Props) => {
                 {items_infinite.map((item, index) => (
                     <div
                         className="carousel-item"
-                        key={index}
-                        style={{backgroundColor: item.bgcolor}}
-
-                    ></div>
+                        key={`carousel-item-${index}`}
+                    >
+                        {item}
+                    </div>
                 ))}
             </div>
 

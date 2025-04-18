@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ButtonGroupSelect from "../components/ButtonGroupSelect/ButtonGroupSelect.tsx";
 import PageTitleBanner from "../components/PageTitleBanner/PageTitleBanner.tsx";
 import RestaurantCard from "../components/RestaurantCard/RestaurantCard.tsx";
+import DiningPagePlaceholder from "../components/DiningPagePlaceholder.tsx";
 
 
 const DiningPage = () => {
@@ -63,6 +64,8 @@ const DiningPage = () => {
                     </div>
                 </div>
             </div>
+
+            <DiningPagePlaceholder />
         </>
 
     )

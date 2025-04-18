@@ -18,6 +18,9 @@ import MovieBooking from "./pages/movie/MovieBooking.tsx";
 import ProtectedRoute from "./layouts/ProtectedRoute.tsx";
 import {Slide, ToastContainer} from "react-toastify";
 import CheckoutPage from './pages/checkout/CheckoutPage.tsx';
+import DetailsPagePlaceholder from "./components/DetailsPagePlaceholder.tsx";
+import MoviePagePlaceholder from "./components/MoviePagePlaceholder.tsx";
+import DiningPagePlaceholder from "./components/DiningPagePlaceholder.tsx";
 
 function App() {
   return (
@@ -52,6 +55,9 @@ function App() {
                               <Route path="verification" element={<OTPVerification num_digits={6} />} />
                               {/*<Route path="movies/:id/book" element={<MovieBooking />} />*/}
                               <Route path="/checkout" element={<CheckoutPage />} />
+                              <Route path="/placeholder" element={<DetailsPagePlaceholder />} />
+                              <Route path="/placeholder-movies" element={<MoviePagePlaceholder />} />
+                              <Route path="/placeholder-dining" element={<DiningPagePlaceholder />} />
 
                               <Route element={<ProtectedRoute />}>
                                   <Route path="movies/:id/book" element={<MovieBooking />} />

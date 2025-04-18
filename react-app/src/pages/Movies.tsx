@@ -30,7 +30,15 @@ const MoviesPage = () => {
 
     const carouselData = [];
     for (let i = 0; i < 7; i++) {
-        carouselData.push({item: i, bgcolor: getRandomColor()});
+        carouselData.push(
+            <div style={{
+                backgroundColor: getRandomColor(),
+                width: '100%',
+                height: '300px',
+                borderRadius: '20px',
+            }}>
+            </div>
+        );
     }
 
     return (
@@ -45,21 +53,14 @@ const MoviesPage = () => {
                     {
                         createArray(10).map(i => {
                             return (
-                                // <div style={{
-                                //     backgroundColor: getRandomColor(),
-                                //     height: "400px",
-                                //     width: "300px",
-                                //     float: "left",
-                                //     borderRadius: "5px"
-                                // }}
-                                //      key={i}
-                                // onClick={() => navigate(`/movies/${i}` , { state: { movie: movies[i % (movies.length || 1)] } })}>
-                                //
-                                // </div>
-
-                                <MovieCard key={`movie-${i}`}
-                                           onClick={() => navigate(`/movies/${i}`, {state: {movie: movies[i % (movies.length || 1)]}})}
-                                           poster={""} name={""} rating={0} genres={[]} />
+                                <MovieCard
+                                    key={`movie-${i}`}
+                                    onClick={() => navigate(`/movies/${i}`, {state: {movie: movies[i % (movies.length || 1)]}})}
+                                    poster={""}
+                                    name={""}
+                                    rating={0}
+                                    genres={[]}
+                                />
                             )
                         })
                     }
