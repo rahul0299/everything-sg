@@ -29,7 +29,7 @@ def cart_table_exists():
     cursor.close()
     conn.close()
 
-@cart.route("/cart/add", methods=["POST"])
+@cart.route("/add", methods=["POST"])
 @jwt_required
 def add_to_cart():
     user_id=get_jwt_identity()
@@ -87,7 +87,7 @@ def add_to_cart():
 
     return jsonify({"message":"Item added to cart!!"})
 
-@cart.route("/cart/remove", methods=["POST"])
+@cart.route("/remove", methods=["POST"])
 @jwt_required()
 def remove_from_cart():
     user_id = get_jwt_identity()
@@ -121,7 +121,7 @@ def remove_from_cart():
     return jsonify({"message": "Item removed from cart"}), 200
 
 
-@cart.route("/cart", methods=["GET"])
+@cart.route("/", methods=["GET"])
 @jwt_required()
 def get_cart():
     user_id = get_jwt_identity()
