@@ -56,7 +56,8 @@ const DiningPage = () => {
                     <div className="restaurant-grid">
                         {
                             Array(10).fill("").map((_, i) => (
-                                <RestaurantCard key={`restaurant-${i}`}  />
+                                <RestaurantCard key={`restaurant-${i}`} name={""} image={""} category={""} rating={0}
+                                                priceRange={""} location={""}  />
                             ))
                         }
                     </div>

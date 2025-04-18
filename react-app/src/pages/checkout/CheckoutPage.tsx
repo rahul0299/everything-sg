@@ -1,22 +1,19 @@
-import {useEffect, useState} from 'react';
+import {ReactNode, useEffect, useState} from 'react';
 import {
     Box,
     Stepper,
     Step,
     StepLabel,
-    Button,
     Typography,
     Paper,
     styled,
-    StepConnector, MenuItem,
-    Select, CircularProgress,
+    StepConnector,
+    CircularProgress,
     Alert, AlertTitle,
     RadioGroup,
     FormControlLabel,
-    Radio, Divider,
+    Radio,
 } from '@mui/material';
-import LocalAtmIcon from '@mui/icons-material/LocalAtm';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import PaymentIcon from '@mui/icons-material/Payment';
 
@@ -94,7 +91,7 @@ const CheckoutPage = () => {
         }
     };
 
-    const getStep = (step) => {
+    const getStep = (step: number) : ReactNode => {
         if (step === 0) {
             return <ItemsReviewStep />;
         } else if (step === 1) {
@@ -104,6 +101,8 @@ const CheckoutPage = () => {
         } else if (step === 3) {
             return <ConfirmStep onSuccess={() => navigate("/")} onFailure={() => setActiveStep(1)}/>
         }
+
+        return <CircularProgress />
     }
 
     return (
@@ -210,7 +209,7 @@ const PaymentOptionStep = () => {
     return <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" gap={9}>
         <Typography variant="h5" fontWeight="bold">Select Payment Option</Typography>
         <RadioGroup value={selected} onChange={(e) => setSelected(e.target.value)}>
-            {paymentMethods.map((method, index) => (
+            {paymentMethods.map((method) => (
                 <Box py={1} display="flex" width="100%" key={`payment-method-${method.value}`}>
                     <FormControlLabel
                         value={method.value}
@@ -219,9 +218,6 @@ const PaymentOptionStep = () => {
                             <Box display="flex" alignItems="center" justifyContent="space-between">
                                 <Box mr={2}>
                                     <Typography fontWeight={600}>{method.label}</Typography>
-                                    {method.description && (
-                                        <Typography variant="body2" color="text.secondary">{method.description}</Typography>
-                                    )}
                                 </Box>
                                 {method.icon}
                             </Box>
@@ -236,15 +232,7 @@ const PaymentDetailStep = () => {
     return <CardDetailsForm />
 }
 
-function CheckCircleIcon(props: { color: string, sx: { fontSize: number } }) {
-    return null;
-}
-
-function ErrorIcon(props: { color: string, sx: { fontSize: number } }) {
-    return null;
-}
-
-const ConfirmStep = ({ onSuccess, onFailure }) => {
+const ConfirmStep = ({ onSuccess, onFailure }: { onSuccess: () => void, onFailure: () => void }) => {
     const [status, setStatus] = useState<'loading' | 'success' | 'failure'>('loading');
 
     useEffect(() => {

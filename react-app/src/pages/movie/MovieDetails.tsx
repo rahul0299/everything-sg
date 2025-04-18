@@ -20,6 +20,7 @@ const genres = ["Action", "Adventure", "Thriller"]
 
 const MovieDetails = () => {
     const movieId = useParams().id;
+    const movieIdNum = Number(movieId ?? 0);
     const { movies } = useStore().data;
     const showTimesRef = useRef<HTMLDivElement>(null);
     const location = useLocation();
@@ -29,7 +30,7 @@ const MovieDetails = () => {
     // TODO: Use this version later once Movies page is hooked up
     // const movieData = location.state.movie || useStore().data.movies.find(movie => movie.id === movieId);
 
-    const movieData = location.state?.movie || movies[movieId % movies.length];
+    const movieData = location.state?.movie || movies[movieIdNum % movies.length];
 
     const dates = groupMovieShows(movieData.show_timings);
 

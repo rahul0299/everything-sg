@@ -24,7 +24,7 @@ const MenuBar = () => {
             <div className="menu-bar-user">
 
                 {
-                    authContext.token
+                    authContext.user
 
                         ?
                         <>

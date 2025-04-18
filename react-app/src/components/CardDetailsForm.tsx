@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
-import {useState} from "react";
+import {ChangeEvent, useState} from "react";
 
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -68,13 +68,13 @@ const CardDetailsForm = () => {
         return digitsOnly.replace(/(.{4})/g, '$1 ').trim();
     };
 
-    const handleCardInputChange = (e) => {
+    const handleCardInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const raw = e.target.value;
         setCardNumber(formatCardNumber(raw));
     };
 
-    const handleCvvChange = (e) => {
-        const digitsOnly = e.target.value.replace(/\D/g, '').slice(0, 4);
+    const handleCvvChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const digitsOnly = e.target.value.replace(/\D/g, '').slice(0, 3);
         setCvv(digitsOnly);
     };
 

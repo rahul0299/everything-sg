@@ -1,6 +1,3 @@
-import StarIcon from "@mui/icons-material/Star";
-import {Divider} from "@mui/material";
-import LocationPinIcon from "@mui/icons-material/LocationPin";
 import "./movie-card.css"
 
 interface MovieCardProps {
@@ -10,9 +7,6 @@ interface MovieCardProps {
     genres: string[];
     onClick: () => void;
 }
-
-const imgUrl = "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/t_16by9Centre/f_auto/q_auto/fom-website/2025/F1%20movie/f1_movie_poster16x9%20(1)"
-
 
 const getRandomPoster = () => {
     const samplePosters = [
@@ -32,10 +26,10 @@ const getRandomPoster = () => {
 const MovieCard = (props: MovieCardProps) => {
     return (
         <div className="movie-card" onClick={props.onClick}>
-            <img src={props.image || getRandomPoster()} alt="name" className="movie-card-image" />
+            <img src={props.poster || getRandomPoster()} alt="name" className="movie-card-image" />
             <div className="movie-card-content">
                 <h2 className="movie-card-title">{props.name || "Movie Name"}</h2>
-                <p className="movie-card-category">{props.category || "Category1, Category2"}</p>
+                <p className="movie-card-category">{props.genres.join(", ") || "Category1, Category2"}</p>
             </div>
         </div>
     )

@@ -57,7 +57,9 @@ const MoviesPage = () => {
                                 //
                                 // </div>
 
-                                <MovieCard key={`movie-${i}`} onClick={() => navigate(`/movies/${i}` , { state: { movie: movies[i % (movies.length || 1)] } })} />
+                                <MovieCard key={`movie-${i}`}
+                                           onClick={() => navigate(`/movies/${i}`, {state: {movie: movies[i % (movies.length || 1)]}})}
+                                           poster={""} name={""} rating={0} genres={[]} />
                             )
                         })
                     }

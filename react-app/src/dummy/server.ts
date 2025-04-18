@@ -118,7 +118,7 @@ export const fetchData = () => {
 }
 
 export const addToCart = (cartItem: CartBookingItem) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         setTimeout(() => {
             console.log(`Adding to cart`);
             console.log(cartItem);
@@ -135,7 +135,7 @@ export const fetchCart = () => {
     })
 }
 
-export const processPayment = (paymentDetails) => {
+export const processPayment = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const success = Math.random() < 0.7; // 70% chance of success
