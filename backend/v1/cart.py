@@ -12,22 +12,6 @@ CATEGORY_TABLES={
     "attractions":"attractions"
 }
 
-def cart_table_exists():
-    conn=db_connection_pool.get_connection()
-    cursor=conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS cart(
-            user_id INT PRIMARY KEY,
-            movies LONGTEXT,
-            dining LONGTEXT,
-            events LONGTEXT,
-            attractions LONGTEXT          
-        
-        )
-    """)
-    conn.commit()
-    cursor.close()
-    conn.close()
 
 @cart.route("/add", methods=["POST"])
 @jwt_required()
@@ -43,7 +27,7 @@ def add_to_cart():
     if not all([item_id, category, item_data]):
         return jsonify({"message": "Missing required fields!!"}), 400
 
-    cart_table_exists()
+    # cart_table_exists()
     conn=db_connection_pool.get_connection()
     cursor=conn.cursor(dictionary=True)
 
