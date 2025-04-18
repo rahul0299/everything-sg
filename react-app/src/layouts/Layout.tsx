@@ -4,7 +4,7 @@ import "./layout.css";
 
 const Layout = () => {
     const location = useLocation();
-    const hiddenMenuPaths =["/login", "/signup", "/verification"];
+    const hiddenMenuPaths =["/login", "/signup", "/verification", "/checkout"];
 
     return (
         <>

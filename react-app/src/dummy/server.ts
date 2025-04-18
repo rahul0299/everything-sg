@@ -134,3 +134,25 @@ export const fetchCart = () => {
         }, 1000);
     })
 }
+
+export const processPayment = (paymentDetails) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const success = Math.random() < 0.7; // 70% chance of success
+
+            if (success) {
+                resolve({
+                    status: 'success',
+                    message: 'Payment processed successfully',
+                    transactionId: `txn_${Date.now()}`
+                });
+            } else {
+                reject({
+                    status: 'failure',
+                    message: 'Payment declined. Please try again.'
+                });
+            }
+        }, 2000);
+    });
+};
+

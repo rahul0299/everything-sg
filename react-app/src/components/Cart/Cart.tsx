@@ -4,9 +4,11 @@ import {IconButton} from "../IconButton/IconButton.tsx";
 import CloseIcon from '@mui/icons-material/Close';
 import CartItem from "../CartItem/CartItem.tsx";
 import {Badge, Stack} from "@mui/material";
+import {useNavigate} from "react-router";
 
 export const Cart = () => {
     const cart = useCart();
+    const navigate = useNavigate();
 
 
     // DESIGN INSPIRATIONS
@@ -15,6 +17,7 @@ export const Cart = () => {
 
     const handleButtonClick = () => {
         cart.hideCart();
+        navigate("/checkout")
     }
 
     return <Modal open={cart?.cart.isOpen || false} className="cart">
@@ -29,7 +32,7 @@ export const Cart = () => {
         <div className="cart-body">
             <div className="cart-items">
                 {
-                    cart.cart.items.map((item) => (<CartItem key={item.id} item={item} />))
+                    cart.cart.items.map((item, index) => (<CartItem key={`cart-${index}-${item.id}`} item={item} />))
                 }
             </div>
             <div className="cart-summary">

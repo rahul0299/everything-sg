@@ -17,6 +17,7 @@ import {Cart} from "./components/Cart/Cart.tsx";
 import MovieBooking from "./pages/movie/MovieBooking.tsx";
 import ProtectedRoute from "./layouts/ProtectedRoute.tsx";
 import {Slide, ToastContainer} from "react-toastify";
+import CheckoutPage from './pages/checkout/CheckoutPage.tsx';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
                               <Route path="dining" element={<DiningPage />} />
                               <Route path="verification" element={<OTPVerification num_digits={6} />} />
                               {/*<Route path="movies/:id/book" element={<MovieBooking />} />*/}
+                              <Route path="/checkout" element={<CheckoutPage />} />
 
                               <Route element={<ProtectedRoute />}>
                                   <Route path="movies/:id/book" element={<MovieBooking />} />
