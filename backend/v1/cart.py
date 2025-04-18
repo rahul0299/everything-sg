@@ -19,7 +19,7 @@ def cart_table_exists():
         CREATE TABLE IF NOT EXISTS cart(
             user_id INT PRIMARY KEY,
             movies LONGTEXT,
-            restaurants LONGTEXT,
+            dining LONGTEXT,
             events LONGTEXT,
             attractions LONGTEXT          
         
