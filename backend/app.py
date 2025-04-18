@@ -7,6 +7,7 @@ from v1.dining import dining
 from v1.movies import movies
 from v1.events import events
 from v1.attractions import attractions
+from v1.cart import cart
 
 
 
@@ -27,6 +28,7 @@ app.register_blueprint(dining, url_prefix="/v1/restaurants")
 app.register_blueprint(movies, url_prefix="/v1/movies")
 app.register_blueprint(events, url_prefix="/v1/events")
 app.register_blueprint(attractions, url_prefix="/v1/attractions")
+app.register_blueprint(cart, url_prefix="/v1/cart")
 
 
 # image_bp=Blueprint("images",__name__)
