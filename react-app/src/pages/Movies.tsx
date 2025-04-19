@@ -1,71 +1,86 @@
 import "./movies.css";
 import Carousel from "../components/Carousel/Carousel.tsx";
 import {useNavigate} from "react-router";
-import {useStore} from "../store/StoreContext.tsx";
 import MovieCard from "../components/MovieCard/MovieCard.tsx";
+import {useEffect, useState} from "react";
+import {API} from "../config.ts";
+import {MovieData} from "../types/store.tsx";
+import MoviePagePlaceholder from "../components/MoviePagePlaceholder.tsx";
+import {getImgUrl} from "../utlis.ts";
 
-
-const getRandomColor = (): string => {
-    return `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
-};
-
-// group by title
-// include locations
-
-// on click move to
-
-const createArray = (num: number): number[] => {
-    const res = []
-    for (let i=1;i<=num;i++){
-        res.push(i)
-    }
-    return res;
-}
 
 const MoviesPage = () => {
     const navigate = useNavigate();
-    const { data: { movies } } = useStore();
 
-    console.log(movies);
+    const [isLoading, setIsLoading] = useState(true);
+    const [moviesData, setMoviesData] = useState<MovieData[]>([]);
 
-    const carouselData = [];
-    for (let i = 0; i < 7; i++) {
-        carouselData.push(
-            <div style={{
-                backgroundColor: getRandomColor(),
+    useEffect(() => {
+        setIsLoading(true);
+        fetch(API.MOVIES)
+            .then(res => {
+                setIsLoading(false);
+                return res.json()
+            })
+            .then(data => setMoviesData(data));
+    }, [])
+
+    const getFeaturedMoviesCarouselData = (moviesData: MovieData[]) => {
+        const featuredMoviesData: MovieData[] = moviesData.filter(movie => movie.featured_flag);
+
+        console.log(featuredMoviesData);
+
+        return featuredMoviesData.map((movie: MovieData) => {
+            return <div key={`movie-${movie.id}`} style={{
                 width: '100%',
                 height: '300px',
                 borderRadius: '20px',
+                overflow: 'hidden',
             }}>
+                <img
+                    src={getImgUrl(movie.title, movie.poster)}
+                    alt={movie.title}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        objectPosition: 'center'}}
+                />
             </div>
-        );
+        })
     }
 
     return (
         <>
-            <div className="section">
-                <h2>Featured</h2>
-                <Carousel items={carouselData} />
-            </div>
-            <div className="section">
-                <h2>Now Showing</h2>
-                <div className="movie-grid">
-                    {
-                        createArray(10).map(i => {
-                            return (
-                                <MovieCard
-                                    key={`movie-${i}`}
-                                    onClick={() => navigate(`/movies/${i}`, {state: {movie: movies[i % (movies.length || 1)]}})}
-                                    poster={""}
-                                    name={""}
-                                    rating={0}
-                                    genres={[]}
-                                />
-                            )
-                        })
-                    }
-                </div>
-            </div>
+            {
+                isLoading ? (
+                    <MoviePagePlaceholder />
+                ) : (
+                    <>
+                        <div className="section">
+                            <h2>Featured</h2>
+                            <Carousel items={getFeaturedMoviesCarouselData(moviesData)} />
+                        </div>
+
+                        <div className="section">
+                            <h2>Now Showing</h2>
+                            <div className="movie-grid">
+                                {
+                                    moviesData.map(m => {
+                                        return (
+                                            <MovieCard
+                                                key={`movie-${m.id}`}
+                                                onClick={() => navigate(`/movies/${m.id}`, {state: {movie: m}})}
+                                                movie={m}
+                                            />
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+                    </>
+                )
+            }
         </>
     )
 }

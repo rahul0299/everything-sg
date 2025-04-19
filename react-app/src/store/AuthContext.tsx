@@ -21,22 +21,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<AuthUser | null>(null);
 
     const refreshUser = async () => {
-        const verifyRes = await fetch('http://localhost:8000/auth/verify', {
-            credentials: 'include',
-        });
-        if (verifyRes.ok) {
-            setUser(null);
-        } else {
-            const userRes = await fetch('http://localhost:8000/auth/user', {
-                credentials: 'include',
-            });
-            if (userRes.ok) {
-                const userData = await userRes.json();
-                setUser(userData);
-            } else {
-                setUser(null);
-            }
-        }
+        // const verifyRes = await fetch('http://localhost:8000/auth/verify', {
+        //     credentials: 'include',
+        // });
+        // if (verifyRes.ok) {
+        //     setUser(null);
+        // } else {
+        //     const userRes = await fetch('http://localhost:8000/auth/user', {
+        //         credentials: 'include',
+        //     });
+        //     if (userRes.ok) {
+        //         const userData = await userRes.json();
+        //         setUser(userData);
+        //     } else {
+        //         setUser(null);
+        //     }
+        // }
+
+        setUser(null);
     };
 
     useEffect(() => {

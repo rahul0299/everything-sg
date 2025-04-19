@@ -10,7 +10,7 @@ interface Props {
 const Carousel = ({ items }: Props) => {
     const ref = useRef<HTMLDivElement>(null);
 
-    const items_infinite = [...items, items[0], items[1], items[2]];
+    const items_infinite = items. length > 2 ? [...items, items[0], items[1], items[2]] : items;
 
     const [active, setActive] = useState<number>(0);
 

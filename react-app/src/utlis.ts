@@ -51,3 +51,8 @@ export const groupMovieShows = (shows: Show[]): GroupedShow[] => {
         }));
 }
 
+export const getImgUrl = (name: string, poster: string): string => {
+    console.log(name, poster)
+    return "https://anniehaydesign.weebly.com/uploads/9/5/4/6/95469676/landscape-poster-3_orig.jpg";
+}
+
