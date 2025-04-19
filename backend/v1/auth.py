@@ -83,10 +83,10 @@ def register():
         otp_code = generate_otp(6)
 
         insert_query = """
-            INSERT INTO users (username, email, password_hash, role, is_verified, otp_code)
+            INSERT INTO users (firstname, lastname, email, password_hash, role, is_verified)
             VALUES (%s, %s, %s, %s, %s, %s)
         """
-        cursor.execute(insert_query, (firstname, lastname, email, hashed_password, role, False, otp_code))
+        cursor.execute(insert_query, (firstname, lastname, email, hashed_password, role, False))
         conn.commit()
 
         cursor.close()
@@ -177,27 +177,25 @@ def verify():
     conn = db_connection_pool.get_connection()
     cursor = conn.cursor(dictionary=True)
     # Fetch user by email
-    cursor.execute("SELECT otp_code, is_verified FROM users WHERE email = %s", (email,))
+    # cursor.execute("SELECT otp_code, is_verified FROM users WHERE email = %s", (email,))
+    cursor.execute("""
+        SELECT id, firstname, lastname, role, otp_code, is_verified
+        FROM users
+        WHERE email = %s
+    """, (email,))
+
     user = cursor.fetchone()
 
     if not user:
         return jsonify({"message": "User not found"}), 404
-
-    # if user["is_verified"]:
-    #     return jsonify({"message": "Already verified"}), 400
     
-    # if not otp_submitted:
-    #     new_otp=generate_otp(6)
-    #     cursor.execute("UPDATE users SET otp_code = %s WHERE email = %s", (new_otp,email))
-    #     conn.commit()
-    #     cursor.close()
-    #     conn.close()
+    if not otp_submitted:
+        return jsonify({"message": "OTP code is required"}), 400
 
-    #     return jsonify({
-    #         "message":"User found, but not verified. OTP sent",
-    #         "otp_demo":new_otp
-    #     }), 200
+    if user["otp_code"] is None:
+        return jsonify({"message": "No OTP was issued. Please request again."}), 400
 
+   
     # Check OTP
     if user["otp_code"] == otp_submitted:
         # Mark verified in DB
