@@ -13,8 +13,12 @@ def insert_booking_from_cart():
     user_id = get_jwt_identity()
     details = get_cart_data(user_id)
 
-    if not details:
+    # if not details:
+    #     return jsonify({"message": "Cart is empty, cannot create booking"}), 400
+
+    if not any(details.get(cat) for cat in ["dining", "movies", "events", "attractions"]):
         return jsonify({"message": "Cart is empty, cannot create booking"}), 400
+
 
     now = datetime.now()
     timestamp_str = now.strftime("%Y-%m-%d %H:%M:%S")
