@@ -19,6 +19,10 @@ app = Flask(__name__)
 
 CORS(app, resources={r"/*": {"origins": "*"}})
 
+@app.route("/")
+def hello_world():
+    return "<h1>Everything SG</h1>"
+
 app.config["JWT_SECRET_KEY"]="everything-sg"
 app.config["JWT_TOKEN_LOCATION"]=["cookies"]
 app.config["JWT_ACCESS_COOKIE_NAME"]="access_token_cookie"
