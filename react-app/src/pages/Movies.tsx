@@ -1,6 +1,6 @@
 import "./movies.css";
 import Carousel from "../components/Carousel/Carousel.tsx";
-import {useNavigate} from "react-router";
+import {useLocation, useNavigate} from "react-router";
 import MovieCard from "../components/MovieCard/MovieCard.tsx";
 import {useEffect, useState} from "react";
 import {API} from "../config.ts";
@@ -11,6 +11,7 @@ import {getImgUrl} from "../utlis.ts";
 
 const MoviesPage = () => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [isLoading, setIsLoading] = useState(true);
     const [moviesData, setMoviesData] = useState<MovieData[]>([]);
@@ -23,7 +24,7 @@ const MoviesPage = () => {
                 return res.json()
             })
             .then(data => setMoviesData(data));
-    }, [])
+    }, [location.pathname])
 
     const getFeaturedMoviesCarouselData = (moviesData: MovieData[]) => {
         const featuredMoviesData: MovieData[] = moviesData.filter(movie => movie.featured_flag);

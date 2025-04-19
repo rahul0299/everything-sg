@@ -13,7 +13,7 @@ export type Action =
 
 export interface CategoryData {
     description: string,
-    featured_flag: boolean,
+    featured_flag: number,
     id: number,
     images: string[],
     location: string,
@@ -38,7 +38,7 @@ export interface MovieData {
     available_seats: number,
     description: string,
     duration: string,
-    featured_flag: boolean,
+    featured_flag: number,
     genres: string[],
     id: number,
     poster: string,

@@ -43,4 +43,11 @@
     padding: 10px 20px;
     width: fit-content;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.data-row-timing-item.selected {
+    border: 1px solid #747bff;
+    color: white;
+    background-color: #747bff;
 }

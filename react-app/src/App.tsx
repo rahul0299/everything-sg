@@ -14,7 +14,7 @@ import {CartProvider} from "./store/CartContext.tsx";
 import {AuthProvider} from "./store/AuthContext.tsx";
 import MovieDetails from "./pages/movie/MovieDetails.tsx";
 import {Cart} from "./components/Cart/Cart.tsx";
-import MovieBooking from "./pages/movie/MovieBooking.tsx";
+import BookingPage from "./pages/booking/BookingPage.tsx";
 import ProtectedRoute from "./layouts/ProtectedRoute.tsx";
 import {Slide, ToastContainer} from "react-toastify";
 import CheckoutPage from './pages/checkout/CheckoutPage.tsx';
@@ -53,14 +53,15 @@ function App() {
                               <Route path="attractions" element={<AttractionsPage />} />
                               <Route path="dining" element={<DiningPage />} />
                               <Route path="verification" element={<OTPVerification num_digits={6} />} />
-                              {/*<Route path="movies/:id/book" element={<MovieBooking />} />*/}
+                              {/*<Route path="movies/:id/book" element={<BookingPage />} />*/}
                               <Route path="/checkout" element={<CheckoutPage />} />
                               <Route path="/placeholder" element={<DetailsPagePlaceholder />} />
                               <Route path="/placeholder-movies" element={<MoviePagePlaceholder />} />
                               <Route path="/placeholder-dining" element={<DiningPagePlaceholder />} />
+                              <Route path="movies/:id/book" element={<BookingPage />} />
+
 
                               <Route element={<ProtectedRoute />}>
-                                  <Route path="movies/:id/book" element={<MovieBooking />} />
                                   {/*<Route path="events/:id/book" element={<EventBooking />} />*/}
                                   {/*<Route path="attractions/:id/book" element={<AttractionBooking />} />*/}
                                   {/*<Route path="dining/:id/book" element={<DiningBooking />} />*/}

@@ -10,7 +10,7 @@
     z-index: 1;
 }
 
-.movie-banner img {
+img.movie-banner-background {
     position: absolute;
     z-index: -1;
     top: 0;
@@ -19,16 +19,16 @@
     height: 100%;
     object-fit: cover;
     object-position:left center;
-    /*mask-image: linear-gradient(to left, black 25%, transparent 70%);*/
+        /*mask-image: linear-gradient(to left, black 25%, transparent 70%);*/
     mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
     -webkit-mask-image: -webkit-linear-gradient(to left, black 25%, transparent 70%);
 }
 
 .movie-poster {
     height: 400px;
-    width: 250px;
-    background: cornflowerblue;
+    max-width: 250px;
     margin: 50px;
+    background-color: white;
 }
 
 .movie-info {

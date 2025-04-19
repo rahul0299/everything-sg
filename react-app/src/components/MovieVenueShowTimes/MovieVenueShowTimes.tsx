@@ -1,14 +1,16 @@
 import "./movievenueshowtimes.css";
+import {MovieShowTime} from "../../types/store.tsx";
 
 interface PropTypes {
     data: {
         venue: string;
         times: string[];
     }[],
-    onClick: ({ venue, time }: { venue: string, time: string }) => void
+    onClick: ({ venue, time }: { venue: string, time: string }) => void,
+    selected?: MovieShowTime | null;
 }
 
-const MovieVenueShowTimes = ({ data, onClick }: PropTypes) => {
+const MovieVenueShowTimes = ({ data, onClick, selected }: PropTypes) => {
 
     console.log(data);
 
@@ -27,7 +29,7 @@ const MovieVenueShowTimes = ({ data, onClick }: PropTypes) => {
                     <div className="data-row-timings">
                         {
                             times.map(time => <div
-                                className="data-row-timing-item"
+                                className={`data-row-timing-item ${selected?.venue === venue && selected?.time === time ? "selected" : ""}`}
                                 key={`${venue}-${time}`}
                                 onClick={() => onClick({ venue, time })}
                             >

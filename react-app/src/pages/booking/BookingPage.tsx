@@ -1,38 +1,54 @@
-import { useLocation, useParams, useNavigate, Link } from "react-router";
-import { useStore } from "../../store/StoreContext";
-import "./moviebooking.css";
+import { useLocation, useNavigate, Link } from "react-router";
+import "./bookingpage.css";
 import {MenuItem, Select} from "@mui/material";
 import {useState} from "react";
 import {addToCart} from "../../dummy/server.ts";
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import LocationPinIcon from '@mui/icons-material/LocationPin';
+import {getImgUrl} from "../../utlis.ts";
 
 
 const options = Array.from({length: 10}, (_, i) => i + 1);
 
-const posterUrl = "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/t_16by9Centre/f_auto/q_auto/fom-website/2025/F1%20movie/f1_movie_poster16x9%20(1)"
+
+interface BookingData {
+    id: string;
+    image: string;
+    name: string;
+    category: string;
+    session: {
+        date: string;
+        time: string;
+        venue: string;
+    }
+}
 
 
-const MovieBooking = () => {
-    const { id } = useParams(); // movieId from URL
+const BookingPage = () => {
     const location = useLocation();
-    const navigate = useNavigate();
-    const { movies } = useStore().data;
+    const navigate = useNavigate()
 
-    const movie = movies.find(m => m.id === id);
+    const data = location.state as BookingData;
 
-    const [ numSeats, setNumSeats] = useState(1);
+    const [ quantity, setQuantity] = useState(1);
+
+    if (!data) return <div>
+        <p>Item not found</p>
+        <Link to="/">Home</Link>
+    </div>;
+
 
     const onSubmit = async () => {
         addToCart({
-            id: id as string,
-            name: movie?.title || "",
-            venue: venue || "",
-            quantity: numSeats,
-            category: "movie",
+            id: data.id,
+            name: data.name,
+            venue: data.session.venue,
+            quantity: quantity,
+            category: data.category,
             session: {
-                date, time
+                date: data.session.date,
+                time: data.session.time
             }
         })
             .then(res => {
@@ -44,24 +60,13 @@ const MovieBooking = () => {
             })
     }
 
-    if (!movie) return <div>
-        <p>Movie not found</p>
-        <Link to="/movies">All Movies</Link>
-    </div>;
-
-    if (!location.state?.show) return <div>
-        <p>No Show Selected</p>
-        <Link to={`/movies/${id}`}>See Timings</Link>
-    </div>
-
-    const { date, time, venue } = location.state.show;
 
     // Booking form after showtime selection
     return (
         <div className="movie-booking-container">
             <div className="card" style={{display: "flex", flexDirection: "row", padding: "0", minWidth: "800px", overflow: "hidden" }} >
                 <div className="card-image" style={{ width: "500px" }} >
-                    <img src={posterUrl} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
+                    <img alt="" src={getImgUrl(data.name, data.image)} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
 
                 </div>
                 <div
@@ -75,7 +80,7 @@ const MovieBooking = () => {
                         justifyContent: "center",
                         alignItems: "center"
                 }}>
-                    <h2>Booking for {movie.title}</h2>
+                    <h2>Booking for {data.name}</h2>
                     <div style={{
                         margin: "10px auto"
                     }}>
@@ -89,17 +94,17 @@ const MovieBooking = () => {
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "start", gap: "10px", minWidth: "300px", minHeight: "40px" }}>
                             <CalendarTodayIcon sx={{ color: "gray" }} />
                             <span style={{ fontWeight: "bold", color: "gray" }}>Date:</span>
-                            {date}
+                            {data.session.date}
                         </div>
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "start", gap: "10px", minWidth: "300px", minHeight: "40px" }}>
                             <ScheduleIcon sx={{ color: "gray" }} />
                             <span style={{ fontWeight: "bold", color: "gray" }}>Time:</span>
-                            {time}
+                            {data.session.time}
                         </div>
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "start", gap: "10px", minWidth: "300px", minHeight: "40px" }}>
                             <LocationPinIcon sx={{ color: "gray" }} />
                             <span style={{ fontWeight: "bold", color: "gray" }}>Venue:</span>
-                            {venue}
+                            {data.session.venue}
                         </div>
 
                     </div>
@@ -111,12 +116,12 @@ const MovieBooking = () => {
                         minWidth: "300px",
                         minHeight: "40px",
                     }}>
-                        <strong>Select Seats:</strong>
+                        <strong>Select Quantity:</strong>
                         <Select
                             size="small"
                             sx={{ width: "100px", textAlign: "left" }}
-                            value={numSeats}
-                            onChange={e => setNumSeats(Number(e.target.value))}>
+                            value={quantity}
+                            onChange={e => setQuantity(Number(e.target.value))}>
                             {
                                 options.map(n => (
                                     <MenuItem key={n} value={n}>{n}</MenuItem>
@@ -141,4 +146,4 @@ const MovieBooking = () => {
     );
 };
 
-export default MovieBooking;
+export default BookingPage;
