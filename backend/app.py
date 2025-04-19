@@ -1,5 +1,6 @@
 from flask import Flask, Blueprint
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt
+from flask_cors import CORS
 
 
 from v1.auth import auth
@@ -14,8 +15,9 @@ from v1.checkout import checkout
 
 
 
-
 app = Flask(__name__)
+
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.config["JWT_SECRET_KEY"]="everything-sg"
 app.config["JWT_TOKEN_LOCATION"]=["cookies"]
