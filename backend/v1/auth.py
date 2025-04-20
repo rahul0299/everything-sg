@@ -232,6 +232,25 @@ def verify():
         cursor.close()
         conn.close()
         return jsonify({"message":"Invalid Otp"}), 400
+    
+
+@auth.route("/logout", methods=["POST"])
+@jwt_required()
+def logout_and_clear():
+    response = make_response(jsonify({"message": "Logged out successfully"}))
+
+    # Overwrite the cookie with expired one
+    response.set_cookie(
+        "access_token_cookie", 
+        "",  
+        httponly=True,
+        secure=True,
+        samesite="None",
+        max_age=0  
+    )
+
+    return response
+
 
 
 
