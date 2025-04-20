@@ -29,13 +29,6 @@ def send_info_for_profile():
     cursor.close()
     conn.close()
 
-    for booking in bookings:
-        if isinstance(booking.get("details"), str):
-            try:
-                booking["details"] = json.loads(booking["details"])
-            except:
-                booking["details"] = {}
-
     response = make_response(jsonify({
         "profile": {
             "firstname": user_record["firstname"],
