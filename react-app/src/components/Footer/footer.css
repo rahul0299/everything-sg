@@ -1,0 +1,105 @@
+.footer-container {
+  background-color: #0a3d50;
+  color: #ecf0f1;
+  padding: 2rem 0;
+  margin-top: 3rem;
+  border-radius: 20px;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  gap: 2rem;
+}
+
+.footer-section {
+  padding-left: 40px;
+  flex: 1;
+  min-width: 200px;
+  color: azure;
+}
+
+.footer-section h3 {
+  color: #fffdfd;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.footer-section p {
+  font-weight: 500;
+  color: #e3e4ef;
+  text-align: left;
+}
+
+.footer-section :link {
+  font-weight: 500;
+  color: #e3e4ef;
+  text-align: left;
+  margin-left: 0;
+}
+.footer-section ul {
+  padding-left: 0; /* Remove default ul padding */
+  margin-left: 0; /* Remove default ul margin */
+  list-style-type: none; /* Remove bullets if desired */
+}
+
+.footer-section a {
+  display: block; /* Make links stack vertically */
+  margin-bottom: 0rem; /* Space between links */
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Use parent text color */
+}
+
+/* Single, consolidated social-icons definition */
+.social-icons {
+  display: flex;
+  gap: 15px; /* Reduced from your original 1rem */
+  margin-top: 15px;
+  justify-content: flex-start; /* Align icons to the left */
+}
+
+.social-icons a {
+  color: #ecf0f1;
+  background: rgba(45, 27, 27, 0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background: #f39c12;
+  color: #170f53;
+  transform: translateY(-3px);
+}
+
+.footer-bottom {
+  text-align: centerr;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid #34495e;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .footer-section {
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .social-icons {
+    justify-content: center; /* Center icons on mobile */
+  }
+}
