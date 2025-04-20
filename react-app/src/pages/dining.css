@@ -1,0 +1,48 @@
+.dining-container {
+    display: flex;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.main-panel {
+    flex-grow: 1;
+}
+
+.main-panel-header {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1rem;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+
+.filter-container {
+    height: fit-content;
+    width: 250px;
+}
+
+.top-rated-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.restaurant-card {
+    height: 300px;
+    /*width: 300px;*/
+    background-color: lightblue;
+    border-radius: 15px;
+}
+
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    width: 100%;
+    gap: 30px;
+    margin-left: 10px;
+    margin-top: 40px;
+    padding: 10px;
+    overflow-y: scroll;
+
+}

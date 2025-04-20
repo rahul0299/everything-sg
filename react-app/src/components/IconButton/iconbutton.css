@@ -1,0 +1,38 @@
+.icon-button {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    position: relative;
+    color: gray;
+}
+
+.icon-button:hover {
+    outline: none;
+    border: none;
+    background: rgba(0,0,0,0.2);
+}
+
+.icon-button:active::after {
+    content: "";
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    animation: grow 0.2s linear;
+}
+
+@keyframes grow {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
