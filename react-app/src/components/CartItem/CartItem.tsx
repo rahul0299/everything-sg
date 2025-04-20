@@ -17,7 +17,7 @@ const CartItem = ({ item }: Props) => {
     const [tempQty, setTempQty] = useState(item.quantity);
 
     const handleSave = () => {
-        updateQuantity(item.id, tempQty);
+        updateQuantity({...item, quantity: tempQty});
         setIsEditing(false);
     };
 

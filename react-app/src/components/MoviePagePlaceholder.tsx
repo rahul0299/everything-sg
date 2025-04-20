@@ -16,7 +16,6 @@ const MoviePagePlaceholder = () => {
 
     const gridItems = Array(10).fill(0);
 
-    console.log(gridItems);
 
     return (
         <>

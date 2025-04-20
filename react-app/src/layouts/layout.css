@@ -2,4 +2,5 @@
     width: 100%;
     /*border: 1px solid gray;*/
     flex-grow: 1;
+    min-height: 90vh;
 }

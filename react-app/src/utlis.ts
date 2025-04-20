@@ -111,27 +111,33 @@ export const verifyOTP = async ({email, otp} : { email: string, otp: string }) =
 
 export const getCategory =(path: string): string => {
     if (path.includes("events")) {
-        return "event";
+        return "events";
     } else if (path.includes("attractions")) {
-        return "attraction";
+        return "attractions";
     } else if (path.includes("dining")) {
-        return "restaurant";
+        return "dining";
     } else if (path.includes("movies")) {
-        return "movie";
+        return "movies";
     }
 
     return ""
 }
 
 export const getCategoryBaseUrl = (category: string): string => {
-    if (category === "event") {
+    if (category === "events") {
         return API.EVENTS;
-    } else if (category === "attraction") {
+    } else if (category === "attractions") {
         return API.ATTRACTIONS;
-    } else if (category === "restaurant") {
+    } else if (category === "dining") {
         return API.DINING;
     }
 
     return ""
 }
 
+export const processPayment= () => {
+    return fetch(API.CHECKOUT, {
+        method: 'POST',
+        credentials: 'include',
+    })
+}

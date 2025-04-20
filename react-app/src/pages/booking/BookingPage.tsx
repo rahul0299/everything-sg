@@ -1,13 +1,14 @@
 import { useLocation, useNavigate, Link } from "react-router";
 import "./bookingpage.css";
-import {MenuItem, Select} from "@mui/material";
+import {Alert, MenuItem, Select} from "@mui/material";
 import {useState} from "react";
-import {addToCart} from "../../dummy/server.ts";
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import LocationPinIcon from '@mui/icons-material/LocationPin';
 import {getImgUrl} from "../../utlis.ts";
 import { Sell } from "@mui/icons-material";
+import {useCart} from "../../store/CartContext.tsx";
+import {CartBookingItem} from "../../types/booking.tsx";
 
 
 const options = Array.from({length: 10}, (_, i) => i + 1);
@@ -28,10 +29,13 @@ interface BookingData {
 
 
 const BookingPage = () => {
+    const cart = useCart();
     const location = useLocation();
     const navigate = useNavigate()
 
     const data = location.state as BookingData;
+
+    const [state, setState] = useState("");
 
     const [ quantity, setQuantity] = useState(1);
 
@@ -42,7 +46,33 @@ const BookingPage = () => {
 
 
     const onSubmit = async () => {
-        addToCart({
+        // try {
+        //     const res = cart.addToCart({
+        //         id: data.id,
+        //         name: data.name,
+        //         venue: data.session.venue,
+        //         quantity: quantity,
+        //         price: data.price,
+        //         category: data.category,
+        //         session: {
+        //             date: data.session.date,
+        //             time: data.session.time
+        //         }
+        //     });
+        //
+        //     if (res !== "Success") {
+        //         setState("error");
+        //     } else {
+        //         setState(""); // clear loading state
+        //
+        //         navigate("/", { state: { toast: 'Added to cart successfully!' } });
+        //     }
+        // } catch (error) {
+        //     console.log("Failed adding items to cart:", error);
+        //     setState("error");
+        // }
+
+        const cartItem: CartBookingItem = {
             id: data.id,
             name: data.name,
             venue: data.session.venue,
@@ -53,14 +83,15 @@ const BookingPage = () => {
                 date: data.session.date,
                 time: data.session.time
             }
-        })
-            .then(res => {
-                console.log("Success", res);
-                navigate("/", { state: { toast: 'Added to cart successfully!' } });
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        }
+
+        const res = await cart.addToCart(cartItem);
+        if (res !== "Success") {
+            setState("error");
+        }
+
+        navigate("/", { state: { toast: 'Added to cart successfully!' } });
+
     }
 
 
@@ -83,6 +114,14 @@ const BookingPage = () => {
                         justifyContent: "center",
                         alignItems: "center"
                 }}>
+                    {
+                        state === "error" && (
+                            <Alert severity="error">
+                                Failed adding item to cart. Please try again.
+                            </Alert>
+                        )
+                    }
+
                     <h2>Booking for {data.name}</h2>
                     <div style={{
                         margin: "10px auto"

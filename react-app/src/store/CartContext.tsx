@@ -1,16 +1,17 @@
 import {createContext, useContext, useState, ReactNode, useEffect} from "react";
 import "../components/Cart/cart.css";
 import {CartBookingItem} from "../types/booking.tsx";
-import {fetchCart} from "../dummy/server.ts";
+import {API} from "../config.ts";
+import {useAuth} from "./AuthContext.tsx";
 
 interface CartContextType {
     cart: CartContextState;
     showCart: () => void;
     hideCart: () => void;
-    addToCart: (item: CartBookingItem) => void;
+    addToCart: (item: CartBookingItem) => Promise<string>;
     removeFromCart: (id: string) => void;
     clearCart: () => void;
-    updateQuantity: (id: string, quantity: number) => void;
+    updateQuantity: (item: CartBookingItem) => void;
 }
 
 interface CartContextState {
@@ -21,26 +22,58 @@ interface CartContextState {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
+    const user = useAuth();
     const [cart, setCart] = useState<CartContextState>({
         isOpen: false,
         items: [],
     });
 
-    useEffect(() => {
-        refreshCart()
-    }, [cart.items]);
+    const refreshCart = async () => {
+        if (!user) return;
 
-    function refreshCart() {
-        fetchCart()
-            .then((cartItems) => {
-                setCart((prevState) => {
-                    return {...prevState, items: cartItems} as CartContextState;
-                })
+        try {
+            const res = await fetch(API.CART.GET, {
+                credentials: 'include',
             });
-    }
+
+            if (res.ok && res.status === 200) {
+                const cartItems = await res.json();
+
+                if (cartItems.message) {
+                    throw new Error(cartItems.message);
+                }
+
+                setCart(prevState => {
+                    return {
+                        isOpen: prevState.isOpen,
+                        items: cartItems
+                    }
+                });
+            } else {
+                setCart(prevState => {
+                    return {
+                        isOpen: prevState.isOpen,
+                        items: []
+                    }
+                });
+            }
+        } catch (error) {
+            console.log("Error fetching cart items: ", error);
+            setCart(prevState => {
+                return {
+                    isOpen: prevState.isOpen,
+                    items: []
+                }
+            });
+        }
+    };
+
+    useEffect(() => {
+        refreshCart().then();
+    }, []);
 
     const showCart = () => {
-        refreshCart();
+        refreshCart().then();
 
         setCart(prevState => {return {...prevState, isOpen: true}});
     }
@@ -49,16 +82,34 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         setCart(prevState => {return {...prevState, isOpen: false}});
     }
 
-    const addToCart = (item: CartBookingItem) => {
-        console.log("ADD TO CART", item);
+    const addToCart = async (item: CartBookingItem) => {
+        try {
+            const res = await fetch(API.CART.ADD, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(item),
+                signal: AbortSignal.timeout(1000)
+            });
+
+            if (!res.ok || res.status !== 200) {
+                throw new Error('Failed adding item to cart. Please try again.');
+            }
+
+            return "Success";
+        } catch (err: unknown) {
+            throw new Error("Failed to login: " + err + ". Please try again.");
+        }
     };
 
     const removeFromCart = (id: string) => {
         console.log("REMOVE ITEM", id);
     };
 
-    const updateQuantity = (id: string, quantity: number) => {
-         console.log("UPDATE QUANTITY", id, quantity);
+    const updateQuantity = (item: CartBookingItem) => {
+         console.log("UPDATE QUANTITY", item);
     };
 
     const clearCart = () => setCart(prev => {

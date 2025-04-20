@@ -11,10 +11,6 @@ export const Cart = () => {
     const navigate = useNavigate();
 
 
-    // DESIGN INSPIRATIONS
-    // https://dribbble.com/shots/21752241-Shopping-Cart
-    // https://dribbble.com/shots/22369270-Shopping-cart-exercise
-
     const closeCart = () => {
         cart.hideCart();
     }
@@ -23,6 +19,9 @@ export const Cart = () => {
         cart.hideCart();
         navigate("/checkout");
     }
+
+    const subTotal = cart.cart.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
 
     return <Modal open={cart?.cart.isOpen || false} className="cart">
         <div className="cart-header">
@@ -43,7 +42,7 @@ export const Cart = () => {
                 <h3>Summary</h3>
                 <div className="cart-summary-row">
                     <p>Subtotal</p>
-                    <p>$123</p>
+                    <p>{subTotal.toFixed(2)} SGD</p>
                 </div>
                 <div className="cart-summary-row">
                     <p>GST</p>
@@ -52,7 +51,7 @@ export const Cart = () => {
 
                 <div className="cart-summary-row cart-total-row">
                     <p>Total</p>
-                    <p>{`$${123 * 1.1}`}</p>
+                    <p>{`${(subTotal * 1.1).toFixed(2)}`} SGD</p>
                 </div>
 
                 <button onClick={handleCheckoutClick} className="cart-checkout-button">Checkout</button>

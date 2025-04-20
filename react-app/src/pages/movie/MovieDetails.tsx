@@ -202,7 +202,7 @@ const MovieDetails = () => {
                                                 id: movie.id,
                                                 image: movie.poster,
                                                 name: movie.title,
-                                                category: "movie",
+                                                category: "movies",
                                                 price: movie.price,
                                                 session: {
                                                     date: dates[selectedDate].date,

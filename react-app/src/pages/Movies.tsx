@@ -29,8 +29,6 @@ const MoviesPage = () => {
     const getFeaturedMoviesCarouselData = (moviesData: MovieData[]) => {
         const featuredMoviesData: MovieData[] = moviesData.filter(movie => movie.featured_flag);
 
-        console.log(featuredMoviesData);
-
         return featuredMoviesData.map((movie: MovieData) => {
             return <div key={`movie-${movie.id}`} style={{
                 width: '100%',

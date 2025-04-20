@@ -12,17 +12,15 @@ import {
     Alert, AlertTitle,
     RadioGroup,
     FormControlLabel,
-    Radio, Chip,
+    Radio,
 } from '@mui/material';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import PaymentIcon from '@mui/icons-material/Payment';
 
 import "./checkoutpage.css";
-import {useCart} from "../../store/CartContext.tsx";
-// import CartItem from "../../components/CartItem/CartItem.tsx";
 import CardDetailsForm from "../../components/CardDetailsForm.tsx";
-import {processPayment} from "../../dummy/server.ts";
 import {useNavigate} from "react-router";
+import {processPayment} from "../../utlis.ts";
 
 // Custom connector with animated fill
 const AnimatedConnector = styled(StepConnector)(({ theme }) => ({
@@ -73,7 +71,7 @@ const StyledStepLabel = styled(StepLabel)(({ theme }) => ({
 }));
 
 
-const steps = ['Review', 'Payment Option', 'Payment Details', 'Confirmation'];
+const steps = ['Payment Option', 'Payment Details', 'Confirmation'];
 
 const CheckoutPage = () => {
     const navigate = useNavigate();
@@ -93,12 +91,10 @@ const CheckoutPage = () => {
 
     const getStep = (step: number) : ReactNode => {
         if (step === 0) {
-            return <ItemsReviewStep />;
-        } else if (step === 1) {
             return <PaymentOptionStep />
-        } else if (step === 2) {
+        } else if (step === 1) {
             return <PaymentDetailStep />;
-        } else if (step === 3) {
+        } else if (step === 2) {
             return <ConfirmStep onSuccess={() => navigate("/")} onFailure={() => setActiveStep(1)}/>
         }
 
@@ -166,42 +162,6 @@ const CheckoutPage = () => {
 
 export default CheckoutPage;
 
-const ItemsReviewItem = () => {
-    return (
-        <div className="checkout-review-item">
-            <h3 className="cart-item-title">
-                ITEM NAME
-                <Chip
-                    variant="outlined"
-                    size="small"
-                    sx={{ fontSize: 10, marginLeft: "10px" }}
-                    label={"ITEM CATEGORY"}
-                />
-            </h3>
-        </div>
-    )
-}
-
-
-const ItemsReviewStep = () => {
-    const cart = useCart().cart;
-    console.log(cart);
-    return (
-        <>
-            {
-                cart.items.length === 0 && <CircularProgress/>
-            }
-            <Box display="flex" justifyContent="start" alignItems="center" minWidth="5000" flexDirection="column" border="1px solid #ccc">
-                {
-                    cart.items.map((item, index) => (
-                        // <CartItem key={`cart-${index}-${item.id}`} item={item} />
-                        <ItemsReviewItem key={`cart-${index}-${item.id}`} />
-                    ))
-                }
-            </Box>
-        </>
-    )
-}
 
 const PaymentOptionStep = () => {
     const [selected, setSelected] = useState('');
