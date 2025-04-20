@@ -71,9 +71,6 @@ The react-app folder holds the frontend of the application. It is built with Rea
 -   **.gitignore**  
     Lists files and folders that should be ignored by Git, ensuring that build artifacts or sensitive information are not tracked.
 
--   **eslint.config.js**  
-    Configures ESLint rules to enforce code style guidelines and catch potential errors in the source code.
-
 -   **index.html**  
     The HTML entry point of the application. It bootstraps the React app by linking to the JavaScript bundle produced by Vite.
 
@@ -86,9 +83,6 @@ The react-app folder holds the frontend of the application. It is built with Rea
 -   **vite.config.ts**  
     Configures the Vite bundler, optimizing development builds and enabling use of modern JavaScript features for a smoother development experience.
 
--   **public/**  
-    Holds static assets like images, favicon, or fonts. Files here are served directly without any modifications during the build process.
-
 -   **src/**  
     Contains the source code for the React application, organized into several sub-directories:
     -   **Components:**  
@@ -99,8 +93,6 @@ The react-app folder holds the frontend of the application. It is built with Rea
         Each page represents a distinct view or feature of the app (e.g., Homepage, Movies, EventsPage, Attractions, Dining, BookingPage, CheckoutPage, Login, Signup, Profile). These files coordinate multiple components to define complete screens.
     -   **Store:**  
         Implements state management using contexts (e.g., `AuthContext.tsx` for authentication, `CartContext.tsx` for shopping cart management). This facilitates data sharing across various components.
-    -   **Data:**  
-        Contains static JSON or TypeScript files used for UI prototyping, demo data, or to simulate API responses.
     -   **Utils:**  
         Contains utility functions and helper modules (like API call wrappers and formatting functions) that support the components and pages.
     -   **Config:**  
