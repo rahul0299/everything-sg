@@ -87,7 +87,7 @@ const HomePage = () => {
         <div className='about-us-container'>
           <div className='about-us-image'>
             <img
-              src='https://images.unsplash.com/photo-1523482580672-f109ba8cb9be'
+              src='https://cdn.pixabay.com/photo/2021/11/22/20/32/nature-6817376_1280.jpg'
               alt='About Us'
               className='about-us-img'
             />
