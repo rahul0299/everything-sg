@@ -1,6 +1,7 @@
 import './destination.css'
 import data from '../../data/sample'
 import DestinationData from '../../data/destinationdata'
+
 const attractionsData = data.attractions
 
 const Destination = () => {
@@ -13,6 +14,7 @@ const Destination = () => {
           heading={attraction.name}
           description={attraction.description}
           img_url={attraction.img_url}
+          id={attraction.id} // Pass the attraction id
           key={index}
         />
       ))}
@@ -21,24 +23,3 @@ const Destination = () => {
 }
 
 export default Destination
-
-{
-  /*
-      <div className='destination-grid'>
-        <div className='destination-text'>
-          <h2>Destination Name</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in
-            dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.
-          </p>
-        </div>
-        <div className='destination-image'>
-          <img
-            alt='Beautiful destination view'
-            src='https://images.unsplash.com/photo-1645275168620-7a35326deb25'
-            loading='lazy'
-          />
-        </div>
-      </div>
-      */
-}

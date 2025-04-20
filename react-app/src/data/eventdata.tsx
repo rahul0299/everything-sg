@@ -1,6 +1,7 @@
 import { Component, ReactNode } from 'react'
-import '../components/Event/event.css'
-
+import { Link } from 'react-router-dom'
+import '../components/Destination/destination.css'
+import '../components/EventDetailsPage/eventdetailspage.css'
 class EventData extends Component {
   render(): ReactNode {
     return (
@@ -8,16 +9,24 @@ class EventData extends Component {
         <div className='destination-text'>
           <h2>{this.props.heading}</h2>
           <p>{this.props.description}</p>
+
+          {/* More Details Button inside the Grid */}
+          <div className='more-details-btn-container'>
+            <Link to={`/events/${this.props.id}`}>
+              <button className='more-details-btn'>More Details</button>
+            </Link>
+          </div>
         </div>
         <div className='destination-image'>
           <img
-            alt='Beautiful destination view' // More descriptive alt text
+            alt='Beautiful destination view'
             src={this.props.img_url}
-            loading='lazy' // Better performance
+            loading='lazy'
           />
         </div>
       </div>
     )
   }
 }
+
 export default EventData

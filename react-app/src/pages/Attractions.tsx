@@ -25,7 +25,7 @@ const AttractionsPage = () => {
           pageName='attractions'
           pageImage='https://images.unsplash.com/photo-1496939376851-89342e90adcd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
           title='Explore Singapore'
-          phrase='Choose your next travel itinery'
+          phrase='Choose your next travel itinerary'
         />
       </div>
 

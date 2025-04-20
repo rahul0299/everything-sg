@@ -25,96 +25,258 @@ const data = {
       poster: 'https://via.placeholder.com/100x150?text=Orchard+Love',
     },
   ],
-  events: [
-    {
-      id: 'event_001',
-      name: 'Singapore Jazz Festival',
-      category: 'Music',
-      date: '2025-04-15',
-      time: '19:00',
-      location: 'Marina Bay Sands',
-      price: 68,
-      description:
-        'An evening of world-class jazz performances by local and international artists.',
-      image: 'https://via.placeholder.com/150?text=Jazz+Fest',
-    },
-    {
-      id: 'event_002',
-      name: 'TechNext Conference',
-      category: 'Technology',
-      date: '2025-05-02',
-      time: '09:00',
-      location: 'Suntec City Convention Centre',
-      price: 120,
-      description:
-        'A 1-day conference with speakers from Google, AWS, and Meta discussing the future of tech.',
-      image: 'https://via.placeholder.com/150?text=Tech+Next',
-    },
-  ],
-  /* "attractions": [     {
-            "id": "attraction_001",
-            "name": "Gardens by the Bay",
-            "type": "Nature Park",
-            "entry_fee": 28,
-            "location": "18 Marina Gardens Dr",
-            "opening_hours": "09:00 - 21:00",
-            "rating": 4.8,
-            "image": "https://via.placeholder.com/150?text=Gardens+Bay"
-        },
-        {
-            "id": "attraction_002",
-            "name": "Universal Studios Singapore",
-            "type": "Theme Park",
-            "entry_fee": 79,
-            "location": "Sentosa Island",
-            "opening_hours": "10:00 - 19:00",
-            "rating": 4.6,
-            "image": "https://via.placeholder.com/150?text=USS"
-        }
-    ],*/
-
-  // sample.tsx
 
   attractions: [
     {
-      id: 'attraction_001',
+      id: 'attr_001',
       name: 'Gardens by the Bay',
-      type: 'Nature Park',
       description:
-        'A nature park spanning 101 hectares in central Singapore, adjacent to the Marina Reservoir.',
-      img_url: 'https://images.unsplash.com/photo-1587135991058-8816a5a6e0a0',
+        'A nature park spanning 101 hectares in central Singapore, adjacent to the Marina Reservoir. The park consists of three waterfront gardens: Bay South Garden, Bay East Garden and Bay Central Garden.',
+      img_url: 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+      details: {
+        location: '18 Marina Gardens Dr, Singapore 018953',
+        openingHours: '5:00 AM - 2:00 AM daily',
+        admission: 'Free (Outdoor Gardens), SGD 28 (Conservatories)',
+        cost: 'SGD 28 (for Conservatories)',
+        highlights: [
+          'Supertree Grove',
+          'Flower Dome',
+          'Cloud Forest',
+          'OCBC Skyway',
+          'Garden Rhapsody Light Show',
+        ],
+        gallery: [
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+        ],
+      },
     },
     {
-      id: 'attraction_002',
-      name: 'Universal Studios Singapore',
-      type: 'Theme Park',
-      description:
-        "Southeast Asia's first and only Universal Studios theme park, featuring 24 rides and attractions.",
-      img_url: 'https://images.unsplash.com/photo-1596386461350-326ccb383e9f',
-    },
-    {
-      id: 'attraction_003',
-      name: 'Marina Bay Sands',
-      type: 'Hotel & Casino',
-      description:
-        'An iconic integrated resort fronting Marina Bay, known for its infinity pool and skyline views.',
-      img_url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945',
-    },
-    {
-      id: 'attraction_004',
+      id: 'attr_002',
       name: 'Sentosa Island',
-      type: 'Island Resort',
       description:
-        'A popular island resort with beaches, attractions, golf courses, and luxury hotels.',
-      img_url: 'https://images.unsplash.com/photo-1560964645-5296b5099677',
+        'A popular island resort in Singapore, visited by some twenty million people a year. Attractions include a 2 km long sheltered beach, Fort Siloso, two golf courses, and the Resorts World Sentosa.',
+      img_url: 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+      details: {
+        location: 'Sentosa Island, Singapore',
+        openingHours: '24 hours (varies by attraction)',
+        admission: 'Free (island entry), Attractions vary',
+        cost: 'Free (Island entry), Attractions vary',
+        highlights: [
+          'Universal Studios Singapore',
+          'S.E.A. Aquarium',
+          'Adventure Cove Waterpark',
+          'Skyline Luge',
+          'Palawan Beach',
+        ],
+        gallery: [
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+        ],
+      },
     },
     {
-      id: 'attraction_005',
+      id: 'attr_003',
       name: 'Singapore Zoo',
-      type: 'Zoo',
       description:
-        'A world-renowned wildlife park with open enclosures and naturalistic habitats.',
-      img_url: 'https://images.unsplash.com/photo-1552410260-0fd9b577afa6',
+        "One of the world's most renowned zoos, Singapore Zoo is famous for its open concept, which allows visitors to interact with the animals in naturalistic settings.",
+      img_url: 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+      details: {
+        location: '80 Mandai Lake Rd, Singapore 729826',
+        openingHours: '8:30 AM - 6:00 PM daily',
+        admission: 'SGD 37 (Adult), SGD 25 (Child)',
+        cost: 'SGD 37 (Adult), SGD 25 (Child)',
+        highlights: [
+          'Jungle Breakfast with Wildlife',
+          'Rainforest Kidzworld',
+          'Elephant Show',
+          'Wild Africa Exhibit',
+          'Fragile Forest',
+        ],
+        gallery: [
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+        ],
+      },
+    },
+    {
+      id: 'attr_004',
+      name: 'Marina Bay Sands SkyPark',
+      description:
+        'An observation deck located atop the iconic Marina Bay Sands hotel, offering panoramic views of the Singapore skyline and beyond.',
+      img_url: 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+      details: {
+        location: '10 Bayfront Ave, Singapore 018956',
+        openingHours: '9:30 AM - 10:00 PM daily',
+        admission: 'SGD 23 (Adult), SGD 17 (Child)',
+        cost: 'SGD 23 (Adult), SGD 17 (Child)',
+        highlights: [
+          'Infinity Pool',
+          'SkyPark Observation Deck',
+          'Panoramic Views of Singapore',
+          'Marina Bay Skyline',
+        ],
+        gallery: [
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+        ],
+      },
+    },
+    {
+      id: 'attr_005',
+      name: 'Singapore Flyer',
+      description:
+        'One of the worlds largest observation wheels, offering breathtaking views of Singapores skyline, the Marina Bay area, and even parts of Malaysia and Indonesia.',
+      img_url: 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+      details: {
+        location: '30 Raffles Ave, Singapore 039803',
+        openingHours: '8:30 AM - 10:30 PM daily',
+        admission: 'SGD 33 (Adult), SGD 21 (Child)',
+        cost: 'SGD 33 (Adult), SGD 21 (Child)',
+        highlights: [
+          '360-degree Views',
+          'Sunset and Night Rides',
+          'Air-conditioned Capsules',
+        ],
+        gallery: [
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+          'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+        ],
+      },
+    },
+  ],
+
+  events: [
+    {
+      id: 'event_001',
+      name: 'Singapore Grand Prix',
+      description:
+        'The Singapore Grand Prix is a Formula 1 night race that takes place in the heart of the city. It is renowned for its electrifying atmosphere and stunning views of the Marina Bay skyline.',
+      img_url: 'https://images.unsplash.com/photo-1548207131-d0a42b22a61f',
+      details: {
+        location: 'Marina Bay Street Circuit, Singapore',
+        openingHours: 'Various timings throughout the weekend',
+        admission: 'From SGD 68 (General Admission)',
+        cost: 'From SGD 68 (General Admission)',
+        highlights: [
+          'Formula 1 Races',
+          'Live Music Performances',
+          'Night Race under the Lights',
+          'Celebrity Appearances',
+          'Pit Stop Challenge',
+        ],
+        gallery: [
+          'https://images.unsplash.com/photo-1548207131-d0a42b22a61f',
+          'https://images.unsplash.com/photo-1548207123-6d95b1c4b576',
+          'https://images.unsplash.com/photo-1567474556-d35e6f5fa7b9',
+        ],
+      },
+    },
+    {
+      id: 'event_002',
+      name: 'Singapore International Film Festival (SGIFF)',
+      description:
+        'SGIFF is the most prestigious film festival in Southeast Asia, showcasing a mix of international films, documentaries, and shorts from various genres and cultures.',
+      img_url: 'https://images.unsplash.com/photo-1496342060984-b6801d8efc59',
+      details: {
+        location: 'Various cinemas across Singapore',
+        openingHours: 'Varies by film screening',
+        admission: 'SGD 15 - SGD 35 (per screening)',
+        cost: 'SGD 15 - SGD 35 (per screening)',
+        highlights: [
+          'International Film Screenings',
+          'Industry Networking Events',
+          'Filmmaker Talks',
+          'Awards Ceremony',
+          'Red Carpet Events',
+        ],
+        gallery: [
+          'https://images.unsplash.com/photo-1496342060984-b6801d8efc59',
+          'https://images.unsplash.com/photo-1569981489-76d9a7b5f13a',
+          'https://images.unsplash.com/photo-1552612979-2b04c5b1b3bc',
+        ],
+      },
+    },
+    {
+      id: 'event_003',
+      name: 'Singapore Food Festival',
+      description:
+        'The Singapore Food Festival celebrates the citys rich culinary heritage with a month-long event that features food tastings, cooking workshops, and food markets.',
+      img_url: 'https://images.unsplash.com/photo-1569478989-b1b409b529d9',
+      details: {
+        location: 'Various locations across Singapore',
+        openingHours: 'Varies by event, typically 10:00 AM - 10:00 PM',
+        admission:
+          'Free entry for certain events, tickets required for workshops and tastings',
+        cost: 'SGD 10 - SGD 50 (depending on the event)',
+        highlights: [
+          'Street Food Markets',
+          'Signature Dishes from Local Chefs',
+          'Cooking Classes',
+          'Food Tasting Experiences',
+          'Culinary Demonstrations',
+        ],
+        gallery: [
+          'https://images.unsplash.com/photo-1569478989-b1b409b529d9',
+          'https://images.unsplash.com/photo-1603300222987-b5a7b4b7c700',
+          'https://images.unsplash.com/photo-1562933810-46752a567e3b',
+        ],
+      },
+    },
+    {
+      id: 'event_004',
+      name: 'Lantern Festival (Mid-Autumn Festival)',
+      description:
+        'The Mid-Autumn Festival, or Lantern Festival, is a vibrant cultural celebration featuring lantern displays, traditional music, and mooncake tastings. It celebrates the harvest moon and the importance of family.',
+      img_url: 'https://images.unsplash.com/photo-1506516214575-2d08b8c8f2d3',
+      details: {
+        location: 'Chinatown, Singapore',
+        openingHours: '6:00 PM - 10:00 PM daily',
+        admission: 'Free',
+        cost: 'Free',
+        highlights: [
+          'Lantern Displays',
+          'Mooncake Tasting',
+          'Chinese Traditional Music',
+          'Cultural Performances',
+          'Street Processions',
+        ],
+        gallery: [
+          'https://images.unsplash.com/photo-1506516214575-2d08b8c8f2d3',
+          'https://images.unsplash.com/photo-1562924719-d5507e570a40',
+          'https://images.unsplash.com/photo-1569162998-3eec914d607b',
+        ],
+      },
+    },
+    {
+      id: 'event_005',
+      name: 'Singapore International Jazz Festival (Sing Jazz)',
+      description:
+        'Sing Jazz is a premier jazz festival in Singapore, bringing together world-class jazz artists and offering performances in an open-air venue, with a mix of classic and contemporary jazz.',
+      img_url: 'https://images.unsplash.com/photo-1504129055-b67954f6b6f5',
+      details: {
+        location: 'Esplanade - Theatres on the Bay, Singapore',
+        openingHours: '7:00 PM - 11:00 PM (varies by day)',
+        admission: 'SGD 55 - SGD 200 (depending on performance)',
+        cost: 'SGD 55 - SGD 200 (depending on performance)',
+        highlights: [
+          'Live Jazz Performances',
+          'International and Local Jazz Artists',
+          'Outdoor Concerts',
+          'Workshops and Masterclasses',
+          'Food and Beverage Stalls',
+        ],
+        gallery: [
+          'https://images.unsplash.com/photo-1504129055-b67954f6b6f5',
+          'https://images.unsplash.com/photo-1577794021022-81588e9b198f',
+          'https://images.unsplash.com/photo-1552373839-4e8f1e19a469',
+        ],
+      },
     },
   ],
 
