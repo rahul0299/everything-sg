@@ -38,11 +38,6 @@ The backend folder contains a Python-based Flask server application that powers 
     -   **cache.py**: Implements caching mechanisms to improve performance by storing frequently accessed data.
     -   **db.py**: Provides functionalities to connect to the database, execute queries, and manage transactions.
 
--   **reference/**  
-    Used to store reference data or configurations that the backend might need.
-
-    -   **dummy_data.json**: Provides sample data that may be used during development or testing to simulate real-world data.
-
 -   **v1/**  
     Contains the API endpoints, grouped under version 1 of the API. Each file focuses on a specific functionality:
     -   **attractions.py**:  
