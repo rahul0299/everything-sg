@@ -1,6 +1,9 @@
 // src/config/api.ts
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL || 'http://localhost:8000';
+
+console.log("BASE_URL", IMG_BASE_URL);
 
 export const API = {
     AUTH: {
@@ -25,6 +28,6 @@ export const API = {
     EVENTS: `${BASE_URL}/events/`,
     ATTRACTIONS: `${BASE_URL}/attractions/`,
     DINING: `${BASE_URL}/restaurants/`,
-    POSTER: `${BASE_URL}/poster`,
+    IMAGES: `${IMG_BASE_URL}`,
     // etc.
 };

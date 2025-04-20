@@ -39,7 +39,7 @@ const EventDetails = () => {
       {/* Hero Section */}
       <div className='attraction-hero'>
         <img
-          src={getImgUrl(event.name, event.images[0])}
+          src={getImgUrl("events", String(event.id), event.images[0] || "bg.jpg")}
           alt={event.name}
           className='attraction-hero-image'
         />
@@ -88,7 +88,7 @@ const EventDetails = () => {
           {event.images.map((image, index) => (
             <img
               key={index}
-              src={getImgUrl(event.name, image)}
+              src={getImgUrl("events", String(event.id), image)}
               alt={`Gallery image ${index + 1}`}
               className='gallery-image'
             />

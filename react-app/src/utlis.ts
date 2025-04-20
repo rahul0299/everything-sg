@@ -53,9 +53,12 @@ export const groupMovieShows = (shows: Show[]): GroupedShow[] => {
         }));
 }
 
-export const getImgUrl = (name: string, poster: string): string => {
-    console.log(name, poster)
-    return "https://beautyrepublicfdl.com/wp-content/uploads/2020/06/placeholder-image.jpg";
+export const getImgUrl = (category: string, name: string, poster: string): string => {
+    if (!category || !name || !poster) {
+        return "https://beautyrepublicfdl.com/wp-content/uploads/2020/06/placeholder-image.jpg";
+    }
+
+    return `${API.IMAGES}/${category}/${name}/${poster}`;
 }
 
 type SignUpArgs = {

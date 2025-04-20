@@ -13,7 +13,7 @@ const Event = ({ events }: {events: CategoryData[]}) => {
         <EventData
           heading={event.name}
           description={event.description}
-          img_url={getImgUrl(event.name, event.images[0])}
+          img_url={getImgUrl("events", String(event.id), event.images[0])}
           id={event.id} // Pass the attraction id
           key={index}
         />

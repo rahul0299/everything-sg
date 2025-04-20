@@ -37,7 +37,7 @@ const MoviesPage = () => {
                 overflow: 'hidden',
             }}>
                 <img
-                    src={getImgUrl(movie.title, movie.poster)}
+                    src={getImgUrl("movies", String(movie.id), `bg.jpg`)}
                     alt={movie.title}
                     style={{
                         width: '100%',

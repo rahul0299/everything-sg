@@ -50,7 +50,7 @@ const DetailsPage = () => {
                     {/* Hero Section */}
                     <div className='attraction-hero'>
                         <img
-                            src={getImgUrl(data?.name, data?.images[0])}
+                            src={getImgUrl(category, String(data?.id), data?.images[0])}
                             alt={data?.name}
                             className='attraction-hero-image'
                         />
@@ -130,7 +130,7 @@ const DetailsPage = () => {
                                         onClick={() => {
                                             navigate(`${location.pathname}/book`, { state: {
                                                     id: data.id,
-                                                    image: data?.images[0],
+                                                    image: getImgUrl(category, String(data.id), data?.images[0] || `bg.jpg`),
                                                     name: data?.name,
                                                     category: category,
                                                     price: data?.price,
@@ -164,7 +164,7 @@ const DetailsPage = () => {
                             {data?.images.map((image, index) => (
                                 <img
                                     key={index}
-                                    src={getImgUrl(data?.name, image)}
+                                    src={getImgUrl(category, String(data?.id), image)}
                                     alt={`Gallery image ${index + 1}`}
                                     className='gallery-image'
                                 />

@@ -5,7 +5,6 @@ import {useState} from "react";
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import LocationPinIcon from '@mui/icons-material/LocationPin';
-import {getImgUrl} from "../../utlis.ts";
 import { Sell } from "@mui/icons-material";
 import {useCart} from "../../store/CartContext.tsx";
 import {CartBookingItem} from "../../types/booking.tsx";
@@ -46,32 +45,6 @@ const BookingPage = () => {
 
 
     const onSubmit = async () => {
-        // try {
-        //     const res = cart.addToCart({
-        //         id: data.id,
-        //         name: data.name,
-        //         venue: data.session.venue,
-        //         quantity: quantity,
-        //         price: data.price,
-        //         category: data.category,
-        //         session: {
-        //             date: data.session.date,
-        //             time: data.session.time
-        //         }
-        //     });
-        //
-        //     if (res !== "Success") {
-        //         setState("error");
-        //     } else {
-        //         setState(""); // clear loading state
-        //
-        //         navigate("/", { state: { toast: 'Added to cart successfully!' } });
-        //     }
-        // } catch (error) {
-        //     console.log("Failed adding items to cart:", error);
-        //     setState("error");
-        // }
-
         const cartItem: CartBookingItem = {
             id: data.id,
             name: data.name,
@@ -100,7 +73,7 @@ const BookingPage = () => {
         <div className="movie-booking-container">
             <div className="card" style={{display: "flex", flexDirection: "row", padding: "0", minWidth: "800px", overflow: "hidden" }} >
                 <div className="card-image" style={{ width: "500px" }} >
-                    <img alt="" src={getImgUrl(data.name, data.image)} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
+                    <img alt="" src={data.image} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
 
                 </div>
                 <div

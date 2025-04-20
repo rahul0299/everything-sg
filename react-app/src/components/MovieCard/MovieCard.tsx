@@ -10,7 +10,7 @@ interface MovieCardProps {
 const MovieCard = (props: MovieCardProps) => {
     return (
         <div className="movie-card" onClick={props.onClick}>
-            <img src={getImgUrl(props.movie.title, props.movie.poster)} alt="name" className="movie-card-image" />
+            <img src={getImgUrl("movies", String(props.movie?.id) || "", props.movie?.poster || "")} alt="name" className="movie-card-image" />
             <div className="movie-card-content">
                 <h2 className="movie-card-title">{props.movie.title || "Movie Name"}</h2>
                 <p className="movie-card-category">{props.movie.genres.join(", ") || "Category1, Category2"}</p>

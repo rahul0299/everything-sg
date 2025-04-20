@@ -14,7 +14,7 @@ const Destination = ({ destinations }: { destinations: CategoryData[] }) => {
         <DestinationData
           heading={attraction.name}
           description={attraction.description}
-          img_url={getImgUrl(attraction.name, attraction.images[0])}
+          img_url={getImgUrl("attractions", String(attraction.id), attraction.images[0])}
           id={attraction.id} // Pass the attraction id
           key={index}
         />

@@ -129,12 +129,12 @@ const MovieDetails = () => {
                 <>
                     <div className="movie-banner">
                         <div className="movie-banner-background">
-                            <img className="movie-banner-background" src={getImgUrl(movie?.title || "", movie?.poster || "")} alt=""/>
+                            <img className="movie-banner-background" src={getImgUrl("movies", String(movie?.id || ""), `bg.jpg`)} alt=""/>
                         </div>
 
                         <div className="movie-poster">
                             <img
-                                src={getImgUrl(movie?.title || "", movie?.poster || "")}
+                                src={getImgUrl("movies", String(movie?.id) || "", movie?.poster || "")}
                                 alt=""
                                 style={{
                                     width: "100%",
@@ -200,7 +200,7 @@ const MovieDetails = () => {
                                     onClick={() => {
                                         navigate(`/movies/${movieId}/book`, { state: {
                                                 id: movie.id,
-                                                image: movie.poster,
+                                                image: getImgUrl("movies", String(movie.id), "bg.jpg"),
                                                 name: movie.title,
                                                 category: "movies",
                                                 price: movie.price,
