@@ -54,8 +54,8 @@ def add_to_cart():
         new_cart_category_data.append(data)
 
         cursor.execute(f"""
-            UPDATE cart SET %s = %s WHERE user_id = %s
-        """, (data["category"], json.dumps(new_cart_category_data), user_id))
+            UPDATE cart SET {data["category"]} = %s WHERE user_id = %s
+        """, (json.dumps(new_cart_category_data), user_id))
 
     conn.commit()
     cursor.close()
@@ -88,8 +88,8 @@ def remove_from_cart():
             new_cart_category_data.append(item)
 
     cursor.execute(f"""
-        UPDATE cart SET %s = %s WHERE user_id = %s
-    """, (data["category"], json.dumps(new_cart_category_data), user_id))
+        UPDATE cart SET {data["category"]} = %s WHERE user_id = %s
+    """, (json.dumps(new_cart_category_data), user_id))
 
     cursor.close()
     conn.close()

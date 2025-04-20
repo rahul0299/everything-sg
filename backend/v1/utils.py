@@ -19,6 +19,6 @@ def get_cart_data(user_id):
     cart_data = []
     # for category in ["restaurants", "events", "attractions", "dining"]:
     for category in ["movies", "events", "dining", "attractions"]:
-        cart_data.append(json.loads(cart_row[category]) if cart_row[category] else [])
+        cart_data.extend(json.loads(cart_row[category]) if cart_row[category] else [])
 
     return cart_data
