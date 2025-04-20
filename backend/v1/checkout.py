@@ -13,12 +13,9 @@ checkout = Blueprint("v1/checkout", __name__)
 @jwt_required()
 def checkout_and_book():
     user_id = get_jwt_identity()
-    data = request.get_json() or {}
 
-    payment_status = data.get("status")
-    if payment_status != "success":
-        return jsonify({"message": "Payment failed or cancelled."}), 402
-
+    payment_status = "confirmed"
+    
     cart_data = get_cart_data(user_id)
     if not cart_data:
         return jsonify({"message": "Cart is empty. Cannot checkout."}), 400
@@ -42,7 +39,7 @@ def checkout_and_book():
         UPDATE cart
         SET movies = %s, events = %s, dining = %s, attractions = %s
         WHERE user_id = %s
-    """, (json.dumps({}), json.dumps({}), json.dumps({}), json.dumps({}), user_id))
+    """, (json.dumps([]), json.dumps([]), json.dumps([]), json.dumps([]), user_id))
 
     conn.commit()
     cursor.close()

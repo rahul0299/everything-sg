@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt
 from flask_cors import CORS
+from flask_caching import Cache
 
 
 from v1.auth import auth
@@ -9,7 +10,6 @@ from v1.movies import movies
 from v1.events import events
 from v1.attractions import attractions
 from v1.cart import cart
-from v1.bookings import bookings
 from v1.profile import profile
 from v1.checkout import checkout
 
@@ -19,9 +19,6 @@ app = Flask(__name__)
 
 CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "https://d3voxyqcbctkeg.cloudfront.net"]}}, supports_credentials=True)
 
-@app.route("/")
-def hello_world():
-    return "<h1>Everything SG</h1>"
 
 app.config["JWT_SECRET_KEY"]="everything-sg"
 app.config["JWT_TOKEN_LOCATION"]=["cookies"]
@@ -34,13 +31,22 @@ app.config["JWT_COOKIE_CSRF_PROTECT"] = False
 jwt = JWTManager(app)
 
 
+app.config["CACHE_TYPE"]="simple"
+app.config["CACHE_DEFAULT_TIMEOUT"]=30
+app.config["CACHE_KEY_PREFIX"]="myapp_"
+
+cache = Cache(app)
+
+@app.route("/")
+def hello_world():
+    return "<h1>Everything SG</h1>"
+
 app.register_blueprint(auth, url_prefix="/v1/auth")
 app.register_blueprint(dining, url_prefix="/v1/restaurants")
 app.register_blueprint(movies, url_prefix="/v1/movies")
 app.register_blueprint(events, url_prefix="/v1/events")
 app.register_blueprint(attractions, url_prefix="/v1/attractions")
 app.register_blueprint(cart, url_prefix="/v1/cart")
-app.register_blueprint(bookings, url_prefix="/v1/bookings")
 app.register_blueprint(profile, url_prefix="/v1/profile")
 app.register_blueprint(checkout, url_prefix="/v1/checkout")
 

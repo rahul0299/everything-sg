@@ -16,9 +16,9 @@ def get_cart_data(user_id):
     if not cart_row:
         return jsonify({"message": "Cart is empty"}), 200
 
-    cart_data = {}
+    cart_data = []
     # for category in ["restaurants", "events", "attractions", "dining"]:
     for category in ["movies", "events", "dining", "attractions"]:
-        cart_data[category] = json.loads(cart_row[category]) if cart_row[category] else {}
+        cart_data.append(json.loads(cart_row[category]) if cart_row[category] else [])
 
     return cart_data

@@ -6,26 +6,15 @@ from .utils import get_cart_data
 
 cart = Blueprint("v1/cart", __name__)
 
-CATEGORY_TABLES={
-    "movies":"movies",
-    "events":"events",
-    "dining":"dining",
-    "attractions":"attractions"
-}
-
-
-@cart.route("/add", methods=["POST"])
+@cart.route("/update", methods=["POST"])
 @jwt_required()
 def add_to_cart():
     user_id=get_jwt_identity()
     data=request.get_json()
-    item_id=data.get("item_id")
-    category=data.get("category")
-    item_data=data.get("data")
 
     # if not all([item_id, category, item_data]) in data:
     #     return jsonify({"message":"Misisng required fields!!"}),400
-    if not all([item_id, category, item_data]):
+    if not data or data["category"] not in ["movies", "events", "dining", "attractions"]:
         return jsonify({"message": "Missing required fields!!"}), 400
 
     # cart_table_exists()
@@ -37,34 +26,36 @@ def add_to_cart():
     if not cart_row:
         #create empty cart
         empty_cart={
-            "movies":{},
-            "events":{},
-            "dining":{},
-            "attractions":{}
-            
+            "movies": [data] if data["category"] == "movies" else [],
+            "events": [data] if data["category"] == "events" else [],
+            "dining": [data] if data["category"] == "dining" else [],
+            "attractions": [data] if data["category"] == "attractions" else []
         }
-        empty_cart[category][item_id]=item_data
+
         cursor.execute("""
-            
-            INSERT INTO cart (user_id, movies, events, dining, attractions)           
-            VALUES (%s, %s, %s, %s, %s)    
-         """,(
-             user_id,
-             json.dumps(empty_cart["movies"]),
-             json.dumps(empty_cart["events"]),
-             json.dumps(empty_cart["dining"]),
-             json.dumps(empty_cart["attractions"])
-             
-         ))
+                INSERT INTO cart (user_id, movies, events, dining, attractions)           
+                VALUES (%s, %s, %s, %s, %s)    
+            """,(
+                user_id,
+                json.dumps(empty_cart["movies"]),
+                json.dumps(empty_cart["events"]),
+                json.dumps(empty_cart["dining"]),
+                json.dumps(empty_cart["attractions"])
+                
+            ))
     else:
         
-       
+        cart_category_data = json.loads(cart_row[data["category"]])
+        new_cart_category_data = []
+        for item in cart_category_data:
+            if item["id"] != data["id"]:
+                new_cart_category_data.append(item)
+        
+        new_cart_category_data.append(data)
 
-        cart_data = json.loads(cart_row[category]) if cart_row[category] else {}
-        cart_data[item_id] = item_data
         cursor.execute(f"""
-            UPDATE cart SET {category} = %s WHERE user_id = %s
-        """, (json.dumps(cart_data), user_id))
+            UPDATE cart SET %s = %s WHERE user_id = %s
+        """, (data["category"], json.dumps(new_cart_category_data), user_id))
 
     conn.commit()
     cursor.close()
@@ -78,10 +69,7 @@ def remove_from_cart():
     user_id = get_jwt_identity()
     data = request.get_json()
 
-    item_id = data.get("item_id")
-    category = data.get("category")
-
-    if not all([item_id, category]):
+    if not data or data["category"] not in ["movies", "events", "dining", "attractions"]:
         return jsonify({"message": "Missing required fields"}), 400
 
     conn = db_connection_pool.get_connection()
@@ -90,16 +78,18 @@ def remove_from_cart():
     cursor.execute("SELECT * FROM cart WHERE user_id = %s", (user_id,))
     cart_row = cursor.fetchone()
 
-    if not cart_row or not cart_row[category]:
+    if not cart_row or not cart_row[data["category"]]:
         return jsonify({"message": "No cart or category data found for user"}), 404
 
-    cart_data = json.loads(cart_row[category])
-    if item_id in cart_data:
-        del cart_data[item_id]
-        cursor.execute(f"""
-            UPDATE cart SET {category} = %s WHERE user_id = %s
-        """, (json.dumps(cart_data), user_id))
-        conn.commit()
+    cart_category_data = json.loads(cart_row[data["category"]])
+    new_cart_category_data = []
+    for item in cart_category_data:
+        if item["id"] != data["id"]:
+            new_cart_category_data.append(item)
+
+    cursor.execute(f"""
+        UPDATE cart SET %s = %s WHERE user_id = %s
+    """, (data["category"], json.dumps(new_cart_category_data), user_id))
 
     cursor.close()
     conn.close()
@@ -111,10 +101,8 @@ def remove_from_cart():
 def get_cart():
     user_id = get_jwt_identity()
 
+    cart_data = get_cart_data(user_id)
 
-
-    cart_data = {}
-    cart_data=get_cart_data(user_id)
     if not cart_data:
         return jsonify({"message":"Cart details not found"})
     
