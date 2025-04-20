@@ -1,0 +1,175 @@
+{
+    "restaurants": [
+        {
+            "name": "Tandoori Flame",
+            "images": ["tandoori1.jpg", "tandoori2.jpg"],
+            "location": "Little India, Singapore",
+            "operating_hours": "11:00 AM - 10:30 PM",
+            "description": "Authentic North Indian cuisine with a modern twist. Great ambience and spicy flavors!",
+            "ratings": 4.5,
+            "time_slots": ["12:00 PM", "1:00 PM", "6:00 PM", "8:00 PM"],
+            "tags": ["Indian", "Spicy", "Casual Dining"],
+            "price": "$25 per person",
+            "per_slot_seats": 10,
+            "max_per_booking": 4,
+            "featured_flag": true
+        },
+        {
+            "name": "Bella Italia",
+            "images": ["bella1.jpg", "bella2.jpg"],
+            "location": "Orchard Road, Singapore",
+            "operating_hours": "12:00 PM - 11:00 PM",
+            "description": "Enjoy traditional Italian dishes in a cozy atmosphere with wood-fired pizzas and homemade pasta.",
+            "ratings": 4.3,
+            "time_slots": ["12:30 PM", "2:00 PM", "7:00 PM", "9:00 PM"],
+            "tags": ["Italian", "Family", "Romantic"],
+            "price": "$30 per person",
+            "per_slot_seats": 8,
+            "max_per_booking": 4,
+            "featured_flag": false
+        },
+        {
+            "name": "Sushi Zen",
+            "images": ["sushi1.jpg", "sushi2.jpg"],
+            "location": "Marina Bay, Singapore",
+            "operating_hours": "1:00 PM - 10:00 PM",
+            "description": "Fresh and delicious sushi with a modern twist. Perfect for quick lunches or elegant dinners.",
+            "ratings": 4.7,
+            "time_slots": ["1:30 PM", "3:00 PM", "6:30 PM", "8:30 PM"],
+            "tags": ["Japanese", "Seafood", "Trendy"],
+            "price": "$35 per person",
+            "per_slot_seats": 12,
+            "max_per_booking": 4,
+            "featured_flag": true
+        }
+    ],
+    "events": [
+        {
+            "name": "Singapore Jazz Festival",
+            "images": ["jazzfest1.jpg", "jazzfest2.jpg"],
+            "location": "Marina Bay Sands",
+            "operating_hours": "6:00 PM - 11:00 PM",
+            "description": "Experience smooth tunes and vibrant performances by top jazz artists from around the world.",
+            "ratings": 4.7,
+            "time_slots": ["6:00 PM", "7:30 PM", "9:00 PM"],
+            "tags": ["Music", "Outdoor", "Live Performance"],
+            "price": "$75",
+            "per_slot_seats": 200,
+            "max_per_booking": 4,
+            "featured_flag": false
+        },
+        {
+            "name": "Art & Wine Evening",
+            "images": ["artwine1.jpg", "artwine2.jpg"],
+            "location": "Clarke Quay, Singapore",
+            "operating_hours": "5:00 PM - 10:00 PM",
+            "description": "An evening of art exhibitions paired with exquisite wine tastings in a relaxed setting.",
+            "ratings": 4.5,
+            "time_slots": ["5:00 PM", "6:30 PM", "8:00 PM"],
+            "tags": ["Art", "Wine", "Cultural"],
+            "price": "$50",
+            "per_slot_seats": 100,
+            "max_per_booking": 4,
+            "featured_flag": true
+        },
+        {
+            "name": "Night Market Extravaganza",
+            "images": ["market1.jpg", "market2.jpg"],
+            "location": "Bugis, Singapore",
+            "operating_hours": "7:00 PM - 12:00 AM",
+            "description": "A lively night market featuring street food, live music, and local handicrafts.",
+            "ratings": 4.2,
+            "time_slots": ["7:00 PM", "8:30 PM", "10:00 PM"],
+            "tags": ["Market", "Street Food", "Live Music"],
+            "price": "$20",
+            "per_slot_seats": 300,
+            "max_per_booking": 4,
+            "featured_flag": false
+        }
+    ],
+    "attractions": [
+        {
+            "name": "Gardens by the Bay",
+            "images": ["gardens1.jpg", "gardens2.jpg"],
+            "location": "Central Singapore",
+            "operating_hours": "9:00 AM - 9:00 PM",
+            "description": "A futuristic park with biodomes, supertrees, and floral displays that mesmerize visitors.",
+            "ratings": 4.8,
+            "time_slots": ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"],
+            "tags": ["Nature", "Family Friendly", "Instagrammable"],
+            "price": "$20 entry",
+            "per_slot_seats": 100,
+            "max_per_booking": 4,
+            "featured_flag": true
+        },
+        {
+            "name": "Singapore Zoo",
+            "images": ["zoo1.jpg", "zoo2.jpg"],
+            "location": "Mandai, Singapore",
+            "operating_hours": "8:30 AM - 6:00 PM",
+            "description": "Explore wildlife from around the world in a naturalistic setting with interactive exhibits.",
+            "ratings": 4.6,
+            "time_slots": ["9:00 AM", "11:00 AM", "2:00 PM", "4:00 PM"],
+            "tags": ["Wildlife", "Family", "Interactive"],
+            "price": "$35 entry",
+            "per_slot_seats": 150,
+            "max_per_booking": 4,
+            "featured_flag": false
+        },
+        {
+            "name": "Sentosa Beach Adventure",
+            "images": ["beach1.jpg", "beach2.jpg"],
+            "location": "Sentosa, Singapore",
+            "operating_hours": "10:00 AM - 8:00 PM",
+            "description": "Enjoy water sports, beach volleyball, and sunbathing at one of Singapore's top beach destinations.",
+            "ratings": 4.4,
+            "time_slots": ["10:00 AM", "12:00 PM", "3:00 PM", "5:00 PM"],
+            "tags": ["Beach", "Outdoor", "Family Friendly"],
+            "price": "$15 entry",
+            "per_slot_seats": 120,
+            "max_per_booking": 4,
+            "featured_flag": true
+        }
+    ],
+    "movies": [
+        {
+            "id": "1",
+            "title": "Avengers: Endgame",
+            "poster": "avengers_endgame.jpg",
+            "description": "The Avengers take a final stand against Thanos in Marvel Studios’ epic conclusion to the Infinity Saga.",
+            "ratings": 4.9,
+            "show_timings": [
+                { "date": "2025-04-05", "time": "11:30 AM", "venue": "GV VivoCity, Hall 3" },
+                { "date": "2025-04-06", "time": "2:30 PM", "venue": "Shaw Theatres Lido, Hall 1" },
+                { "date": "2025-04-07", "time": "5:30 PM", "venue": "GV Plaza, Screen 4" },
+                { "date": "2025-04-07", "time": "9:00 PM", "venue": "Cathay Cineplex, Orchard" }
+            ],
+            "available_languages": ["English", "Tamil", "Mandarin"],
+            "genres": ["Action", "Sci-Fi", "Adventure"],
+            "duration": "3h 2m",
+            "price": "$15",
+            "available_seats": 120,
+            "featured_flag": true
+        },
+        {
+            "id": "2",
+            "title": "La La Land",
+            "poster": "la_la_land.jpg",
+            "description": "A vibrant musical that tells the story of love and ambition in Los Angeles.",
+            "ratings": 4.7,
+            "show_timings": [
+                { "date": "2025-04-05", "time": "12:00 PM", "venue": "GV Tiong Bahru" },
+                { "date": "2025-04-06", "time": "3:00 PM", "venue": "Shaw Theatres Seletar" },
+                { "date": "2025-04-07", "time": "6:00 PM", "venue": "Golden Mile Tower Cinema" },
+                { "date": "2025-04-07", "time": "9:30 PM", "venue": "Projector X: Picturehouse" }
+            ],
+            "available_languages": ["English", "Spanish"],
+            "genres": ["Musical", "Romance", "Drama"],
+            "duration": "2h 8m",
+            "price": "$12",
+            "available_seats": 100,
+            "featured_flag": false
+        }
+    ]
+}
+
