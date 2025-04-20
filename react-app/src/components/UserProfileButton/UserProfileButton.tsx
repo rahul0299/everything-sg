@@ -3,7 +3,6 @@ import "./userprofilebutton.css";
 import {useAuth} from "../../store/AuthContext.tsx";
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
-import EventIcon from '@mui/icons-material/Event';
 
 
 const UserProfileButton = () => {
@@ -21,10 +20,6 @@ const UserProfileButton = () => {
                 <div className="dropdown-row">
                     <AccountBoxIcon />
                     My Profile
-                </div>
-                <div className="dropdown-row">
-                    <EventIcon />
-                    My Bookings
                 </div>
                 <div className="dropdown-row" onClick={auth.logoutUser}>
                     <LogoutIcon />
