@@ -13,60 +13,76 @@ const HomePage = () => {
             Discover the best of Singapore — food, fun, and unforgettable
             experiences.
           </p>
-          <div className='hero-buttons'>
-            <Link to='/explore' className='hero-btn primary'>
-              Explore Now
-            </Link>
-          </div>
         </div>
       </section>
 
+      {/* Features Section */}
       <section className='features-section'>
         <h2 className='features-heading'>FEATURES</h2>
         <div className='features-grid'>
-          <div className='feature-box'>
+          <Link to='/movies' className='feature-box'>
             <div className='feature-icon-container'>
-              <i className='fas fa-comments feature-icon'></i>
+              <img
+                src='https://img.icons8.com/?size=100&id=97192&format=png&color=000000'
+                alt='Movies'
+                className='feature-img'
+              />
             </div>
             <h3 className='feature-title'>Movies</h3>
             <p className='feature-desc'>
               Dive into blockbusters, indie gems, and timeless classics lighting
               up screens near you.
             </p>
-          </div>
-          <div className='feature-box'>
+          </Link>
+
+          <Link to='/events' className='feature-box'>
             <div className='feature-icon-container'>
-              <i className='fas fa-bullhorn feature-icon'></i>
+              <img
+                src='https://img.icons8.com/?size=100&id=uwS5rVi2Z61i&format=png&color=000000'
+                alt='Events'
+                className='feature-img'
+              />
             </div>
             <h3 className='feature-title'>Events</h3>
             <p className='feature-desc'>
               Experience live music, festivals, and can't-miss happenings that
               bring the city to life.
             </p>
-          </div>
-          <div className='feature-box'>
+          </Link>
+
+          <Link to='/attractions' className='feature-box'>
             <div className='feature-icon-container'>
-              <i className='fas fa-users feature-icon'></i>
+              <img
+                src='https://cdn-icons-png.flaticon.com/512/854/854894.png'
+                alt='Attractions'
+                className='feature-img'
+              />
             </div>
             <h3 className='feature-title'>Attractions</h3>
             <p className='feature-desc'>
               Uncover hidden landmarks, iconic wonders, and breathtaking spots
-              worth the journey
+              worth the journey.
             </p>
-          </div>
-          <div className='feature-box'>
+          </Link>
+
+          <Link to='/dining' className='feature-box'>
             <div className='feature-icon-container'>
-              <i className='fas fa-magic feature-icon'></i>
+              <img
+                src='https://cdn-icons-png.flaticon.com/512/3075/3075977.png'
+                alt='Dining'
+                className='feature-img'
+              />
             </div>
             <h3 className='feature-title'>Dining</h3>
             <p className='feature-desc'>
               Savor culinary adventures, from cozy cafés to gourmet hotspots
               that redefine flavor.
             </p>
-          </div>
+          </Link>
         </div>
       </section>
 
+      {/* About Us Section */}
       <section className='about-us'>
         <div className='about-us-container'>
           <div className='about-us-image'>
@@ -97,7 +113,6 @@ const HomePage = () => {
                 events in one app—no more switching between multiple platforms!
               </li>
               <li>
-                {' '}
                 Exclusive Deals & Offers – Get special discounts, early-bird
                 tickets, and members-only perks you won’t find elsewhere.
               </li>
