@@ -14,7 +14,7 @@ def get_cart_data(user_id):
     conn.close()
 
     if not cart_row:
-        return jsonify({"message": "Cart is empty"}), 200
+        return None
 
     cart_data = []
     # for category in ["restaurants", "events", "attractions", "dining"]:
