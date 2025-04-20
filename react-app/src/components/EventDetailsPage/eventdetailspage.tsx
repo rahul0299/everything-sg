@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router'
 import data from '../../data/sample'
 import './eventdetailspage.css'
 

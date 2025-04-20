@@ -201,3 +201,81 @@ h1 {
   color: white;
   background-color: var(--netflix-red);
 }
+
+.MuiPickersDay-root.Mui-selected {
+  background-color: #1976d2 !important;
+}
+
+.MuiOutlinedInput-root {
+  background-color: white;
+}
+
+.booking-section {
+  background-color: #f4f9ff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 40px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.booking-label {
+  display: block;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.date-picker {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 200px;
+}
+
+.time-slot-picker {
+  margin-top: 1rem;
+}
+
+.slot-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 0.5rem;
+}
+
+.slot-button {
+  padding: 8px 16px;
+  border-radius: 8px;
+
+  background-color: #f2f2f2;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
+}
+
+.slot-button:hover {
+  background-color: #e0e0e0;
+}
+
+.slot-button.selected {
+  background-color: #1976d2;
+  color: white;
+}
+
+.action-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+}
