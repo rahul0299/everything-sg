@@ -1,0 +1,53 @@
+.movie-showtimes-data {
+    margin-top: 30px;
+}
+
+.movie-showtimes-data-row {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid lightgray;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    align-items: center;
+}
+
+.movie-showtimes-data-row.header {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: gray;
+}
+
+.movie-showtimes-data-row:last-of-type {
+    border-bottom: none;
+
+}
+
+.data-row-venue {
+    width: 350px;
+    vertical-align: middle;
+}
+
+.data-row-timings {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns:  repeat(auto-fill, minmax(110px, 1fr));
+    grid-row-gap: 10px;
+}
+
+.data-row-timing-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #747bff;
+    color: #747bff;
+    padding: 10px 20px;
+    width: fit-content;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.data-row-timing-item.selected {
+    border: 1px solid #747bff;
+    color: white;
+    background-color: #747bff;
+}

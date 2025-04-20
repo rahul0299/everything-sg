@@ -1,0 +1,97 @@
+.movie-banner {
+    height: 500px;
+    width: 100%;
+    background: black;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    z-index: 1;
+}
+
+img.movie-banner-background {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position:left center;
+        /*mask-image: linear-gradient(to left, black 25%, transparent 70%);*/
+    mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    -webkit-mask-image: -webkit-linear-gradient(to left, black 25%, transparent 70%);
+}
+
+.movie-poster {
+    height: 400px;
+    max-width: 250px;
+    margin: 50px;
+    background-color: transparent;
+}
+
+.movie-info {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    color: white;
+    text-align: left;
+    align-items: start;
+    justify-content: flex-start;
+    height: 100%;
+    padding: 0 0 50px 0;
+    box-sizing: border-box;
+}
+
+.movie-info p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.movie-title {
+    color: white;
+    margin-bottom: 0;
+}
+
+.movie-banner p {
+    margin: 5px;
+}
+
+.movie-about-section {
+    max-width: 700px;
+    text-align: left;
+    margin-top: 50px;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 50px;
+}
+
+#movie-showtimes {
+    padding-top: 25px;
+    text-align: left;
+    scroll-margin-top: 50px;
+}
+
+.movie-genres {
+    font-size: 0.9rem;
+    margin-bottom: 40px;
+}
+
+.movie-details {
+    padding: 20px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    border: 3px solid #edf6f9;
+    background-color: rgba(255, 255, 255, 0.25);
+    margin-top: 40px;
+}
+
+.movie-details span {
+    width: 105px;
+    text-align: left;
+    margin-right: 20px;
+    color: white;
+    font-weight: bold;
+}
