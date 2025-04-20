@@ -15,15 +15,19 @@ export const Cart = () => {
     // https://dribbble.com/shots/21752241-Shopping-Cart
     // https://dribbble.com/shots/22369270-Shopping-cart-exercise
 
-    const handleButtonClick = () => {
+    const closeCart = () => {
         cart.hideCart();
-        navigate("/checkout")
+    }
+
+    const handleCheckoutClick =() => {
+        cart.hideCart();
+        navigate("/checkout");
     }
 
     return <Modal open={cart?.cart.isOpen || false} className="cart">
         <div className="cart-header">
             <h3>Your Cart</h3>
-            <IconButton onClick={handleButtonClick}>
+            <IconButton onClick={closeCart}>
                 <CloseIcon />
             </IconButton>
 
@@ -51,7 +55,7 @@ export const Cart = () => {
                     <p>{`$${123 * 1.1}`}</p>
                 </div>
 
-                <button onClick={handleButtonClick} className="cart-checkout-button">Checkout</button>
+                <button onClick={handleCheckoutClick} className="cart-checkout-button">Checkout</button>
 
             </div>
         </div>

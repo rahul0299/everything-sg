@@ -8,9 +8,12 @@ import DiningPagePlaceholder from "../components/DiningPagePlaceholder.tsx";
 import {useEffect, useState} from "react";
 import {CategoryData} from "../types/store.tsx";
 import {API} from "../config.ts";
+import {useNavigate} from "react-router";
 
 
 const DiningPage = () => {
+
+    const navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [restaurants, setRestaurants] = useState<CategoryData[]>([]);
@@ -130,7 +133,7 @@ const DiningPage = () => {
                             <div className="restaurant-grid">
                                 {
                                     filterAndSortRestaurants().map(r => (
-                                        <RestaurantCard key={`restaurant-${r.id}`} restaurant={r} />
+                                        <RestaurantCard key={`restaurant-${r.id}`} restaurant={r} onClick={() => navigate(`/dining/${r.id}`)} />
                                     ))
                                 }
                             </div>

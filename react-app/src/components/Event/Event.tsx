@@ -1,19 +1,19 @@
 import './event.css'
-import data from '../../data/sample'
 import EventData from '../../data/eventdata'
+import {CategoryData} from "../../types/store.tsx";
+import {getImgUrl} from "../../utlis.ts";
 
-const eventdata = data.events
 
-const Event = () => {
+const Event = ({ events }: {events: CategoryData[]}) => {
   return (
     <div className='destination'>
       <h1>Popular Destinations</h1>
 
-      {eventdata.map((event, index) => (
+      {events.map((event, index) => (
         <EventData
           heading={event.name}
           description={event.description}
-          img_url={event.img_url}
+          img_url={getImgUrl(event.name, event.images[0])}
           id={event.id} // Pass the attraction id
           key={index}
         />

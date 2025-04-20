@@ -7,6 +7,7 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import LocationPinIcon from '@mui/icons-material/LocationPin';
 import {getImgUrl} from "../../utlis.ts";
+import { Sell } from "@mui/icons-material";
 
 
 const options = Array.from({length: 10}, (_, i) => i + 1);
@@ -17,6 +18,7 @@ interface BookingData {
     image: string;
     name: string;
     category: string;
+    price: number;
     session: {
         date: string;
         time: string;
@@ -45,6 +47,7 @@ const BookingPage = () => {
             name: data.name,
             venue: data.session.venue,
             quantity: quantity,
+            price: data.price,
             category: data.category,
             session: {
                 date: data.session.date,
@@ -106,6 +109,11 @@ const BookingPage = () => {
                             <span style={{ fontWeight: "bold", color: "gray" }}>Venue:</span>
                             {data.session.venue}
                         </div>
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "start", gap: "10px", minWidth: "300px", minHeight: "40px" }}>
+                            <Sell sx={{ color: "gray" }} />
+                            <span style={{ fontWeight: "bold", color: "gray" }}>Price:</span>
+                            {data.price} SGD
+                        </div>
 
                     </div>
                     <div style={{
@@ -128,6 +136,11 @@ const BookingPage = () => {
                                 ))
                             }
                         </Select>
+                    </div>
+
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "start", gap: "10px", minWidth: "300px", minHeight: "40px" }}>
+                        <span style={{ fontWeight: "bold", color: "black" }}>Total Price:</span>
+                        {data.price * quantity} SGD
                     </div>
 
                     <div style={{

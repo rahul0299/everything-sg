@@ -76,7 +76,7 @@ const MovieDetails = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        fetch(`${API.MOVIES}/${movieId}`, { signal: AbortSignal.timeout(1000) })
+        fetch(`${API.MOVIES}${movieId}`, { signal: AbortSignal.timeout(1000) })
             .then(res => {
                 if (res.status === 200) {
                     return res.json();
@@ -203,6 +203,7 @@ const MovieDetails = () => {
                                                 image: movie.poster,
                                                 name: movie.title,
                                                 category: "movie",
+                                                price: movie.price,
                                                 session: {
                                                     date: dates[selectedDate].date,
                                                     time: selectedShow?.time || "",
@@ -275,7 +276,7 @@ const SelectedShowPreview = ({ date, time, venue, seats, price, onClick}: Select
         </p>
 
         {
-            !user ? (
+            user ? (
                 <button className="primary-button" onClick={onClick}>Book Now</button>
             ) : (
                 <span style={{ color: "red", fontSize: "0.8rem", fontStyle: "italic", textAlign: "center" }}>You need to be logged in to make a booking.</span>

@@ -1,19 +1,20 @@
 import './destination.css'
-import data from '../../data/sample'
 import DestinationData from '../../data/destinationdata'
+import {CategoryData} from "../../types/store.tsx";
+import {getImgUrl} from "../../utlis.ts";
 
-const attractionsData = data.attractions
 
-const Destination = () => {
+
+const Destination = ({ destinations }: { destinations: CategoryData[] }) => {
   return (
     <div className='destination'>
       <h1>Popular Destinations</h1>
 
-      {attractionsData.map((attraction, index) => (
+      {destinations.map((attraction, index) => (
         <DestinationData
           heading={attraction.name}
           description={attraction.description}
-          img_url={attraction.img_url}
+          img_url={getImgUrl(attraction.name, attraction.images[0])}
           id={attraction.id} // Pass the attraction id
           key={index}
         />

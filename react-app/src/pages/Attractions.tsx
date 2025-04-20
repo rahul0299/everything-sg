@@ -4,19 +4,37 @@ import Footer from '../components/Footer/Footer.tsx'
 import './Attractions.css'
 import TopSection from '../components/TopSection/TopSection.tsx'
 import Destination from '../components/Destination/Destination.tsx'
+import {useLocation} from "react-router";
+import {useEffect, useState} from "react";
+import {CategoryData} from "../types/store.tsx";
+import {API} from "../config.ts";
 
-const getRandomColor = (): string => {
-  return `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${
-    Math.random() * 255
-  })`
-}
 
 const AttractionsPage = () => {
   //Carousel for any offers or popular attractions - location above footer
-  const carouselData = []
-  for (let i = 0; i < 7; i++) {
-    carouselData.push({ item: i, bgcolor: getRandomColor() })
-  }
+    const location = useLocation();
+    const [attractions, setAttractions] = useState<CategoryData[]>([]);
+
+    useEffect(() => {
+        // setIsLoading(true);
+        fetch(API.ATTRACTIONS)
+            .then(res => {
+                // setIsLoading(false);
+                return res.json()
+            })
+            .then(data => setAttractions(data));
+    }, [location.pathname])
+
+    console.log(attractions);
+
+    const carouselData = []
+    for (let i = 0; i < 7; i++) {
+        carouselData.push(
+            <div>
+                Carousel Item
+            </div>
+        )
+    }
 
   return (
     <>
@@ -29,7 +47,7 @@ const AttractionsPage = () => {
         />
       </div>
 
-      <Destination />
+      <Destination destinations={attractions} />
 
       <div className='section'>
         <h2>Popular</h2>

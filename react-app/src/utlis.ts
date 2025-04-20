@@ -109,3 +109,29 @@ export const verifyOTP = async ({email, otp} : { email: string, otp: string }) =
     }
 }
 
+export const getCategory =(path: string): string => {
+    if (path.includes("events")) {
+        return "event";
+    } else if (path.includes("attractions")) {
+        return "attraction";
+    } else if (path.includes("dining")) {
+        return "restaurant";
+    } else if (path.includes("movies")) {
+        return "movie";
+    }
+
+    return ""
+}
+
+export const getCategoryBaseUrl = (category: string): string => {
+    if (category === "event") {
+        return API.EVENTS;
+    } else if (category === "attraction") {
+        return API.ATTRACTIONS;
+    } else if (category === "restaurant") {
+        return API.DINING;
+    }
+
+    return ""
+}
+

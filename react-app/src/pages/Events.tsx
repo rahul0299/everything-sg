@@ -1,21 +1,39 @@
 //import { Link } from 'react-router'
 import Carousel from '../components/Carousel/Carousel.tsx'
-import Footer from '../components/Footer/Footer.tsx'
 import './events.css'
 import TopSection from '../components/TopSection/TopSection.tsx'
 import Event from '../components/Event/Event.tsx'
+import {useEffect, useState} from "react";
+import {CategoryData} from "../types/store.tsx";
+import {API} from "../config.ts";
+import {useLocation} from "react-router";
 
-const getRandomColor = (): string => {
-  return `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${
-    Math.random() * 255
-  })`
-}
 
 const EventsPage = () => {
   //Carousel for any offers or popular attractions - location above footer
+    const location = useLocation();
+    const [events, setEvents] = useState<CategoryData[]>([]);
+
+    useEffect(() => {
+        // setIsLoading(true);
+        fetch(API.EVENTS)
+            .then(res => {
+                // setIsLoading(false);
+                return res.json()
+            })
+            .then(data => setEvents(data));
+    }, [location.pathname])
+
+    console.log(events);
+
+
   const carouselData = []
   for (let i = 0; i < 7; i++) {
-    carouselData.push({ item: i, bgcolor: getRandomColor() })
+    carouselData.push(
+        <div>
+            Carousel Item
+        </div>
+    )
   }
 
   return (
@@ -29,15 +47,11 @@ const EventsPage = () => {
         />
       </div>
 
-      <Event />
+      <Event events={events} />
 
       <div className='section'>
         <h2>Popular</h2>
         <Carousel items={carouselData} />
-      </div>
-
-      <div className='footer'>
-        <Footer />
       </div>
     </>
   )

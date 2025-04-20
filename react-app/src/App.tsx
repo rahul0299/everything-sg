@@ -2,7 +2,7 @@ import './App.css'
 import {BrowserRouter, Route, Routes} from "react-router";
 import Login from "./pages/auth/Login.tsx";
 import SignUp from "./pages/auth/Signup.tsx";
-import {HomePage} from "./pages/Homepage.tsx";
+import HomePage from "./pages/Homepage.tsx";
 import {StoreProvider} from "./store/StoreContext.tsx";
 import {MoviesPage} from "./pages/Movies.tsx";
 import {EventsPage} from "./pages/Events.tsx";
@@ -18,10 +18,8 @@ import BookingPage from "./pages/booking/BookingPage.tsx";
 import ProtectedRoute from "./layouts/ProtectedRoute.tsx";
 import {Slide, ToastContainer} from "react-toastify";
 import CheckoutPage from './pages/checkout/CheckoutPage.tsx';
-import DetailsPagePlaceholder from "./components/DetailsPagePlaceholder.tsx";
-import MoviePagePlaceholder from "./components/MoviePagePlaceholder.tsx";
-import DiningPagePlaceholder from "./components/DiningPagePlaceholder.tsx";
 import Profile from "./pages/profile/Profile.tsx";
+import DetailsPage from "./pages/details/DetailsPage.tsx";
 
 function App() {
   return (
@@ -51,22 +49,22 @@ function App() {
                               <Route path="movies" element={<MoviesPage />} />
                               <Route path="movies/:id" element={< MovieDetails/>} />
                               <Route path="events" element={<EventsPage />} />
+                              <Route path="events/:id" element={<DetailsPage />} />
                               <Route path="attractions" element={<AttractionsPage />} />
+                              <Route path="attractions/:id" element={<DetailsPage />} />
                               <Route path="dining" element={<DiningPage />} />
+                              <Route path="dining/:id" element={<DetailsPage />} />
                               <Route path="verification" element={<OTPVerification num_digits={6} />} />
-                              {/*<Route path="movies/:id/book" element={<BookingPage />} />*/}
                               <Route path="/checkout" element={<CheckoutPage />} />
-                              <Route path="/placeholder" element={<DetailsPagePlaceholder />} />
-                              <Route path="/placeholder-movies" element={<MoviePagePlaceholder />} />
-                              <Route path="/placeholder-dining" element={<DiningPagePlaceholder />} />
-                              <Route path="movies/:id/book" element={<BookingPage />} />
+
                               <Route path="/profile" element={<Profile />} />
 
 
                               <Route element={<ProtectedRoute />}>
-                                  {/*<Route path="events/:id/book" element={<EventBooking />} />*/}
-                                  {/*<Route path="attractions/:id/book" element={<AttractionBooking />} />*/}
-                                  {/*<Route path="dining/:id/book" element={<DiningBooking />} />*/}
+                                  <Route path="/movies/:id/book" element={<BookingPage />} />
+                                  <Route path="/events/:id/book" element={<BookingPage />} />
+                                  <Route path="/attractions/:id/book" element={<BookingPage />} />
+                                  <Route path="/dining/:id/book" element={<BookingPage />} />
                               </Route>
                           </Route>
                       </Routes>

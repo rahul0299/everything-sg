@@ -1,18 +1,24 @@
-import { Component, ReactNode } from 'react'
 import { Link } from 'react-router'
 import '../components/Destination/destination.css'
 import '../components/AttractionDetailsPage/attractiondetailspage.css'
-class DestinationData extends Component {
-  render(): ReactNode {
+
+interface DestinationDataProps {
+    heading: string;
+    description: string;
+    img_url: string;
+    id: number;
+}
+
+const DestinationData = ({ heading, description, img_url, id }: DestinationDataProps) => {
     return (
       <div className='destination-grid'>
         <div className='destination-text'>
-          <h2>{this.props.heading}</h2>
-          <p>{this.props.description}</p>
+          <h2>{heading}</h2>
+          <p>{description}</p>
 
           {/* More Details Button inside the Grid */}
           <div className='more-details-btn-container'>
-            <Link to={`/attraction/${this.props.id}`}>
+            <Link to={`/attractions/${id}`}>
               <button className='more-details-btn'>More Details</button>
             </Link>
           </div>
@@ -20,13 +26,12 @@ class DestinationData extends Component {
         <div className='destination-image'>
           <img
             alt='Beautiful destination view'
-            src={this.props.img_url}
+            src={img_url}
             loading='lazy'
           />
         </div>
       </div>
     )
-  }
 }
 
 export default DestinationData

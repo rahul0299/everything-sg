@@ -21,10 +21,10 @@ export const API = {
         UPDATE: `${BASE_URL}/cart/update`,
     },
     CHECKOUT: `${BASE_URL}/checkout`,
-    MOVIES: `${BASE_URL}/movies`,
-    EVENTS: `${BASE_URL}/events`,
-    ATTRACTIONS: `${BASE_URL}/attractions`,
-    DINING: `${BASE_URL}/restaurants`,
+    MOVIES: `${BASE_URL}/movies/`,
+    EVENTS: `${BASE_URL}/events/`,
+    ATTRACTIONS: `${BASE_URL}/attractions/`,
+    DINING: `${BASE_URL}/restaurants/`,
     POSTER: `${BASE_URL}/poster`,
     // etc.
 };
