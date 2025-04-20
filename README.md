@@ -30,7 +30,7 @@ The backend folder contains a Python-based Flask server application that powers 
     The entry point of the backend application. It configures the server, sets up routes, and starts the service. This file ties together all the API modules and initializes middleware.
 
 -   **requirements.txt**  
-    Lists all the Python dependencies needed by the backend. When setting up the project, you install these dependencies to ensure that all necessary packages are available.
+    Lists all the Python dependencies needed by the backend.
 
 -   **database/**  
     Contains modules for database connectivity and operations.
@@ -93,7 +93,7 @@ The react-app folder holds the frontend of the application. It is built with Rea
     Lists project metadata, dependencies, and scripts (e.g., build, start, test) for managing the React app's lifecycle.
 
 -   **tsconfig.app.json, tsconfig.json, tsconfig.node.json**  
-    TypeScript configuration files that enforce type safety across your codebase. They specify compiler options and project file includes for different parts of the project (app, overall project, Node.js specific).
+    TypeScript configuration files that enforce type safety across the codebase. They specify compiler options and project file includes for different parts of the project (app, overall project, Node.js specific).
 
 -   **vite.config.ts**  
     Configures the Vite bundler, optimizing development builds and enabling use of modern JavaScript features for a smoother development experience.
