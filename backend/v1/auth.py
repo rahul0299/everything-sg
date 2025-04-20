@@ -131,7 +131,7 @@ def login():
     if bcrypt.check_password_hash(user_record["password_hash"], plain_password):
         # Create JWT
         access_token = create_access_token(
-            identity=user_record["id"],
+            identity=str(user_record["id"]),
             additional_claims={
                 "firstname":user_record["firstname"],
                 "lastname":user_record["lastname"],
@@ -158,7 +158,7 @@ def login():
             "access_token_cookie",access_token,
             httponly=True,
             secure=True,
-            samesite="Lax",
+            samesite="None",
             max_age=15*60
         )
 
@@ -204,7 +204,7 @@ def verify():
         # message = "Verified successfully"
         # status = 200
         access_token=create_access_token(
-            identity=user["id"],
+            identity=str(user["id"]),
             additional_claims={
                 "firstname":user["firstname"],
                 "lastname":user["lastname"],                
@@ -220,7 +220,7 @@ def verify():
             "access_token_cookie", access_token,
             httponly=True,
             secure=True,
-            samesite="Lax",
+            samesite="None",
             max_age=15*60
         )
 
