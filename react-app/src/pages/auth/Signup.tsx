@@ -1,42 +1,53 @@
 import {Link, useLocation, useNavigate} from "react-router";
 import "./login.css"
-import {createUser} from "../../dummy/server.ts";
-import {FormEvent} from "react";
+import {FormEvent, useState} from "react";
+import {signUpUser} from "../../utlis.ts";
+import {Alert} from "@mui/material";
 
 const SignUp = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from || "/";
+    const [state, setState] = useState("")
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        setState("loading");
+
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
 
-        const fname = String(formData.get("fname"));
-        const lname = String(formData.get("lname"));
+        const firstname = String(formData.get("fname"));
+        const lastname = String(formData.get("lname"));
         const email = String(formData.get("email"));
         const password = String(formData.get("password"));
 
-        await createUser({ fname, lname, email, password });
-
-        console.log("handleSubmit", fname, lname, email, password);
+        console.log("handleSubmit", firstname, lastname, email, password);
 
         try {
-            await createUser({ fname, lname, email, password });
-            navigate("/verification", { state: { user: { fname, lname, email, password }, from } });
-        } catch (err ) {
-            console.log(err);
+            const res = await signUpUser({ firstname, lastname, email, password })
+
+            if (res !== "Success") {
+                setState("error");
+            } else {
+                navigate("/verification", { state: { user: { firstname, lastname, email, password }, from } });
+            }
+        } catch (error) {
+            console.log("Signup error:", error);
+            setState("error");
         }
-
-
-        // console.log(formData && formData.entries());
-        // navigate("/verification");
     }
 
     return (
         <div className="auth-container">
             <div className="card">
                 <h2>Sign Up</h2>
+                {
+                    state === "error" && (
+                        <Alert severity="error" style={{ marginBottom: "1rem" }}>
+                            Sign up failed. Please try again.
+                        </Alert>
+                    )
+                }
                 <form
                     onSubmit={handleSubmit}
                     className="auth-form">

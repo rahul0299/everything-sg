@@ -1,8 +1,9 @@
-import {useEffect, useRef, useState} from "react";
+import {FormEvent, useEffect, useRef, useState} from "react";
 import "./login.css"
 import {useLocation, useNavigate} from "react-router";
 import {useAuth} from "../../store/AuthContext.tsx";
-import {verifyOTP} from "../../dummy/server.ts";
+import {verifyOTP} from "../../utlis.ts";
+import {Alert} from "@mui/material";
 
 
 const OTPVerification = ({num_digits}: {num_digits: number}) => {
@@ -15,7 +16,7 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
     const from = location.state?.from || "/";
 
     const [code, setCode] = useState(new Array<string>(num_digits).fill(""));
-    const [isVerifyingOtp, setIsVerifyingOtp] = useState<boolean>(false);
+    const [state, setState] = useState<string>("");
     const codeRef = useRef<Array<HTMLInputElement>>(Array(num_digits).fill(null));
 
     useEffect(() => {
@@ -58,19 +59,30 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
     };
 
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setIsVerifyingOtp(true);
+        setState("loading");
+
+        const otp = code.join("");
 
         try {
-            const otp = code.join("");
-            await verifyOTP(otp);
-            loginUser(user);
-            navigate(from, { replace: true });
+            const res = await verifyOTP({email: user.email, otp});
+
+            if (res !== "Success") {
+                throw new Error("OTP failed");
+            }
+
+            setState("");
+            const login = await loginUser(user.email, user.password)
+
+            if (login === "Success") {
+                navigate(from, { replace: true });
+            } else {
+                throw new Error("Login failed")
+            }
         } catch (err) {
-            console.error("OTP failed", err);
-        } finally {
-            setIsVerifyingOtp(false);
+            console.error(err);
+            setState("error");
         }
     }
 
@@ -84,7 +96,16 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
         <div className="auth-container">
             <div className="card otp-form">
                 <h2>Verification</h2>
-                <p>We have sent an OTP to the email address {censorEmail(user?.email)}</p>
+                {
+                    state === "error" && (
+                        <Alert severity="error" style={{ marginBottom: "1rem" }}>
+                            Sign up failed. Please try again.
+                        </Alert>
+                    )
+                }
+                {
+                    state !== "error" && <p style={{ margin: "1rem auto" }}>We have sent an OTP to the email address {censorEmail(user?.email)}</p>
+                }
                 <form onSubmit={handleSubmit}>
                         <div className="otp-input-container">
                             {
@@ -108,7 +129,7 @@ const OTPVerification = ({num_digits}: {num_digits: number}) => {
                     </p>
 
                     {
-                        isVerifyingOtp
+                        state === "loading"
 
                             ?
 

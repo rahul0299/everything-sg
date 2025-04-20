@@ -1,3 +1,5 @@
+import {API} from "./config.ts";
+
 export const getAuthToken = () => {
     return localStorage.getItem('token') || null;
 }
@@ -54,5 +56,56 @@ export const groupMovieShows = (shows: Show[]): GroupedShow[] => {
 export const getImgUrl = (name: string, poster: string): string => {
     console.log(name, poster)
     return "https://beautyrepublicfdl.com/wp-content/uploads/2020/06/placeholder-image.jpg";
+}
+
+type SignUpArgs = {
+    firstname: string;
+    lastname: string;
+    email: string;
+    password: string;
+}
+
+export const signUpUser = async ({ firstname, lastname, email, password }: SignUpArgs) => {
+    try {
+        const res = await fetch(API.AUTH.SIGNUP, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ firstname, lastname, email, password }),
+            signal: AbortSignal.timeout(1000)
+        });
+
+        if (!res.ok) {
+            throw new Error('Sign up failed');
+        }
+
+        return "Success";
+    } catch (err: unknown) {
+        throw new Error("Error occurred: " + err + ". Please try again.");
+    }
+}
+
+export const verifyOTP = async ({email, otp} : { email: string, otp: string }) => {
+    try {
+        const res = await fetch(API.AUTH.VERIFY, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, otp_code: otp }),
+            signal: AbortSignal.timeout(1000)
+        });
+
+        if (!res.ok) {
+            throw new Error('OTP verification failed');
+        }
+
+        return "Success";
+    } catch (err: unknown) {
+        throw new Error("Error occurred: " + err + ". Please try again.");
+    }
 }
 

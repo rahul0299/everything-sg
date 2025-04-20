@@ -1,5 +1,6 @@
 // src/store/AuthContext.tsx
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import {API} from "../config.ts";
 
 interface AuthUser {
     fname: string;
@@ -10,33 +11,27 @@ interface AuthUser {
 interface AuthContextType {
     user: AuthUser | null;
     refreshUser: () => Promise<void>;
+    loginUser: (email: string, password: string) => Promise<string>;
+    logoutUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
     user: null,
     refreshUser: async () => {},
+    loginUser: async () => "",
+    logoutUser: async () => {},
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<AuthUser | null>(null);
 
     const refreshUser = async () => {
-        // const verifyRes = await fetch('http://localhost:8000/auth/verify', {
-        //     credentials: 'include',
-        // });
-        // if (verifyRes.ok) {
-        //     setUser(null);
-        // } else {
-        //     const userRes = await fetch('http://localhost:8000/auth/user', {
-        //         credentials: 'include',
-        //     });
-        //     if (userRes.ok) {
-        //         const userData = await userRes.json();
-        //         setUser(userData);
-        //     } else {
-        //         setUser(null);
-        //     }
-        // }
+        const verifyRes = await fetch(API.AUTH.USER, {
+            credentials: 'include',
+        });
+        if (verifyRes.ok) {
+            console.log("User Verified");
+        }
 
         setUser(null);
     };
@@ -45,8 +40,42 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         refreshUser().then();
     }, []);
 
+    const loginUser = async (email: string, password: string): Promise<string> => {
+        try {
+            const res = await fetch(API.AUTH.LOGIN, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+                signal: AbortSignal.timeout(1000)
+            });
+
+            if (!res.ok) {
+                throw new Error('Login failed');
+            }
+
+            const userData = await res.json();
+            setUser(userData);
+            return "Success";
+        } catch (err: unknown) {
+            throw new Error("Failed to login: " + err + ". Please try again.");
+        }
+    };
+
+
+    const logoutUser = async () => {
+        await fetch(API.AUTH.LOGOUT, {
+            method: 'POST',
+            credentials: 'include',
+        });
+
+        setUser(null);
+    }
+
     return (
-        <AuthContext.Provider value={{ user, refreshUser }}>
+        <AuthContext.Provider value={{ user, refreshUser, loginUser, logoutUser }}>
             {children}
         </AuthContext.Provider>
     );
