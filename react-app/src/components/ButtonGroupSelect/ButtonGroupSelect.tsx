@@ -3,18 +3,24 @@ import {useState} from "react";
 
 interface PropTypes {
     items: string[];
+    onChange?: (items: string[]) => void;
 }
 
-const ButtonGroupSelect = ({ items }: PropTypes) => {
+const ButtonGroupSelect = ({ items, onChange }: PropTypes) => {
     const [selected, setSelected] = useState<string[]>([]);
 
     const toggleButton = (item: string) => {
+        let newSelected: string[];
+
         if (selected.includes(item)) {
-            setSelected(prevState => prevState.filter(i => i !== item));
+            newSelected = selected.filter(i => i !== item);
         } else {
-            setSelected([...selected, item]);
+            newSelected = [...selected, item];
         }
-    }
+
+        setSelected(newSelected);
+        onChange?.(newSelected);
+    };
 
     console.log(selected);
     return <div className="toggle-button-group">

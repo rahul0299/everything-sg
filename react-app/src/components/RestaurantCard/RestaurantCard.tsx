@@ -1,32 +1,30 @@
 import "./restaurantcard.css";
-import LocalCafeIcon from '@mui/icons-material/LocalCafe';
+// import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 import LocationPinIcon from "@mui/icons-material/LocationPin";
-import LocalBarIcon from "@mui/icons-material/LocalBar";
-import LocalDiningIcon from '@mui/icons-material/LocalDining';
-import FastfoodIcon from '@mui/icons-material/Fastfood';
+// import LocalBarIcon from "@mui/icons-material/LocalBar";
+// import LocalDiningIcon from '@mui/icons-material/LocalDining';
+// import FastfoodIcon from '@mui/icons-material/Fastfood';
 import {Divider} from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
+import {CategoryData} from "../../types/store.tsx";
 
 export interface RestaurantCardProps {
-    name: string;
-    image: string;
-    category: string; // e.g. "Restaurant", "Cafe", "Bar"
-    rating: number;
-    priceRange: string; // e.g. "$$", "Avg $25/person"
-    location: string;
+    restaurant: CategoryData;
+    key: string
+    onClick?: () => void;
 }
 
 
-const getRandomIcon = () => {
-    const icons = [
-        LocalCafeIcon,
-        LocalBarIcon,
-        LocalDiningIcon,
-        FastfoodIcon,
-    ]
-
-    return icons[Math.floor(Math.random() * icons.length)];
-}
+// const getRandomIcon = () => {
+//     const icons = [
+//         LocalCafeIcon,
+//         LocalBarIcon,
+//         LocalDiningIcon,
+//         FastfoodIcon,
+//     ]
+//
+//     return icons[Math.floor(Math.random() * icons.length)];
+// }
 
 const getRandomImage = () => {
     const images = [
@@ -39,27 +37,27 @@ const getRandomImage = () => {
     return images[Math.floor(Math.random() * images.length)];
 }
 
-const RestaurantCard: React.FC<RestaurantCardProps> = (props) => {
-    const Icon = getRandomIcon();
+const RestaurantCard = ({ restaurant, key, onClick = () => {} }: RestaurantCardProps) => {
+    // const Icon = getRandomIcon();
     return (
-        <div className="restaurant-card">
-            <img src={props.image || getRandomImage()} alt="name" className="restaurant-card-image" />
+        <div className="restaurant-card" onClick={onClick} key={key}>
+            <img src={restaurant.images[0] || getRandomImage()} alt="name" className="restaurant-card-image" />
             <div className="restaurant-card-content">
-                <h2 className="restaurant-card-title">{props.name || "Restaurant Name"}</h2>
-                <p className="restaurant-card-category">{props.category || "Category1, Category2"}</p>
+                <h2 className="restaurant-card-title">{restaurant.name}</h2>
+                <p className="restaurant-card-category">{restaurant.tags.join(", ")}</p>
                 <div className="restaurant-card-subinfo">
                     <p className="restaurant-card-rating">
                         <StarIcon fontSize="small" color="warning" />
-                        {props.rating || "5.0"}
+                        {restaurant.ratings}
                     </p>
+                    {/*<Divider orientation="vertical" variant="middle" flexItem />*/}
+                    {/*<Icon fontSize="small" />*/}
                     <Divider orientation="vertical" variant="middle" flexItem />
-                    <Icon fontSize="small" />
-                    <Divider orientation="vertical" variant="middle" flexItem />
-                    <p className="restaurant-card-price">{props.priceRange || "S$50"}</p>
+                    <p className="restaurant-card-price">{`${restaurant.price}/person`}</p>
                 </div>
                 <div className="restaurant-card-location">
                     <LocationPinIcon fontSize="small" />
-                    {props.location || "Location"}
+                    {restaurant.location}
                 </div>
             </div>
         </div>
