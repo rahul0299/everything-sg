@@ -29,6 +29,9 @@ def send_info_for_profile():
     cursor.close()
     conn.close()
 
+    for i in range(len(bookings)):
+        bookings[i]["details"] = json.loads(bookings[i]["details"])
+
     response = make_response(jsonify({
         "profile": {
             "firstname": user_record["firstname"],
