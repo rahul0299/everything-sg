@@ -12,6 +12,9 @@ Demo User:
 ```
 Email: test_user_2@example.com
 Password: testu2
+
+Email: test_user_6@example.com
+Password: testu6
 ```
 
 ---
