@@ -17,7 +17,7 @@ from v1.checkout import checkout
 
 app = Flask(__name__)
 
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "https://d3voxyqcbctkeg.cloudfront.net"]}}, supports_credentials=True)
 
 @app.route("/")
 def hello_world():
