@@ -1,10 +1,12 @@
 from flask import Blueprint, jsonify
 from database.db import db_connection_pool
+from database.cache import cache
 import json
 
 dining = Blueprint("v1/restaurants", __name__)
 
 @dining.route("/",methods=["GET"])
+@cache.cached(timeout=50)
 def fetch_all_restaurants():
     conn=db_connection_pool.get_connection()
     cursor=conn.cursor(dictionary=True)
@@ -24,6 +26,7 @@ def fetch_all_restaurants():
     return jsonify(res_rows), 200
 
 @dining.route("/<int:id>", methods=["GET"])
+@cache.cached(timeout=50)
 def fetch_restaurant_by_id(id):
     conn=db_connection_pool.get_connection()
     cursor=conn.cursor(dictionary=True)

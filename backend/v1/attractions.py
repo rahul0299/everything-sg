@@ -1,12 +1,14 @@
 from flask import Blueprint, jsonify, request, make_response
 
 from database.db import db_connection_pool
+from database.cache import cache
 
 import json
 
 attractions = Blueprint("v1/attractions", __name__)
 
 @attractions.route("/",methods=["GET"])
+@cache.cached(timeout=50)
 def fetch_all_events():
     conn=db_connection_pool.get_connection()
     cursor=conn.cursor(dictionary=True)
@@ -24,6 +26,7 @@ def fetch_all_events():
     # return json.dumps(res_rows), 200
 
 @attractions.route("/<int:id>", methods=["GET"])
+@cache.cached(timeout=50)
 def fetch_event_by_id(id):
     conn=db_connection_pool.get_connection()
     cursor=conn.cursor(dictionary=True)

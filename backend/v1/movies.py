@@ -1,10 +1,12 @@
 from flask import Blueprint, jsonify, request, make_response
 from database.db import db_connection_pool
+from database.cache import cache
 import json
 
 movies = Blueprint("v1/movies", __name__)
 
 @movies.route("/",methods=["GET"])
+@cache.cached(timeout=50)
 def fetch_all_movies():
     conn=db_connection_pool.get_connection()
     cursor=conn.cursor(dictionary=True)
@@ -24,6 +26,7 @@ def fetch_all_movies():
     return jsonify(res_rows), 200
 
 @movies.route("/<int:id>", methods=["GET"])
+@cache.cached(timeout=50)
 def fetch_restaurant_by_id(id):
     conn=db_connection_pool.get_connection()
     cursor=conn.cursor(dictionary=True)
