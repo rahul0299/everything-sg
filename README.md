@@ -1,6 +1,18 @@
 # everything-sg
 
-This project is a group project for CS5224 Cloud Computing and consists of two main parts: a **backend** and a **frontend (react-app)**. Below is a high-level overview of each file, including details on the backend endpoints.
+This project is a group project for CS5224 Cloud Computing and consists of two main parts: a **backend** and a **frontend (react-app)**.
+
+---
+
+[Demo Website](https://d3voxyqcbctkeg.cloudfront.net) <br/>
+[Demo Video](https://drive.google.com/drive/folders/1S8p0TkCg4dIJN0GoDcUQapCGvo7xDv-U?usp=sharing)
+
+Demo User:
+
+```
+Email: test_user_2@example.com
+Password: testu2
+```
 
 ---
 
