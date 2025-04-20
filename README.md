@@ -1,6 +1,6 @@
 # everything-sg
 
-This project is a group project for CS5224 Cloud Computing and consists of two main parts: a **backend** and a **frontend (react-app)**.
+This project is a group project for CS5224 Cloud Computing and consists of two main parts: a **backend (Flask)** and a **frontend (react-app)**.
 
 ---
 
@@ -21,7 +21,7 @@ Password: testu6
 
 ## Backend
 
-The backend folder contains a Python-based server application that powers the APIs and core functionalities.
+The backend folder contains a Python-based Flask server application that powers the APIs and core functionalities.
 
 -   **.gitignore**  
     Specifies which files or directories to exclude from version control. This helps avoid committing sensitive or unnecessary files.
