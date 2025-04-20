@@ -13,7 +13,6 @@ const Login = () => {
     const from = location.state?.from || "/";
     const [state, setState] = useState("")
 
-    console.log("Came from", from);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         setState("loading");

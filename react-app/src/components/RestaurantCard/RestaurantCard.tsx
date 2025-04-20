@@ -10,7 +10,6 @@ import {CategoryData} from "../../types/store.tsx";
 
 export interface RestaurantCardProps {
     restaurant: CategoryData;
-    key: string
     onClick?: () => void;
 }
 
@@ -37,10 +36,10 @@ const getRandomImage = () => {
     return images[Math.floor(Math.random() * images.length)];
 }
 
-const RestaurantCard = ({ restaurant, key, onClick = () => {} }: RestaurantCardProps) => {
+const RestaurantCard = ({ restaurant, onClick = () => {} }: RestaurantCardProps) => {
     // const Icon = getRandomIcon();
     return (
-        <div className="restaurant-card" onClick={onClick} key={key}>
+        <div className="restaurant-card" onClick={onClick}>
             <img src={restaurant.images[0] || getRandomImage()} alt="name" className="restaurant-card-image" />
             <div className="restaurant-card-content">
                 <h2 className="restaurant-card-title">{restaurant.name}</h2>
@@ -53,7 +52,7 @@ const RestaurantCard = ({ restaurant, key, onClick = () => {} }: RestaurantCardP
                     {/*<Divider orientation="vertical" variant="middle" flexItem />*/}
                     {/*<Icon fontSize="small" />*/}
                     <Divider orientation="vertical" variant="middle" flexItem />
-                    <p className="restaurant-card-price">{`${restaurant.price}/person`}</p>
+                    <p className="restaurant-card-price">{`S$${restaurant.price}/person`}</p>
                 </div>
                 <div className="restaurant-card-location">
                     <LocationPinIcon fontSize="small" />

@@ -112,7 +112,7 @@ export const verifyOTP = (otp: string): Promise<boolean> => {
 
 export const fetchData = () => {
     return new Promise((resolve) => {
-        console.log(`Fetching data`, data);
+        // console.log(`Fetching data`, data);
         resolve(data);
     })
 }

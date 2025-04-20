@@ -12,14 +12,14 @@ import {
     Alert, AlertTitle,
     RadioGroup,
     FormControlLabel,
-    Radio,
+    Radio, Chip,
 } from '@mui/material';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import PaymentIcon from '@mui/icons-material/Payment';
 
 import "./checkoutpage.css";
 import {useCart} from "../../store/CartContext.tsx";
-import CartItem from "../../components/CartItem/CartItem.tsx";
+// import CartItem from "../../components/CartItem/CartItem.tsx";
 import CardDetailsForm from "../../components/CardDetailsForm.tsx";
 import {processPayment} from "../../dummy/server.ts";
 import {useNavigate} from "react-router";
@@ -166,6 +166,22 @@ const CheckoutPage = () => {
 
 export default CheckoutPage;
 
+const ItemsReviewItem = () => {
+    return (
+        <div className="checkout-review-item">
+            <h3 className="cart-item-title">
+                ITEM NAME
+                <Chip
+                    variant="outlined"
+                    size="small"
+                    sx={{ fontSize: 10, marginLeft: "10px" }}
+                    label={"ITEM CATEGORY"}
+                />
+            </h3>
+        </div>
+    )
+}
+
 
 const ItemsReviewStep = () => {
     const cart = useCart().cart;
@@ -175,9 +191,12 @@ const ItemsReviewStep = () => {
             {
                 cart.items.length === 0 && <CircularProgress/>
             }
-            <Box display="flex" justifyContent="start" alignItems="center" flexDirection="column">
+            <Box display="flex" justifyContent="start" alignItems="center" minWidth="5000" flexDirection="column" border="1px solid #ccc">
                 {
-                    cart.items.map((item, index) => (<CartItem key={`cart-${index}-${item.id}`} item={item} />))
+                    cart.items.map((item, index) => (
+                        // <CartItem key={`cart-${index}-${item.id}`} item={item} />
+                        <ItemsReviewItem key={`cart-${index}-${item.id}`} />
+                    ))
                 }
             </Box>
         </>

@@ -267,7 +267,7 @@ const SelectedShowPreview = ({ date, time, venue, seats, price, onClick}: Select
                 <LocationPinIcon sx={{ color: "gray" }} /> {venue}
             </GridCell>
             <GridCell>
-                <Sell sx={{ color: "gray" }} /> S${price}
+                <Sell sx={{ color: "gray" }} /> {price.toFixed(2)} SGD
             </GridCell>
         </Grid>
         <p>

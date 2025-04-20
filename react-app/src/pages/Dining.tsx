@@ -25,8 +25,6 @@ const DiningPage = () => {
         setFilterRegions(items);
     }
 
-    console.log(filterRegions);
-
     useEffect(() => {
         setIsLoading(true);
         fetch(API.DINING, { signal: AbortSignal.timeout(1000) })
@@ -45,10 +43,16 @@ const DiningPage = () => {
     }, [])
 
     const filterBySearchText = (text: string, items: CategoryData[]) => {
+        if (text === "") {
+            return items;
+        }
         return items.filter(r => r.name.toLowerCase().includes(text.toLowerCase()));
     }
 
     const filterByRegion = (regions: string[], items: CategoryData[]) => {
+        if (regions.length === 0) {
+            return items;
+        }
         return items.filter(r => regions.includes(r.location));
     }
 
@@ -56,7 +60,7 @@ const DiningPage = () => {
         if (property === "price") {
             return items.sort((a, b) => a.price - b.price);
         } else if (property === "rating") {
-            return items.sort((a, b) => a.ratings - b.ratings);
+            return items.sort((a, b) => b.ratings - a.ratings);
         } else {
             return items;
         }

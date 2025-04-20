@@ -3,8 +3,8 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import {API} from "../config.ts";
 
 interface AuthUser {
-    fname: string;
-    lname: string;
+    firstname: string;
+    lastname: string;
     email: string;
 }
 
@@ -31,9 +31,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         });
         if (verifyRes.ok) {
             console.log("User Verified");
+            const userData = await verifyRes.json();
+            setUser(userData.profile);
+        } else {
+            setUser(null);
         }
 
-        setUser(null);
     };
 
     useEffect(() => {
@@ -52,12 +55,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 signal: AbortSignal.timeout(1000)
             });
 
-            if (!res.ok) {
+            if (!res.ok || res.status !== 200) {
                 throw new Error('Login failed');
             }
 
-            const userData = await res.json();
-            setUser(userData);
+            await refreshUser();
+            // const userData = await res.json();
+            // setUser(userData);
             return "Success";
         } catch (err: unknown) {
             throw new Error("Failed to login: " + err + ". Please try again.");

@@ -22,7 +22,6 @@ const ButtonGroupSelect = ({ items, onChange }: PropTypes) => {
         onChange?.(newSelected);
     };
 
-    console.log(selected);
     return <div className="toggle-button-group">
         {items.map(item => (
             <button

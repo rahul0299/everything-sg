@@ -10,14 +10,12 @@ const UserProfileButton = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const auth = useAuth();
 
-    console.log(auth.user);
-
 
     return <div className="user-profile-menu-bar">
-        <div className="user-profile-button-icon" onClick={() => setShowDropdown(!showDropdown)}>{auth.user?.fname[0] || ""}</div>
+        <div className="user-profile-button-icon" onClick={() => setShowDropdown(!showDropdown)}>{auth.user?.firstname[0] || ""}</div>
         <div className={`dropdown ${showDropdown ? "dropdown-visible" : ""}`} >
             <div className="dropdown-title">
-                <p><b>{`${auth.user?.fname} ${auth.user?.lname}`}</b></p>
+                <p><b>{`${auth.user?.firstname} ${auth.user?.lastname}`}</b></p>
             </div>
             <div className="dropdown-content">
                 <div className="dropdown-row">

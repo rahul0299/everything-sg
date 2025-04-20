@@ -21,6 +21,7 @@ import CheckoutPage from './pages/checkout/CheckoutPage.tsx';
 import DetailsPagePlaceholder from "./components/DetailsPagePlaceholder.tsx";
 import MoviePagePlaceholder from "./components/MoviePagePlaceholder.tsx";
 import DiningPagePlaceholder from "./components/DiningPagePlaceholder.tsx";
+import Profile from "./pages/profile/Profile.tsx";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
                               <Route path="/placeholder-movies" element={<MoviePagePlaceholder />} />
                               <Route path="/placeholder-dining" element={<DiningPagePlaceholder />} />
                               <Route path="movies/:id/book" element={<BookingPage />} />
+                              <Route path="/profile" element={<Profile />} />
 
 
                               <Route element={<ProtectedRoute />}>
